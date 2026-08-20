@@ -4,7 +4,7 @@ Custom Wazuh decoders and rules for **UniFi** access points, switches and UniFi 
 
 Rule IDs: **100100–100199** (UniFi APs and switches) and **109300–109399** (UniFi OS consoles), both below the **110100–110199** range used by the [ExtremeXOS ruleset](https://github.com/oliwier-drop/Extreme-Networks-Wazuh-Decoders). 100000–100500 is left alone: that is where `local_rules.xml` from Wazuh tutorials lands, and a duplicate sid is skipped without a load error.
 
-Copy the files into the manager user directories so upgrades do not overwrite them. UniFi AP/switch lines look like Symantec CSV to the stock decoder (`symantec-av` / rule 7300) — see [Symantec](#the-stock-symantec-decoder-steals-every-ap-and-switch-line). The UniFi device decoder is a child of that parent, so the stock file can stay loaded.
+Copy the files into the manager user directories so upgrades do not overwrite them. UniFi AP/switch lines look like Symantec CSV to the stock decoder (`symantec-av` / rule 7300) — see [Symantec](#the-stock-symantec-decoder-steals-every-ap-and-switch-line). Every UniFi device decoder is a direct, same-name child of that stock parent, so the stock file must stay loaded.
 
 ## Layout
 
@@ -12,10 +12,10 @@ Copy the files into the manager user directories so upgrades do not overwrite th
 | --- | --- |
 | `decoders/0100-unifi_device_decoders.xml` | `/var/ossec/etc/decoders/` |
 | `decoders/0101-unifi_os_decoders.xml` | `/var/ossec/etc/decoders/` |
-| `decoders/0330-symantec_decoders.xml` | **do not copy** unless you also receive real Symantec AV CSV; see Symantec section |
 | `rules/0100-unifi_device_rules.xml` | `/var/ossec/etc/rules/` |
 | `rules/0101-unifi_os_rules.xml` | `/var/ossec/etc/rules/` |
 | `samples/unifi-tcpdump.log` | raw `tcpdump -A` capture (reference only) |
+| `samples/unify-tcpdump-v2.log` | follow-up `tcpdump -A` capture with RRM traffic and the first UniFi CEF event (reference only) |
 | `samples/unifi-syslog.log` | input for `wazuh-logtest`, one line per format seen in the capture |
 | `samples/unifi-synthetic.log` | input for `wazuh-logtest`, formats absent from the capture |
 | `scripts/simulate-decode.mjs` | offline check of the decoders against every sample |
@@ -80,13 +80,15 @@ Ubiquiti publishes **no equivalent of the ExtremeXOS EMS Message Catalog** — n
 
 Patterns still awaiting verification against `hostapd` source are listed under [Next samples](#next-samples); `simulate-decode.mjs` names them on every run as `no sample exercises`.
 
-### Five constraints from analysisd
+### Six constraints from analysisd
 
 These come from `decoder.c`, `decoders_list.c`, `shared/expression.c` and `os_xml/os_xml.c`. Each fails silently — as "No decoder matched", or as a field that is quietly missing.
 
 **A parent that has children never runs its own `<regex>`.** `DecodeEvent` reassigns its working pointer to a child before reaching the regex stage, so all fields come from the children.
 
-**Children that share one name are chained; children with distinct names are not.** With distinct names, analysisd picks the first child whose `<prematch>` matches and, if that child's regex then fails, drops the event undecoded — the remaining siblings are never tried. With one shared name it sets `get_next`, walks the entire chain, applies every regex that matches and skips those that do not. Every child in a file here shares its parent's name for that reason. Chained children must not declare `<prematch>`.
+**Decoders cannot have grandchildren.** `OS_AddOSDecoder` resolves a `<parent>` only in the two root decoder lists; it never searches an existing child's child list. A child decoder therefore cannot act as a parent. All `unifi-device` entries are direct children of the stock `symantec-av` root.
+
+**Children that share one name are chained; children with distinct names are not.** With distinct names, analysisd picks the first child whose `<prematch>` matches and, if that child's regex then fails, drops the event undecoded — the remaining siblings are never tried. With one shared name it sets `get_next`, walks the entire chain, applies every regex that matches and skips those that do not. Every child in a family shares one name for that reason. Only the first child may declare `<prematch>`, and that first child must also have a `<regex>`; a prematch-only first child makes the loader reject the next same-name decoder as a duplicate.
 
 **Because the whole chain is applied, one child can carry the header for every line.** This is the one place where the UniFi files are simpler than the Extreme ones. A single pattern per family extracts MAC, model, firmware, daemon and message body, and runs on every line; the event patterns then add only their own fields and never repeat the prefix. It also makes the header child a guaranteed fallback: an event whose message text drifts between firmware releases still arrives with its device and daemon attributed instead of vanishing. The price is that patterns must be mutually exclusive per field, or the same field is set twice — which is why the two `sudo` patterns are separated by anchoring the success case on `: TTY=` rather than on the `USER=` both lines contain.
 
@@ -118,17 +120,15 @@ Twelve word characters and a comma. A UniFi MAC prefix is exactly that (`9041b21
 
 A more specific UniFi prematch does not help: first match wins, not most specific. Excluding the stock file is also brittle on 4.x (`<decoder_exclude>` is silently ignored if the path does not match exactly).
 
-`unifi-device` is therefore a **child of `symantec-av`**, with `<use_own_name>true</use_own_name>` so Phase 2 still reports `unifi-device`. Its own prematch requires the firmware token after the comma (`U7-Pro-8.7.11+19419:`), which real Symantec CSV (`24090D00000A,4,3,7,...`) never has.
+The complete `unifi-device` chain therefore consists of **direct children of `symantec-av`**. Every child uses the same `unifi-device` name, and the first has `<use_own_name>true</use_own_name>` so Phase 2 reports `unifi-device`. Its prematch requires the firmware token after the comma (`U7-Pro-8.7.11+19419:`), which real Symantec CSV (`24090D00000A,4,3,7,...`) never has. The first child also contains the normal-header regex; this is required for Wazuh to link the following same-name children into one multi-regex chain.
 
-That only works if the loaded `symantec-av` parent still has the **stock** prematch. Do **not** copy `0330-symantec_decoders.xml` into `/var/ossec/etc/decoders/` as `symantec_decoders.xml`: that replacement narrows the parent prematch, UniFi no longer matches the parent, and the child never runs. Delete any leftover:
+That only works if the loaded `symantec-av` parent still has the **stock** prematch. Do not install a custom replacement that narrows it: UniFi would no longer match the parent and none of its children would run. Delete any leftover replacement:
 
 ```
 sudo rm -f /var/ossec/etc/decoders/symantec_decoders.xml
 ```
 
 Leave stock `ruleset/decoders/0330-symantec_decoders.xml` loaded. Do not edit it — the next Wazuh upgrade overwrites it.
-
-The replacement file stays in this repo for sites that actually ingest Symantec AV CSV and want both families; that path needs a standalone `unifi-device` parent, which is the combination that failed on this manager.
 
 `wazuh-logtest` talks to analysisd, so **restart wazuh-manager** after changing the XML files; copying them is not enough.
 
@@ -148,11 +148,10 @@ sudo cp rules/0101-unifi_os_rules.xml           /var/ossec/etc/rules/unifi_os_ru
 sudo rm -f /var/ossec/etc/decoders/symantec_decoders.xml
 ```
 
-Do not copy `0330-symantec_decoders.xml`. Restart `wazuh-manager`. Confirm the device parent is the hijack, not a leftover standalone decoder:
+Restart `wazuh-manager`. Confirm that every UniFi device decoder is a direct child of the stock Symantec decoder and that no invalid grandchild remains:
 
 ```
-sudo head -n 5 /var/ossec/etc/decoders/unifi_device_decoders.xml | cat
-grep -n 'parent>symantec-av' /var/ossec/etc/decoders/unifi_device_decoders.xml
+grep -n '<parent>' /var/ossec/etc/decoders/unifi_device_decoders.xml | grep -v 'symantec-av' && echo 'ERROR: invalid parent remains'
 ```
 
 ## Test
@@ -168,6 +167,8 @@ It replicates the parts of analysisd that decide whether a decoder fires — pre
 
 - an escaping of `<` the Wazuh XML reader would reject (`&lt;` or CDATA)
 - a sample whose pre-decoding yields a `program_name` after all, which would put it in the other decoder list where none of these decoders can see it
+- a decoder that references another child as its parent (Wazuh does not support grandchildren)
+- a prematch-only first child, which prevents Wazuh from building a same-name multi-regex chain
 - two parents claiming the same line
 - a regex that does not compile, or whose capture-group count differs from `<order>`
 - an optional capture group with another capture after it
@@ -192,7 +193,7 @@ A successful run shows **no** `program_name` in Phase 1 — that is correct here
 
 If `wazuh-logtest` reports `Invalid root element "decoder". Only "group" is allowed`, a decoder file was placed in `/var/ossec/etc/rules/`. Check that the files landed in the directories listed above.
 
-If Phase 2 still says `symantec-av` with **no fields** and rule **7300**, the manager is still running a standalone `unifi-device` parent, or `/var/ossec/etc/decoders/symantec_decoders.xml` has replaced the stock prematch. The first decoder in `unifi_device_decoders.xml` must contain `<parent>symantec-av</parent>` and `<use_own_name>true</use_own_name>`. Delete the leftover Symantec file, restart `wazuh-manager`, and test again. wazuh-logtest does not reread XML by itself.
+If Phase 2 still says `symantec-av` with **no fields** and rule **7300**, `/var/ossec/etc/decoders/symantec_decoders.xml` may have replaced the stock prematch, or an old UniFi file may still be loaded. Every decoder in `unifi_device_decoders.xml` must contain `<parent>symantec-av</parent>`; the first must additionally contain `<use_own_name>true</use_own_name>`, `<prematch>` and `<regex>`. Delete the leftover Symantec replacement, install the current UniFi file, restart `wazuh-manager`, and test again. `wazuh-logtest` does not reread XML by itself.
 
 ## What is decoded today
 
@@ -226,9 +227,9 @@ Correlation rules: 5 PSK mismatches / 120 s per client MAC, 2 Michael MIC failur
 
 ### Sibling rules are ordered by level, not by file position
 
-`_OS_AddRule` inserts each rule before the first sibling with a **lower** level, so the children of `100100` are evaluated in descending level order and file position only breaks ties. A generic rule with a high level therefore shadows every specific rule below it in level, wherever it sits in the file.
+Before `_OS_AddRule` inserts a level-0 rule, Wazuh temporarily changes its level to **99**. Siblings are then ordered by descending internal priority and file position only breaks ties. The displayed level is restored afterwards. Level 0 is therefore evaluated before levels 1–16; this is useful for silencing rules, but dangerous for an unconditional fallback.
 
-This bit immediately. The catch-all `100190` was first written at level 2 — reasonable-looking, below every alerting rule — and the simulation reported it shadowing `100160` and `100161`, the level-0 rules whose whole purpose is to silence the roaming and fan-speed chatter. An unconditional rule shadows every sibling below its own level, so a catch-all has to sit at level 0 and last in the file, where it ties with the silencing rules and loses the tie on position. The severity escalation lives in `100191` and `100192`, **children** of `100190`: a child is only evaluated after its parent matched, so it cannot outrank a specific sibling. `109390` in the console file is the same construction.
+The catch-all `100190` therefore uses level 1. Level-0 silencing rules `100160` and `100161` run first because their load priority is 99, while every specific alerting rule is level 2 or higher and also runs before the fallback. Severity escalation lives in `100191` and `100192`, **children** of `100190`: a child is evaluated only after its parent matched. `109390` in the console file uses the same construction.
 
 The simulation models this ordering, evaluating each rule's `<id>`, `<field>` and `<match>` conditions against the lines that were actually decoded rather than against a list of event names, and fails if any rule is shadowed. `--verbose` prints the winning rule per event.
 

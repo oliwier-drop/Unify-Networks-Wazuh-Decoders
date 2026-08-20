@@ -1,0 +1,668 @@
+htadmin@plslvmwazuh:~$ sudo tcpdump -i any -nn -A 'udp port 514 and src net 10.248.188.0/24'
+[sudo] password for htadmin:
+tcpdump: data link type LINUX_SLL2
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on any, link-type LINUX_SLL2 (Linux cooked v2), snapshot length 262144 bytes
+12:28:11.634488 enX0  In  IP 10.248.188.30.33913 > 10.248.162.56.514: SYSLOG user.info, length: 210
+E...(X@.>..`
+...
+..8.y.....{<14>Aug 20 12:28:11 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: wevent[8520]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_REQUEST: from serialno=1c:0b:8b:0e:7f:80, target band(1), target channel(44)
+12:28:11.634858 enX0  In  IP 10.248.188.30.33913 > 10.248.162.56.514: SYSLOG user.info, length: 193
+E...(Y@.>..p
+...
+..8.y....f.<14>Aug 20 12:28:11 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: wevent[8520]: wevent-stainfo.ubnt_get_radio_band_channel(): [wifi1ap3], band(1), vap_channel(149), neighbor_channel(44)
+12:28:11.643666 enX0  In  IP 10.248.188.30.33913 > 10.248.162.56.514: SYSLOG kernel.info, length: 163
+E...(Z@.>...
+...
+..8.y......<6>Aug 20 12:28:11 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: kernel: ubnt_neighbor_update_ess_ap(): update [1c:0b:8b:0e:7f:80] band(1), ch(44), type(0)
+12:28:11.736677 enX0  In  IP 10.248.188.36.46555 > 10.248.162.56.514: SYSLOG user.notice, length: 158
+E.....@.>...
+..$
+..8......^.<13>Aug 20 12:28:11 APU7ProH32 8cede1aaa3cc,U7-Pro-8.7.11+19419: syswrapper[746][8161]: Trigger rrm scan(3): sleep 4;cfg80211tool wifi2ap7 acsrrm 37; sleep 1;
+12:28:11.786881 enX0  In  IP 10.248.188.30.33913 > 10.248.162.56.514: SYSLOG user.notice, length: 168
+E...([@.>...
+...
+..8.y....w.<13>Aug 20 12:28:11 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: syswrapper[6370][8520]: Trigger rrm scan(1): sleep 5;cfg80211tool wifi1ap3 acsrrm 44; sleep 1;
+12:28:11.895513 enX0  In  IP 10.248.188.48.41811 > 10.248.162.56.514: SYSLOG user.notice, length: 169
+E.....@.>...
+..0
+..8.S......<13>Aug 20 12:28:11 APU7ProOH45 1c0b8b0e8709,U7-Pro-Outdoor-8.6.11+18870: syswrapper[14766][7904]: Trigger rrm scan(3): sleep 2;cfg80211tool wifi1ap1 acsrrm 44; sleep 1;
+12:28:11.914043 enX0  In  IP 10.248.188.33.43348 > 10.248.162.56.514: SYSLOG user.notice, length: 168
+E....}@.>..b
+..!
+..8.T....s.<13>Aug 20 12:28:11 APU7ProOH34 9041b214b47d,U7-Pro-Outdoor-8.6.11+18870: syswrapper[8315][7910]: Trigger rrm scan(3): sleep 4;cfg80211tool wifi1ap3 acsrrm 44; sleep 1;
+12:28:11.960097 enX0  In  IP 10.248.188.44.55552 > 10.248.162.56.514: SYSLOG user.info, length: 211
+E...MB@.>.zg
+..,
+..8......T@<14>Aug 20 12:28:11 APU7ProOH41 1c0b8b0e8724,U7-Pro-Outdoor-8.6.11+18870: wevent[7905]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_REQUEST: from serialno=90:41:b2:14:da:e4, target band(1), target channel(149)
+12:28:11.961086 enX0  In  IP 10.248.188.44.55552 > 10.248.162.56.514: SYSLOG user.info, length: 194
+E...MC@.>.zw
+..,
+..8.......]<14>Aug 20 12:28:11 APU7ProOH41 1c0b8b0e8724,U7-Pro-Outdoor-8.6.11+18870: wevent[7905]: wevent-stainfo.ubnt_get_radio_band_channel(): [wifi1ap1], band(1), vap_channel(149), neighbor_channel(149)
+12:28:11.963232 enX0  In  IP 10.248.188.44.55552 > 10.248.162.56.514: SYSLOG kernel.info, length: 164
+E...MD@.>.z.
+..,
+..8........<6>Aug 20 12:28:11 APU7ProOH41 1c0b8b0e8724,U7-Pro-Outdoor-8.6.11+18870: kernel: ubnt_neighbor_update_ess_ap(): update [90:41:b2:14:da:e4] band(1), ch(149), type(0)
+12:28:11.964806 enX0  In  IP 10.248.188.248.39684 > 10.248.162.56.514: SYSLOG user.info, length: 237
+E..     ..@.>...
+...
+..8........<14>Aug 20 12:28:11 U7-Pro-Outdoor 9041b214dae4,U7-Pro-Outdoor-8.6.11+18870: wevent[28236]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_RESPONSE: from 1c:0b:8b:0e:87:24 to serialno=90:41:b2:14:da:e4, target band(1), target channel(149)
+12:28:11.969923 enX0  In  IP 10.248.188.248.39684 > 10.248.162.56.514: SYSLOG kernel.info, length: 167
+E.....@.>..8
+...
+..8.......m<6>Aug 20 12:28:11 U7-Pro-Outdoor 9041b214dae4,U7-Pro-Outdoor-8.6.11+18870: kernel: ubnt_neighbor_update_ess_ap(): update [1c:0b:8b:0e:87:24] band(1), ch(149), type(0)
+12:28:12.084138 enX0  In  IP 10.248.188.44.55552 > 10.248.162.56.514: SYSLOG user.notice, length: 141
+E...ME@.>.z.
+..,
+..8.......-<13>Aug 20 12:28:12 APU7ProOH41 1c0b8b0e8724,U7-Pro-Outdoor-8.6.11+18870: syswrapper[4033][7905]: Skip rrm scan wifi1 due to the same channel
+12:28:12.085383 enX0  In  IP 10.248.188.44.55552 > 10.248.162.56.514: SYSLOG user.info, length: 209
+E...MF@.>.ze
+..,
+..8.......}<14>Aug 20 12:28:12 APU7ProOH41 1c0b8b0e8724,U7-Pro-Outdoor-8.6.11+18870: wevent[7905]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_REQUEST: from serialno=90:41:b2:14:da:e4, target band(0), target channel(1)
+12:28:12.086396 enX0  In  IP 10.248.188.44.55552 > 10.248.162.56.514: SYSLOG user.info, length: 191
+E...MG@.>.zv
+..,
+..8........<14>Aug 20 12:28:12 APU7ProOH41 1c0b8b0e8724,U7-Pro-Outdoor-8.6.11+18870: wevent[7905]: wevent-stainfo.ubnt_get_radio_band_channel(): [wifi0ap0], band(0), vap_channel(11), neighbor_channel(1)
+12:28:12.088370 enX0  In  IP 10.248.188.248.39684 > 10.248.162.56.514: SYSLOG user.info, length: 236
+E.....@.>...
+...
+..8........<14>Aug 20 12:28:12 U7-Pro-Outdoor 9041b214dae4,U7-Pro-Outdoor-8.6.11+18870: wevent[28236]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_RESPONSE: from 1c:0b:8b:0e:87:24 to serialno=90:41:b2:14:da:e4, target band(0), target channel(11)
+12:28:12.089614 enX0  In  IP 10.248.188.248.39684 > 10.248.162.56.514: SYSLOG kernel.info, length: 166
+E.....@.>..7
+...
+..8......Oh<6>Aug 20 12:28:12 U7-Pro-Outdoor 9041b214dae4,U7-Pro-Outdoor-8.6.11+18870: kernel: ubnt_neighbor_update_ess_ap(): update [1c:0b:8b:0e:87:24] band(0), ch(11), type(0)
+12:28:12.092977 enX0  In  IP 10.248.188.44.55552 > 10.248.162.56.514: SYSLOG kernel.info, length: 162
+E...MH@.>.z.
+..,
+..8.......2<6>Aug 20 12:28:12 APU7ProOH41 1c0b8b0e8724,U7-Pro-Outdoor-8.6.11+18870: kernel: ubnt_neighbor_update_ess_ap(): update [90:41:b2:14:da:e4] band(0), ch(1), type(0)
+12:28:12.226232 enX0  In  IP 10.248.188.44.55552 > 10.248.162.56.514: SYSLOG user.notice, length: 167
+E...MI@.>.z.
+..,
+..8.......U<13>Aug 20 12:28:12 APU7ProOH41 1c0b8b0e8724,U7-Pro-Outdoor-8.6.11+18870: syswrapper[4093][7905]: Trigger rrm scan(1): sleep 4;cfg80211tool wifi0ap0 acsrrm 1; sleep 1;
+12:28:12.415683 enX0  In  IP 10.248.188.232.36953 > 10.248.162.56.514: SYSLOG user.notice, length: 174
+E...D.@.>..y
+...
+..8.Y....y"<13>Aug 20 12:28:12 U7-Pro-Outdoor 9041b2162211,U7-Pro-Outdoor-8.6.11+18870: syswrapper[21881][14556]: Trigger rrm scan(2): sleep 4;cfg80211tool wifi1ap3 acsrrm 149; sleep 1;
+12:28:12.828831 enX0  In  IP 10.248.188.249.52868 > 10.248.162.56.514: SYSLOG user.notice, length: 174
+E.....@.>...
+...
+..8........<13>Aug 20 12:28:12 U7ProOutdoorTEMP 1c0b8b0e7f80,U7-Pro-Outdoor-8.6.11+18870: syswrapper[4211][20159]: Trigger rrm scan(2): sleep 4;cfg80211tool wifi1ap2 acsrrm 40; sleep 1;
+12:28:12.834895 enX0  In  IP 10.248.188.47.55242 > 10.248.162.56.514: SYSLOG user.info, length: 231
+E.....@.>.".
+../
+..8.......2<14>Aug 20 12:28:12 APU7ProOH44 1c0b8b0e7e87,U7-Pro-Outdoor-8.6.11+18870: wevent[7904]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_RESPONSE: from 90:41:b2:14:b4:7d to serialno=1c:0b:8b:0e:7e:87, target band(0), target channel(6)
+12:28:12.836448 enX0  In  IP 10.248.188.47.55242 > 10.248.162.56.514: SYSLOG kernel.info, length: 162
+E.....@.>.#8
+../
+..8........<6>Aug 20 12:28:12 APU7ProOH44 1c0b8b0e7e87,U7-Pro-Outdoor-8.6.11+18870: kernel: ubnt_neighbor_update_ess_ap(): update [90:41:b2:14:b4:7d] band(0), ch(6), type(0)
+12:28:12.862503 enX0  In  IP 10.248.188.248.39684 > 10.248.162.56.514: SYSLOG user.info, length: 237
+E..     ..@.>...
+...
+..8......D.<14>Aug 20 12:28:12 U7-Pro-Outdoor 9041b214dae4,U7-Pro-Outdoor-8.6.11+18870: wevent[28236]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_RESPONSE: from 8c:ed:e1:78:49:e0 to serialno=90:41:b2:14:da:e4, target band(1), target channel(149)
+12:28:12.862579 enX0  In  IP 10.248.188.245.49901 > 10.248.162.56.514: SYSLOG user.info, length: 212
+E....-@.>...
+...
+..8........<14>Aug 20 12:28:12 U7-Pro 8cede17849e0,U7-Pro-8.7.11+19419: wevent[13682]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_REQUEST: from serialno=90:41:b2:14:da:e4, target band(1), target channel(149), nr_count(0)
+12:28:12.862579 enX0  In  IP 10.248.188.245.49901 > 10.248.162.56.514: SYSLOG user.info, length: 200
+E.....@.>...
+...
+..8......8.<14>Aug 20 12:28:12 U7-Pro 8cede17849e0,U7-Pro-8.7.11+19419: wevent[13682]: wevent-stainfo.ubnt_send_ap_update_response(): => UBNT_RESPONSE (fallback): band(1), vap_channel(149), neighbor_channel(149)
+12:28:12.870914 enX0  In  IP 10.248.188.248.39684 > 10.248.162.56.514: SYSLOG kernel.info, length: 167
+E.....@.>..4
+...
+..8.......j<6>Aug 20 12:28:12 U7-Pro-Outdoor 9041b214dae4,U7-Pro-Outdoor-8.6.11+18870: kernel: ubnt_neighbor_update_ess_ap(): update [8c:ed:e1:78:49:e0] band(1), ch(149), type(0)
+12:28:12.929294 enX0  In  IP 10.248.188.43.52031 > 10.248.162.56.514: SYSLOG user.notice, length: 162
+E...cK@.>.d.
+..+
+..8.?......<13>Aug 20 12:28:12 APU7ProH4P22 8cede174eaba,U7-Pro-8.7.11+19419: syswrapper[12424][8160]: Trigger rrm scan(3): sleep 1;cfg80211tool wifi1ap1 acsrrm 44; sleep 1;
+12:28:12.929331 enX0  In  IP 10.248.188.45.50530 > 10.248.162.56.514: SYSLOG user.info, length: 231
+E.....@.>...
+..-
+..8.b....u.<14>Aug 20 12:28:12 APU7ProOH42 1c0b8b0ea5b1,U7-Pro-Outdoor-8.6.11+18870: wevent[7900]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_RESPONSE: from 90:41:b2:14:27:d1 to serialno=1c:0b:8b:0e:a5:b1, target band(0), target channel(1)
+12:28:12.938349 enX0  In  IP 10.248.188.45.50530 > 10.248.162.56.514: SYSLOG kernel.info, length: 162
+E.....@.>...
+..-
+..8.b....X.<6>Aug 20 12:28:12 APU7ProOH42 1c0b8b0ea5b1,U7-Pro-Outdoor-8.6.11+18870: kernel: ubnt_neighbor_update_ess_ap(): insert [90:41:b2:14:27:d1] band(0), ch(1), type(0)
+12:28:12.946323 enX0  In  IP 10.248.188.47.55242 > 10.248.162.56.514: SYSLOG user.notice, length: 141
+E.....@.>.#L
+../
+..8.......'<13>Aug 20 12:28:12 APU7ProOH44 1c0b8b0e7e87,U7-Pro-Outdoor-8.6.11+18870: syswrapper[6797][7904]: Skip rrm scan wifi0 due to the same channel
+12:28:12.954782 enX0  In  IP 10.248.188.47.55242 > 10.248.162.56.514: SYSLOG user.info, length: 232
+E.....@.>.".
+../
+..8......v6<14>Aug 20 12:28:12 APU7ProOH44 1c0b8b0e7e87,U7-Pro-Outdoor-8.6.11+18870: wevent[7904]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_RESPONSE: from 1c:0b:8b:0e:87:24 to serialno=1c:0b:8b:0e:7e:87, target band(0), target channel(11)
+12:28:12.956924 enX0  In  IP 10.248.188.47.55242 > 10.248.162.56.514: SYSLOG kernel.info, length: 163
+E.....@.>.#4
+../
+..8.......c<6>Aug 20 12:28:12 APU7ProOH44 1c0b8b0e7e87,U7-Pro-Outdoor-8.6.11+18870: kernel: ubnt_neighbor_update_ess_ap(): update [1c:0b:8b:0e:87:24] band(0), ch(11), type(0)
+12:28:12.975146 enX0  In  IP 10.248.188.245.49901 > 10.248.162.56.514: SYSLOG user.notice, length: 135
+E..../@.>...
+...
+..8.......p<13>Aug 20 12:28:12 U7-Pro 8cede17849e0,U7-Pro-8.7.11+19419: syswrapper[13155][13682]: Skip rrm scan wifi1: actual_ch=149 == target=149
+12:28:12.983731 enX0  In  IP 10.248.188.245.49901 > 10.248.162.56.514: SYSLOG user.info, length: 210
+E....0@.>...
+...
+..8.......8<14>Aug 20 12:28:12 U7-Pro 8cede17849e0,U7-Pro-8.7.11+19419: wevent[13682]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_REQUEST: from serialno=90:41:b2:14:da:e4, target band(0), target channel(1), nr_count(0)
+12:28:12.983731 enX0  In  IP 10.248.188.245.49901 > 10.248.162.56.514: SYSLOG user.info, length: 196
+E....1@.>...
+...
+..8........<14>Aug 20 12:28:12 U7-Pro 8cede17849e0,U7-Pro-8.7.11+19419: wevent[13682]: wevent-stainfo.ubnt_send_ap_update_response(): => UBNT_RESPONSE (fallback): band(0), vap_channel(1), neighbor_channel(1)
+12:28:12.983805 enX0  In  IP 10.248.188.248.39684 > 10.248.162.56.514: SYSLOG user.info, length: 235
+E.....@.>...
+...
+..8......y.<14>Aug 20 12:28:12 U7-Pro-Outdoor 9041b214dae4,U7-Pro-Outdoor-8.6.11+18870: wevent[28236]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_RESPONSE: from 8c:ed:e1:78:49:e0 to serialno=90:41:b2:14:da:e4, target band(0), target channel(1)
+12:28:12.989899 enX0  In  IP 10.248.188.248.39684 > 10.248.162.56.514: SYSLOG kernel.info, length: 165
+E.....@.>..4
+...
+..8........<6>Aug 20 12:28:12 U7-Pro-Outdoor 9041b214dae4,U7-Pro-Outdoor-8.6.11+18870: kernel: ubnt_neighbor_update_ess_ap(): update [8c:ed:e1:78:49:e0] band(0), ch(1), type(0)
+12:28:13.062663 enX0  In  IP 10.248.188.45.50530 > 10.248.162.56.514: SYSLOG user.notice, length: 168
+E.....@.>...
+..-
+..8.b....^><13>Aug 20 12:28:13 APU7ProOH42 1c0b8b0ea5b1,U7-Pro-Outdoor-8.6.11+18870: syswrapper[30523][7900]: Trigger rrm scan(1): sleep 4;cfg80211tool wifi0ap0 acsrrm 1; sleep 1;
+12:28:13.086577 enX0  In  IP 10.248.188.245.49901 > 10.248.162.56.514: SYSLOG user.notice, length: 131
+E....2@.>...
+...
+..8........<13>Aug 20 12:28:13 U7-Pro 8cede17849e0,U7-Pro-8.7.11+19419: syswrapper[13220][13682]: Skip rrm scan wifi0: actual_ch=1 == target=1
+12:28:13.092618 enX0  In  IP 10.248.188.47.55242 > 10.248.162.56.514: SYSLOG user.notice, length: 168
+E.....@.>.#.
+../
+..8........<13>Aug 20 12:28:13 APU7ProOH44 1c0b8b0e7e87,U7-Pro-Outdoor-8.6.11+18870: syswrapper[6857][7904]: Trigger rrm scan(1): sleep 2;cfg80211tool wifi0ap0 acsrrm 11; sleep 1;
+12:28:13.105066 enX0  In  IP 10.248.188.245.49901 > 10.248.162.56.514: SYSLOG user.info, length: 212
+E....3@.>...
+...
+..8........<14>Aug 20 12:28:13 U7-Pro 8cede17849e0,U7-Pro-8.7.11+19419: wevent[13682]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_REQUEST: from serialno=90:41:b2:14:26:9f, target band(1), target channel(149), nr_count(0)
+12:28:13.106564 enX0  In  IP 10.248.188.245.49901 > 10.248.162.56.514: SYSLOG user.info, length: 200
+E....4@.>...
+...
+..8......7.<14>Aug 20 12:28:13 U7-Pro 8cede17849e0,U7-Pro-8.7.11+19419: wevent[13682]: wevent-stainfo.ubnt_send_ap_update_response(): => UBNT_RESPONSE (fallback): band(1), vap_channel(149), neighbor_channel(149)
+12:28:13.219041 enX0  In  IP 10.248.188.245.49901 > 10.248.162.56.514: SYSLOG user.notice, length: 135
+E....5@.>...
+...
+..8......,m<13>Aug 20 12:28:13 U7-Pro 8cede17849e0,U7-Pro-8.7.11+19419: syswrapper[13285][13682]: Skip rrm scan wifi1: actual_ch=149 == target=149
+12:28:14.106251 enX0  In  IP 10.248.188.47.55242 > 10.248.162.56.514: SYSLOG user.info, length: 173
+E.....@.>.#(
+../
+..8........<14>Aug 20 12:28:14 APU7ProOH44 1c0b8b0e7e87,U7-Pro-Outdoor-8.6.11+18870: hostapd[7920]: wifi1ap6: STA ba:7a:04:ed:7a:20 RADIUS: starting accounting session AAAFB249E3008AA9
+12:28:14.906081 enX0  In  IP 10.248.188.34.59085 > 10.248.162.56.514: SYSLOG user.notice, length: 169
+E....&@.>...
+.."
+..8........<13>Aug 20 12:28:14 APU7ProOH35 9041b214269f,U7-Pro-Outdoor-8.6.11+18870: syswrapper[5240][8545]: Trigger rrm scan(2): sleep 1;cfg80211tool wifi1ap3 acsrrm 161; sleep 1;
+12:28:14.946559 enX0  In  IP 10.248.188.48.41811 > 10.248.162.56.514: SYSLOG user.info, length: 211
+E.....@.>...
+..0
+..8.S......<14>Aug 20 12:28:14 APU7ProOH45 1c0b8b0e8709,U7-Pro-Outdoor-8.6.11+18870: wevent[7904]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_REQUEST: from serialno=90:41:b2:14:da:e4, target band(1), target channel(149)
+12:28:14.947384 enX0  In  IP 10.248.188.48.41811 > 10.248.162.56.514: SYSLOG user.info, length: 194
+E.....@.>...
+..0
+..8.S......<14>Aug 20 12:28:14 APU7ProOH45 1c0b8b0e8709,U7-Pro-Outdoor-8.6.11+18870: wevent[7904]: wevent-stainfo.ubnt_get_radio_band_channel(): [wifi1ap1], band(1), vap_channel(149), neighbor_channel(149)
+12:28:14.954427 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG user.info, length: 211
+E.....@.>...
+..
+..8.#......<14>Aug 20 12:28:14 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: wevent[7909]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_REQUEST: from serialno=90:41:b2:14:da:e4, target band(1), target channel(149)
+12:28:14.954911 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG user.info, length: 194
+E.....@.>...
+..
+..8.#......<14>Aug 20 12:28:14 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: wevent[7909]: wevent-stainfo.ubnt_get_radio_band_channel(): [wifi1ap3], band(1), vap_channel(149), neighbor_channel(149)
+12:28:14.957144 enX0  In  IP 10.248.188.48.41811 > 10.248.162.56.514: SYSLOG kernel.info, length: 164
+E.....@.>..
+
+..0
+..8.S......<6>Aug 20 12:28:14 APU7ProOH45 1c0b8b0e8709,U7-Pro-Outdoor-8.6.11+18870: kernel: ubnt_neighbor_update_ess_ap(): update [90:41:b2:14:da:e4] band(1), ch(149), type(0)
+12:28:14.959489 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG kernel.info, length: 164
+E.....@.>...
+..
+..8.#.....w<6>Aug 20 12:28:14 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: kernel: ubnt_neighbor_update_ess_ap(): update [90:41:b2:14:da:e4] band(1), ch(149), type(0)
+12:28:14.985436 enX0  In  IP 10.248.188.43.52031 > 10.248.162.56.514: SYSLOG user.info, length: 217
+E...cL@.>.dX
+..+
+..8.?.....1<14>Aug 20 12:28:14 APU7ProH4P22 8cede174eaba,U7-Pro-8.7.11+19419: wevent[8160]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_REQUEST: from serialno=90:41:b2:14:da:e4, target band(1), target channel(149), nr_count(0)
+12:28:14.986045 enX0  In  IP 10.248.188.43.52031 > 10.248.162.56.514: SYSLOG user.info, length: 205
+E...cM@.>.dc
+..+
+..8.?......<14>Aug 20 12:28:14 APU7ProH4P22 8cede174eaba,U7-Pro-8.7.11+19419: wevent[8160]: wevent-stainfo.ubnt_send_ap_update_response(): => UBNT_RESPONSE (fallback): band(1), vap_channel(149), neighbor_channel(149)
+12:28:15.063034 enX0  In  IP 10.248.188.46.46425 > 10.248.162.56.514: SYSLOG user.notice, length: 167
+E....Z@.>.5y
+...
+..8.Y....       .<13>Aug 20 12:28:15 APU7ProOH43 1c0b8b0ea440,U7-Pro-Outdoor-8.6.11+18870: syswrapper[1790][7903]: Trigger rrm scan(3): sleep 1;cfg80211tool wifi0ap0 acsrrm 1; sleep 1;
+12:28:15.068457 enX0  In  IP 10.248.188.48.41811 > 10.248.162.56.514: SYSLOG user.notice, length: 142
+E.....@.>...
+..0
+..8.S....n.<13>Aug 20 12:28:15 APU7ProOH45 1c0b8b0e8709,U7-Pro-Outdoor-8.6.11+18870: syswrapper[15037][7904]: Skip rrm scan wifi1 due to the same channel
+12:28:15.070871 enX0  In  IP 10.248.188.48.41811 > 10.248.162.56.514: SYSLOG user.info, length: 209
+E.....@.>...
+..0
+..8.S.....!<14>Aug 20 12:28:15 APU7ProOH45 1c0b8b0e8709,U7-Pro-Outdoor-8.6.11+18870: wevent[7904]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_REQUEST: from serialno=90:41:b2:14:da:e4, target band(0), target channel(1)
+12:28:15.072347 enX0  In  IP 10.248.188.48.41811 > 10.248.162.56.514: SYSLOG user.info, length: 191
+E.....@.>...
+..0
+..8.S......<14>Aug 20 12:28:15 APU7ProOH45 1c0b8b0e8709,U7-Pro-Outdoor-8.6.11+18870: wevent[7904]: wevent-stainfo.ubnt_get_radio_band_channel(): [wifi0ap0], band(0), vap_channel(11), neighbor_channel(1)
+12:28:15.076935 enX0  In  IP 10.248.188.48.41811 > 10.248.162.56.514: SYSLOG kernel.info, length: 162
+E.....@.>...
+..0
+..8.S....<.<6>Aug 20 12:28:15 APU7ProOH45 1c0b8b0e8709,U7-Pro-Outdoor-8.6.11+18870: kernel: ubnt_neighbor_update_ess_ap(): update [90:41:b2:14:da:e4] band(0), ch(1), type(0)
+12:28:15.081520 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG user.notice, length: 142
+E.....@.>...
+..
+..8.#......<13>Aug 20 12:28:15 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: syswrapper[20197][7909]: Skip rrm scan wifi1 due to the same channel
+12:28:15.084573 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG user.info, length: 209
+E.....@.>...
+..
+..8.#....       /<14>Aug 20 12:28:15 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: wevent[7909]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_REQUEST: from serialno=90:41:b2:14:da:e4, target band(0), target channel(1)
+12:28:15.084574 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG user.info, length: 190
+E.....@.>...
+..
+..8.#....~.<14>Aug 20 12:28:15 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: wevent[7909]: wevent-stainfo.ubnt_get_radio_band_channel(): [wifi0ap0], band(0), vap_channel(1), neighbor_channel(1)
+12:28:15.089386 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG kernel.info, length: 162
+E.....@.>...
+..
+..8.#......<6>Aug 20 12:28:15 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: kernel: ubnt_neighbor_update_ess_ap(): update [90:41:b2:14:da:e4] band(0), ch(1), type(0)
+12:28:15.103050 enX0  In  IP 10.248.188.248.39684 > 10.248.162.56.514: SYSLOG user.info, length: 237
+E..     ..@.>...
+...
+..8........<14>Aug 20 12:28:15 U7-Pro-Outdoor 9041b214dae4,U7-Pro-Outdoor-8.6.11+18870: wevent[28236]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_RESPONSE: from 1c:0b:8b:0e:87:09 to serialno=90:41:b2:14:da:e4, target band(1), target channel(149)
+12:28:15.107006 enX0  In  IP 10.248.188.43.52031 > 10.248.162.56.514: SYSLOG user.notice, length: 140
+E...cN@.>.d.
+..+
+..8.?.....G<13>Aug 20 12:28:15 APU7ProH4P22 8cede174eaba,U7-Pro-8.7.11+19419: syswrapper[12539][8160]: Skip rrm scan wifi1: actual_ch=149 == target=149
+12:28:15.107664 enX0  In  IP 10.248.188.248.39684 > 10.248.162.56.514: SYSLOG kernel.info, length: 167
+E.....@.>..0
+...
+..8.......d<6>Aug 20 12:28:15 U7-Pro-Outdoor 9041b214dae4,U7-Pro-Outdoor-8.6.11+18870: kernel: ubnt_neighbor_update_ess_ap(): update [1c:0b:8b:0e:87:09] band(1), ch(149), type(0)
+12:28:15.119226 enX0  In  IP 10.248.188.43.52031 > 10.248.162.56.514: SYSLOG user.info, length: 215
+E...cO@.>.dW
+..+
+..8.?....Kj<14>Aug 20 12:28:15 APU7ProH4P22 8cede174eaba,U7-Pro-8.7.11+19419: wevent[8160]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_REQUEST: from serialno=90:41:b2:14:da:e4, target band(0), target channel(1), nr_count(0)
+12:28:15.119227 enX0  In  IP 10.248.188.43.52031 > 10.248.162.56.514: SYSLOG user.info, length: 202
+E...cP@.>.dc
+..+
+..8.?.... .<14>Aug 20 12:28:15 APU7ProH4P22 8cede174eaba,U7-Pro-8.7.11+19419: wevent[8160]: wevent-stainfo.ubnt_send_ap_update_response(): => UBNT_RESPONSE (fallback): band(0), vap_channel(11), neighbor_channel(1)
+12:28:15.199532 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG user.notice, length: 142
+E.....@.>...
+..
+..8.#......<13>Aug 20 12:28:15 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: syswrapper[20257][7909]: Skip rrm scan wifi0 due to the same channel
+12:28:15.206707 enX0  In  IP 10.248.188.48.41811 > 10.248.162.56.514: SYSLOG user.notice, length: 168
+E.....@.>...
+..0
+..8.S.....?<13>Aug 20 12:28:15 APU7ProOH45 1c0b8b0e8709,U7-Pro-Outdoor-8.6.11+18870: syswrapper[15097][7904]: Trigger rrm scan(1): sleep 4;cfg80211tool wifi0ap0 acsrrm 1; sleep 1;
+12:28:15.208426 enX0  In  IP 10.248.188.248.39684 > 10.248.162.56.514: SYSLOG user.info, length: 237
+E..     ..@.>...
+...
+..8........<14>Aug 20 12:28:15 U7-Pro-Outdoor 9041b214dae4,U7-Pro-Outdoor-8.6.11+18870: wevent[28236]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_RESPONSE: from 90:41:b2:14:27:d1 to serialno=90:41:b2:14:da:e4, target band(1), target channel(149)
+12:28:15.209016 enX0  In  IP 10.248.188.248.39684 > 10.248.162.56.514: SYSLOG kernel.info, length: 167
+E.....@.>...
+...
+..8......8.<6>Aug 20 12:28:15 U7-Pro-Outdoor 9041b214dae4,U7-Pro-Outdoor-8.6.11+18870: kernel: ubnt_neighbor_update_ess_ap(): update [90:41:b2:14:27:d1] band(1), ch(149), type(0)
+12:28:15.212030 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG user.info, length: 211
+E....   @.>...
+..
+..8.#....*.<14>Aug 20 12:28:15 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: wevent[7909]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_REQUEST: from serialno=90:41:b2:14:26:9f, target band(1), target channel(149)
+12:28:15.212829 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG user.info, length: 194
+E....
+@.>...
+..
+..8.#......<14>Aug 20 12:28:15 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: wevent[7909]: wevent-stainfo.ubnt_get_radio_band_channel(): [wifi1ap3], band(1), vap_channel(149), neighbor_channel(149)
+12:28:15.218884 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG kernel.info, length: 164
+E.....@.>...
+..
+..8.#......<6>Aug 20 12:28:15 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: kernel: ubnt_neighbor_update_ess_ap(): update [90:41:b2:14:26:9f] band(1), ch(149), type(0)
+12:28:15.260633 enX0  In  IP 10.248.188.43.52031 > 10.248.162.56.514: SYSLOG user.notice, length: 161
+E...cQ@.>.d.
+..+
+..8.?....P.<13>Aug 20 12:28:15 APU7ProH4P22 8cede174eaba,U7-Pro-8.7.11+19419: syswrapper[12605][8160]: Trigger rrm scan(1): sleep 3;cfg80211tool wifi0ap0 acsrrm 1; sleep 1;
+12:28:15.279959 enX0  In  IP 10.248.188.35.53011 > 10.248.162.56.514: SYSLOG user.notice, length: 160
+E.....@.>..6
+..#
+..8......<w<13>Aug 20 12:28:15 APU7ProH31 8cede1aab1c8,U7-Pro-8.7.11+19419: syswrapper[10682][8167]: Trigger rrm scan(1): sleep 1;cfg80211tool wifi1ap3 acsrrm 48; sleep 1;
+12:28:15.304372 enX0  In  IP 10.248.188.248.39684 > 10.248.162.56.514: SYSLOG user.info, length: 237
+E..     ..@.>...
+...
+..8.......H<14>Aug 20 12:28:15 U7-Pro-Outdoor 9041b214dae4,U7-Pro-Outdoor-8.6.11+18870: wevent[28236]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_RESPONSE: from 8c:ed:e1:74:ea:ba to serialno=90:41:b2:14:da:e4, target band(1), target channel(149)
+12:28:15.309786 enX0  In  IP 10.248.188.248.39684 > 10.248.162.56.514: SYSLOG kernel.info, length: 167
+E.....@.>..,
+...
+..8.......      <6>Aug 20 12:28:15 U7-Pro-Outdoor 9041b214dae4,U7-Pro-Outdoor-8.6.11+18870: kernel: ubnt_neighbor_update_ess_ap(): update [8c:ed:e1:74:ea:ba] band(1), ch(149), type(0)
+12:28:15.336807 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG user.notice, length: 142
+E.....@.>...
+..
+..8.#......<13>Aug 20 12:28:15 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: syswrapper[20317][7909]: Skip rrm scan wifi1 due to the same channel
+12:28:15.339087 enX0  In  IP 10.248.188.42.60503 > 10.248.162.56.514: SYSLOG user.info, length: 217
+E.....@.>...
+..*
+..8.W...."w<14>Aug 20 12:28:15 APU7ProH4P21 8cede174ea0e,U7-Pro-8.7.11+19419: wevent[8161]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_REQUEST: from serialno=90:41:b2:14:27:d1, target band(1), target channel(149), nr_count(0)
+12:28:15.339689 enX0  In  IP 10.248.188.41.59429 > 10.248.162.56.514: SYSLOG user.info, length: 217
+E.....@.>...
+..)
+..8.%....Tk<14>Aug 20 12:28:15 APU7ProH4P12 8cede174e9fa,U7-Pro-8.7.11+19419: wevent[8159]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_REQUEST: from serialno=90:41:b2:14:27:d1, target band(1), target channel(149), nr_count(0)
+12:28:15.339689 enX0  In  IP 10.248.188.42.60503 > 10.248.162.56.514: SYSLOG user.info, length: 205
+E.....@.>...
+..*
+..8.W......<14>Aug 20 12:28:15 APU7ProH4P21 8cede174ea0e,U7-Pro-8.7.11+19419: wevent[8161]: wevent-stainfo.ubnt_send_ap_update_response(): => UBNT_RESPONSE (fallback): band(1), vap_channel(149), neighbor_channel(149)
+12:28:15.340486 enX0  In  IP 10.248.188.41.59429 > 10.248.162.56.514: SYSLOG user.info, length: 205
+E.....@.>...
+..)
+..8.%......<14>Aug 20 12:28:15 APU7ProH4P12 8cede174e9fa,U7-Pro-8.7.11+19419: wevent[8159]: wevent-stainfo.ubnt_send_ap_update_response(): => UBNT_RESPONSE (fallback): band(1), vap_channel(149), neighbor_channel(149)
+12:28:15.343565 enX0  In  IP 10.248.188.245.49901 > 10.248.162.56.514: SYSLOG user.info, length: 212
+E....6@.>...
+...
+..8.......0<14>Aug 20 12:28:15 U7-Pro 8cede17849e0,U7-Pro-8.7.11+19419: wevent[13682]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_REQUEST: from serialno=90:41:b2:14:27:d1, target band(1), target channel(149), nr_count(0)
+12:28:15.343565 enX0  In  IP 10.248.188.245.49901 > 10.248.162.56.514: SYSLOG user.info, length: 200
+E....7@.>...
+...
+..8......5.<14>Aug 20 12:28:15 U7-Pro 8cede17849e0,U7-Pro-8.7.11+19419: wevent[13682]: wevent-stainfo.ubnt_send_ap_update_response(): => UBNT_RESPONSE (fallback): band(1), vap_channel(149), neighbor_channel(149)
+12:28:15.401469 enX0  In  IP 10.248.188.248.39684 > 10.248.162.56.514: SYSLOG user.info, length: 236
+E.....@.>...
+...
+..8........<14>Aug 20 12:28:15 U7-Pro-Outdoor 9041b214dae4,U7-Pro-Outdoor-8.6.11+18870: wevent[28236]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_RESPONSE: from 1c:0b:8b:0e:87:09 to serialno=90:41:b2:14:da:e4, target band(0), target channel(11)
+12:28:15.410589 enX0  In  IP 10.248.188.248.39684 > 10.248.162.56.514: SYSLOG kernel.info, length: 166
+E.....@.>..+
+...
+..8......@_<6>Aug 20 12:28:15 U7-Pro-Outdoor 9041b214dae4,U7-Pro-Outdoor-8.6.11+18870: kernel: ubnt_neighbor_update_ess_ap(): insert [1c:0b:8b:0e:87:09] band(0), ch(11), type(0)
+12:28:15.440616 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG user.info, length: 187
+E.....@.>...
+..
+..8.#.....m<14>Aug 20 12:28:15 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: wevent[7909]: wevent.ubnt_custom_event(): EVENT_AP_UPDATE wifi1: serial(90:41:b2:14:27:d1), band(1), channel(149)
+12:28:15.440617 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG user.info, length: 233
+E.....@.>...
+..
+..8.#......<14>Aug 20 12:28:15 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: wevent[7909]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_RESPONSE: from 8c:ed:e1:74:e9:fa to serialno=90:41:b2:14:27:d1, target band(1), target channel(149)
+12:28:15.440617 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG kernel.info, length: 164
+E.....@.>...
+..
+..8.#....'#<6>Aug 20 12:28:15 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: kernel: ubnt_neighbor_update_ess_ap(): insert [8c:ed:e1:74:e9:fa] band(1), ch(149), type(0)
+12:28:15.453563 enX0  In  IP 10.248.188.245.49901 > 10.248.162.56.514: SYSLOG user.notice, length: 135
+E....8@.>...
+...
+..8......-p<13>Aug 20 12:28:15 U7-Pro 8cede17849e0,U7-Pro-8.7.11+19419: syswrapper[13351][13682]: Skip rrm scan wifi1: actual_ch=149 == target=149
+12:28:15.465357 enX0  In  IP 10.248.188.42.60503 > 10.248.162.56.514: SYSLOG user.notice, length: 139
+E.....@.>...
+..*
+..8.W.....8<13>Aug 20 12:28:15 APU7ProH4P21 8cede174ea0e,U7-Pro-8.7.11+19419: syswrapper[6118][8161]: Skip rrm scan wifi1: actual_ch=149 == target=149
+12:28:15.467355 enX0  In  IP 10.248.188.41.59429 > 10.248.162.56.514: SYSLOG user.notice, length: 139
+E.....@.>..L
+..)
+..8.%....9,<13>Aug 20 12:28:15 APU7ProH4P12 8cede174e9fa,U7-Pro-8.7.11+19419: syswrapper[9940][8159]: Skip rrm scan wifi1: actual_ch=149 == target=149
+12:28:15.498482 enX0  In  IP 10.248.188.248.39684 > 10.248.162.56.514: SYSLOG user.info, length: 235
+E.....@.>...
+...
+..8........<14>Aug 20 12:28:15 U7-Pro-Outdoor 9041b214dae4,U7-Pro-Outdoor-8.6.11+18870: wevent[28236]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_RESPONSE: from 90:41:b2:14:27:d1 to serialno=90:41:b2:14:da:e4, target band(0), target channel(1)
+12:28:15.499181 enX0  In  IP 10.248.188.248.39684 > 10.248.162.56.514: SYSLOG kernel.info, length: 165
+E.....@.>..*
+...
+..8......q.<6>Aug 20 12:28:15 U7-Pro-Outdoor 9041b214dae4,U7-Pro-Outdoor-8.6.11+18870: kernel: ubnt_neighbor_update_ess_ap(): update [90:41:b2:14:27:d1] band(0), ch(1), type(0)
+12:28:15.567797 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG user.notice, length: 142
+E.....@.>...
+..
+..8.#......<13>Aug 20 12:28:15 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: syswrapper[20421][7909]: Skip rrm scan wifi1 due to the same channel
+12:28:15.568947 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG user.info, length: 233
+E.....@.>...
+..
+..8.#......<14>Aug 20 12:28:15 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: wevent[7909]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_RESPONSE: from 8c:ed:e1:74:ea:0e to serialno=90:41:b2:14:27:d1, target band(1), target channel(149)
+12:28:15.571369 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG kernel.info, length: 164
+E.....@.>...
+..
+..8.#....$B<6>Aug 20 12:28:15 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: kernel: ubnt_neighbor_update_ess_ap(): update [8c:ed:e1:74:ea:0e] band(1), ch(149), type(0)
+12:28:15.594843 enX0  In  IP 10.248.188.248.39684 > 10.248.162.56.514: SYSLOG user.info, length: 236
+E.....@.>...
+...
+..8......IZ<14>Aug 20 12:28:15 U7-Pro-Outdoor 9041b214dae4,U7-Pro-Outdoor-8.6.11+18870: wevent[28236]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_RESPONSE: from 8c:ed:e1:74:ea:ba to serialno=90:41:b2:14:da:e4, target band(0), target channel(11)
+12:28:15.599288 enX0  In  IP 10.248.188.248.39684 > 10.248.162.56.514: SYSLOG kernel.info, length: 166
+E.....@.>..'
+...
+..8........<6>Aug 20 12:28:15 U7-Pro-Outdoor 9041b214dae4,U7-Pro-Outdoor-8.6.11+18870: kernel: ubnt_neighbor_update_ess_ap(): update [8c:ed:e1:74:ea:ba] band(0), ch(11), type(0)
+12:28:15.601684 enX0  In  IP 10.248.188.40.56862 > 10.248.162.56.514: SYSLOG user.info, length: 216
+E.....@.>...
+..(
+..8......N^<14>Aug 20 12:28:15 APU7ProH4P11 8cede174ee36,U7-Pro-8.7.11+19419: wevent[8163]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_REQUEST: from serialno=1c:0b:8b:0e:7f:80, target band(1), target channel(44), nr_count(0)
+12:28:15.602483 enX0  In  IP 10.248.188.40.56862 > 10.248.162.56.514: SYSLOG user.info, length: 203
+E.....@.>...
+..(
+..8.......0<14>Aug 20 12:28:15 APU7ProH4P11 8cede174ee36,U7-Pro-8.7.11+19419: wevent[8163]: wevent-stainfo.ubnt_send_ap_update_response(): => UBNT_RESPONSE (fallback): band(1), vap_channel(44), neighbor_channel(44)
+12:28:15.693702 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG user.info, length: 233
+E.....@.>...
+..
+..8.#......<14>Aug 20 12:28:15 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: wevent[7909]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_RESPONSE: from 8c:ed:e1:78:49:e0 to serialno=90:41:b2:14:27:d1, target band(1), target channel(149)
+12:28:15.693868 enX0  In  IP 10.248.188.248.39684 > 10.248.162.56.514: SYSLOG user.info, length: 215
+E.....@.>...
+...
+..8......{.<14>Aug 20 12:28:15 U7-Pro-Outdoor 9041b214dae4,U7-Pro-Outdoor-8.6.11+18870: wevent[28236]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_REQUEST: from serialno=90:41:b2:14:27:d1, target band(1), target channel(149)
+12:28:15.695002 enX0  In  IP 10.248.188.248.39684 > 10.248.162.56.514: SYSLOG user.info, length: 198
+E.....@.>...
+...
+..8........<14>Aug 20 12:28:15 U7-Pro-Outdoor 9041b214dae4,U7-Pro-Outdoor-8.6.11+18870: wevent[28236]: wevent-stainfo.ubnt_get_radio_band_channel(): [wifi1ap3], band(1), vap_channel(149), neighbor_channel(149)
+12:28:15.699795 enX0  In  IP 10.248.188.248.39684 > 10.248.162.56.514: SYSLOG kernel.info, length: 167
+E.....@.>..#
+...
+..8......8.<6>Aug 20 12:28:15 U7-Pro-Outdoor 9041b214dae4,U7-Pro-Outdoor-8.6.11+18870: kernel: ubnt_neighbor_update_ess_ap(): update [90:41:b2:14:27:d1] band(1), ch(149), type(0)
+12:28:15.700015 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG kernel.info, length: 164
+E.....@.>...
+..
+..8.#.....5<6>Aug 20 12:28:15 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: kernel: ubnt_neighbor_update_ess_ap(): update [8c:ed:e1:78:49:e0] band(1), ch(149), type(0)
+12:28:15.721796 enX0  In  IP 10.248.188.40.56862 > 10.248.162.56.514: SYSLOG user.notice, length: 138
+E.....@.>..7
+..(
+..8......5.<13>Aug 20 12:28:15 APU7ProH4P11 8cede174ee36,U7-Pro-8.7.11+19419: syswrapper[24463][8163]: Skip rrm scan wifi1: actual_ch=44 == target=44
+12:28:15.730234 enX0  In  IP 10.248.188.40.56862 > 10.248.162.56.514: SYSLOG user.info, length: 217
+E.....@.>...
+..(
+..8......'.<14>Aug 20 12:28:15 APU7ProH4P11 8cede174ee36,U7-Pro-8.7.11+19419: wevent[8163]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_REQUEST: from serialno=90:41:b2:14:da:e4, target band(1), target channel(149), nr_count(0)
+12:28:15.730235 enX0  In  IP 10.248.188.40.56862 > 10.248.162.56.514: SYSLOG user.info, length: 204
+E.....@.>...
+..(
+..8........<14>Aug 20 12:28:15 APU7ProH4P11 8cede174ee36,U7-Pro-8.7.11+19419: wevent[8163]: wevent-stainfo.ubnt_send_ap_update_response(): => UBNT_RESPONSE (fallback): band(1), vap_channel(44), neighbor_channel(149)
+12:28:15.737090 enX0  In  IP 10.248.188.234.52199 > 10.248.162.56.514: SYSLOG user.notice, length: 174
+E...W.@.>.o.
+...
+..8.......e<13>Aug 20 12:28:15 U7-Pro-Outdoor 9041b214dd00,U7-Pro-Outdoor-8.6.11+18870: syswrapper[17314][13315]: Trigger rrm scan(2): sleep 1;cfg80211tool wifi1ap3 acsrrm 149; sleep 1;
+12:28:15.761435 enX0  In  IP 10.248.188.251.38848 > 10.248.162.56.514: SYSLOG user.notice, length: 173
+E...:.@.>..}
+...
+..8.......?<13>Aug 20 12:28:15 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: syswrapper[15695][13349]: Trigger rrm scan(2): sleep 1;cfg80211tool wifi1ap3 acsrrm 44; sleep 1;
+12:28:15.794469 enX0  In  IP 10.248.188.248.39684 > 10.248.162.56.514: SYSLOG user.info, length: 236
+E.....@.>...
+...
+..8......p.<14>Aug 20 12:28:15 U7-Pro-Outdoor 9041b214dae4,U7-Pro-Outdoor-8.6.11+18870: wevent[28236]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_RESPONSE: from 8c:ed:e1:74:ee:36 to serialno=90:41:b2:14:da:e4, target band(1), target channel(44)
+12:28:15.799024 enX0  In  IP 10.248.188.248.39684 > 10.248.162.56.514: SYSLOG kernel.info, length: 166
+E.....@.>.."
+...
+..8.......-<6>Aug 20 12:28:15 U7-Pro-Outdoor 9041b214dae4,U7-Pro-Outdoor-8.6.11+18870: kernel: ubnt_neighbor_update_ess_ap(): update [8c:ed:e1:74:ee:36] band(1), ch(44), type(0)
+12:28:15.810522 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG user.notice, length: 142
+E.....@.>...
+..
+..8.#......<13>Aug 20 12:28:15 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: syswrapper[20541][7909]: Skip rrm scan wifi1 due to the same channel
+12:28:15.812776 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG user.info, length: 233
+E.....@.>...
+..
+..8.#....1.<14>Aug 20 12:28:15 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: wevent[7909]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_RESPONSE: from 90:41:b2:14:da:e4 to serialno=90:41:b2:14:27:d1, target band(1), target channel(149)
+12:28:15.812790 enX0  In  IP 10.248.188.239.37176 > 10.248.162.56.514: SYSLOG user.notice, length: 173
+E.....@.>..c
+...
+..8.8......<13>Aug 20 12:28:15 U7-Pro-Outdoor 9041b214dd93,U7-Pro-Outdoor-8.6.11+18870: syswrapper[28047][13348]: Trigger rrm scan(3): sleep 1;cfg80211tool wifi1ap3 acsrrm 44; sleep 1;
+12:28:15.819175 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG kernel.info, length: 164
+E.....@.>...
+..
+..8.#.....v<6>Aug 20 12:28:15 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: kernel: ubnt_neighbor_update_ess_ap(): update [90:41:b2:14:da:e4] band(1), ch(149), type(0)
+12:28:15.872905 enX0  In  IP 10.248.188.40.56862 > 10.248.162.56.514: SYSLOG user.notice, length: 163
+E.....@.>...
+..(
+..8......&.<13>Aug 20 12:28:15 APU7ProH4P11 8cede174ee36,U7-Pro-8.7.11+19419: syswrapper[24528][8163]: Trigger rrm scan(1): sleep 1;cfg80211tool wifi1ap1 acsrrm 149; sleep 1;
+12:28:15.878298 enX0  In  IP 10.248.188.31.59457 > 10.248.162.56.514: SYSLOG user.notice, length: 169
+E....d@.>..{
+...
+..8.A......<13>Aug 20 12:28:15 APU7ProOH32 9041b216288c,U7-Pro-Outdoor-8.6.11+18870: syswrapper[19109][7910]: Trigger rrm scan(3): sleep 4;cfg80211tool wifi1ap3 acsrrm 44; sleep 1;
+12:28:15.935456 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG user.notice, length: 142
+E.....@.>...
+..
+..8.#......<13>Aug 20 12:28:15 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: syswrapper[20601][7909]: Skip rrm scan wifi1 due to the same channel
+12:28:15.937466 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG user.info, length: 123
+E.....@.>...
+..
+..8.#......<14>Aug 20 12:28:15 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: wevent[7909]: wevent.sta_join(): unset vport_down
+12:28:15.938193 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG user.info, length: 175
+E.....@.>...
+..
+..8.#.....7<14>Aug 20 12:28:15 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: wevent[7909]: libubnt.qos_sta_control(): /bin/qos_control.sh replace-sta wifi1ap4 5 1 1kbit 70000kbit
+12:28:16.012114 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG user.info, length: 171
+E.....@.>...
+..
+..8.#......<14>Aug 20 12:28:16 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: wevent[7909]: libubnt.qos_sta_control(): /bin/qos_control.sh replace-sta eth0 5 1 1kbit 70000kbit
+12:28:16.084333 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG user.info, length: 175
+E.....@.>...
+..
+..8.#......<14>Aug 20 12:28:16 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: wevent[7909]: libubnt.qos_sta_control(): /bin/qos_control.sh replace-sta vwireap6 5 1 1kbit 70000kbit
+12:28:16.143725 enX0  In  IP 10.248.188.47.55242 > 10.248.162.56.514: SYSLOG user.notice, length: 168
+E.....@.>.#,
+../
+..8........<13>Aug 20 12:28:16 APU7ProOH44 1c0b8b0e7e87,U7-Pro-Outdoor-8.6.11+18870: syswrapper[6857][7904]: Trigger rrm scan(2): sleep 1;cfg80211tool wifi0ap0 acsrrm 11; sleep 1;
+12:28:16.159225 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG user.info, length: 162
+E.....@.>...
+..
+..8.#......<14>Aug 20 12:28:16 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: wevent[7909]: wevent.ubnt_custom_event(): EVENT_STA_JOIN wifi1ap4: be:b9:44:c6:38:df / 1
+12:28:16.159225 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG user.error, length: 149
+E.....@.>...
+..
+..8.#......<11>Aug 20 12:28:16 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: wevent[7909]: garp.get_ipv4_by_mac(): Netlink error response: Resource busy
+12:28:16.159225 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG user.warning, length: 163
+E.... @.>...
+..
+..8.#......<12>Aug 20 12:28:16 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: wevent[7909]: garp.ui_garp_send_frame(): ARP table does not have IP for be:b9:44:c6:38:df
+12:28:16.159226 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG kernel.warning, length: 148
+E....!@.>...
+..
+..8.#......<4>Aug 20 12:28:16 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: kernel: ieee80211_ioctl_tag_guest: failed to find specified node with aid 1
+12:28:16.162092 enX0  In  IP 10.248.188.41.59429 > 10.248.162.56.514: SYSLOG user.info, length: 215
+E.....@.>...
+..)
+..8.%......<14>Aug 20 12:28:16 APU7ProH4P12 8cede174e9fa,U7-Pro-8.7.11+19419: wevent[8159]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_REQUEST: from serialno=90:41:b2:14:27:d1, target band(0), target channel(1), nr_count(0)
+12:28:16.162948 enX0  In  IP 10.248.188.42.60503 > 10.248.162.56.514: SYSLOG user.info, length: 215
+E.....@.>...
+..*
+..8.W....Z.<14>Aug 20 12:28:16 APU7ProH4P21 8cede174ea0e,U7-Pro-8.7.11+19419: wevent[8161]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_REQUEST: from serialno=90:41:b2:14:27:d1, target band(0), target channel(1), nr_count(0)
+12:28:16.162948 enX0  In  IP 10.248.188.41.59429 > 10.248.162.56.514: SYSLOG user.info, length: 201
+E.....@.>...
+..)
+..8.%.....><14>Aug 20 12:28:16 APU7ProH4P12 8cede174e9fa,U7-Pro-8.7.11+19419: wevent[8159]: wevent-stainfo.ubnt_send_ap_update_response(): => UBNT_RESPONSE (fallback): band(0), vap_channel(6), neighbor_channel(1)
+12:28:16.162948 enX0  In  IP 10.248.188.42.60503 > 10.248.162.56.514: SYSLOG user.info, length: 201
+E.....@.>...
+..*
+..8.W.....I<14>Aug 20 12:28:16 APU7ProH4P21 8cede174ea0e,U7-Pro-8.7.11+19419: wevent[8161]: wevent-stainfo.ubnt_send_ap_update_response(): => UBNT_RESPONSE (fallback): band(0), vap_channel(6), neighbor_channel(1)
+12:28:16.164379 enX0  In  IP 10.248.188.248.39684 > 10.248.162.56.514: SYSLOG user.info, length: 213
+E.....@.>...
+...
+..8.......1<14>Aug 20 12:28:16 U7-Pro-Outdoor 9041b214dae4,U7-Pro-Outdoor-8.6.11+18870: wevent[28236]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_REQUEST: from serialno=90:41:b2:14:27:d1, target band(0), target channel(1)
+12:28:16.165145 enX0  In  IP 10.248.188.248.39684 > 10.248.162.56.514: SYSLOG user.info, length: 194
+E.....@.>...
+...
+..8.......S<14>Aug 20 12:28:16 U7-Pro-Outdoor 9041b214dae4,U7-Pro-Outdoor-8.6.11+18870: wevent[28236]: wevent-stainfo.ubnt_get_radio_band_channel(): [wifi0ap0], band(0), vap_channel(1), neighbor_channel(1)
+12:28:16.165197 enX0  In  IP 10.248.188.245.49901 > 10.248.162.56.514: SYSLOG user.info, length: 210
+E....9@.>...
+...
+..8......$n<14>Aug 20 12:28:16 U7-Pro 8cede17849e0,U7-Pro-8.7.11+19419: wevent[13682]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_REQUEST: from serialno=90:41:b2:14:27:d1, target band(0), target channel(1), nr_count(0)
+12:28:16.165197 enX0  In  IP 10.248.188.245.49901 > 10.248.162.56.514: SYSLOG user.info, length: 196
+E....:@.>...
+...
+..8........<14>Aug 20 12:28:16 U7-Pro 8cede17849e0,U7-Pro-8.7.11+19419: wevent[13682]: wevent-stainfo.ubnt_send_ap_update_response(): => UBNT_RESPONSE (fallback): band(0), vap_channel(1), neighbor_channel(1)
+12:28:16.169190 enX0  In  IP 10.248.188.248.39684 > 10.248.162.56.514: SYSLOG kernel.info, length: 165
+E.....@.>..
+...
+..8......q.<6>Aug 20 12:28:16 U7-Pro-Outdoor 9041b214dae4,U7-Pro-Outdoor-8.6.11+18870: kernel: ubnt_neighbor_update_ess_ap(): update [90:41:b2:14:27:d1] band(0), ch(1), type(0)
+12:28:16.263565 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG user.info, length: 185
+E...."@.>...
+..
+..8.#....3.<14>Aug 20 12:28:16 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: wevent[7909]: wevent.ubnt_custom_event(): EVENT_AP_UPDATE wifi0: serial(90:41:b2:14:27:d1), band(0), channel(1)
+12:28:16.263565 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG user.info, length: 231
+E....#@.>..~
+..
+..8.#....".<14>Aug 20 12:28:16 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: wevent[7909]: wevent-stainfo.ubnt_ap_update_handler(): UBNT_RESPONSE: from 8c:ed:e1:74:e9:fa to serialno=90:41:b2:14:27:d1, target band(0), target channel(6)
+12:28:16.268890 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG kernel.info, length: 162
+E....$@.>...
+..
+..8.#....\Z<6>Aug 20 12:28:16 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: kernel: ubnt_neighbor_update_ess_ap(): insert [8c:ed:e1:74:e9:fa] band(0), ch(6), type(0)
+12:28:16.271116 enX0  In  IP 10.248.188.245.49901 > 10.248.162.56.514: SYSLOG user.notice, length: 131
+E....;@.>...
+...
+..8........<13>Aug 20 12:28:16 U7-Pro 8cede17849e0,U7-Pro-8.7.11+19419: syswrapper[13416][13682]: Skip rrm scan wifi0: actual_ch=1 == target=1
+12:28:16.301878 enX0  In  IP 10.248.188.42.60503 > 10.248.162.56.514: SYSLOG user.notice, length: 160
+E.....@.>...
+..*
+..8.W......<13>Aug 20 12:28:16 APU7ProH4P21 8cede174ea0e,U7-Pro-8.7.11+19419: syswrapper[6183][8161]: Trigger rrm scan(1): sleep 3;cfg80211tool wifi0ap0 acsrrm 1; sleep 1;
+12:28:16.307769 enX0  In  IP 10.248.188.41.59429 > 10.248.162.56.514: SYSLOG user.notice, length: 161
+E.....@.>..3
+..)
+..8.%....Y.<13>Aug 20 12:28:16 APU7ProH4P12 8cede174e9fa,U7-Pro-8.7.11+19419: syswrapper[10005][8159]: Trigger rrm scan(1): sleep 1;cfg80211tool wifi0ap0 acsrrm 1; sleep 1;
+12:28:16.409939 enX0  In  IP 10.248.188.32.60707 > 10.248.162.56.514: SYSLOG user.notice, length: 168
+E....%@.>...
+..
+..8.#....)?<13>Aug 20 12:28:16 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: syswrapper[20852][7909]: Trigger rrm scan(1): sleep 1;cfg80211tool wifi0ap0 acsrrm 6; sleep 1;
+^C
+147 packets captured
+148 packets received by filter
+0 packets dropped by kernel
+htadmin@plslvmwazuh:~$ sudo tcpdump -i any -nn -A 'udp port 514 and src net 10.255.255.0/30'
+tcpdump: data link type LINUX_SLL2
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on any, link-type LINUX_SLL2 (Linux cooked v2), snapshot length 262144 bytes
+12:28:34.932969 enX0  In  IP 10.255.255.2.35458 > 10.248.162.56.514: SYSLOG user.notice, length: 249
+E....p@.?.t6
+...
+..8........<13>Aug 20 12:28:34 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.248.188.251 DST=172.70.70.1 LEN=63 TOS=00 PREC=0x00 TTL=63 ID=48265 DF PROTO=UDP SPT=45648 DPT=53 LEN=43 MARK=1a0000
+
+12:28:34.932970 enX0  In  IP 10.255.255.2.35458 > 10.248.162.56.514: SYSLOG user.notice, length: 288
+E..<.q@.?.t.
+...
+..8.....($n<13>Aug 20 12:28:34 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.248.190.192 DST=172.217.115.4 LEN=60 TOS=00 PREC=0x00 TTL=63 ID=34711 DF PROTO=TCP SPT=56222 DPT=443 SEQ=34118258 ACK=0 WINDOW=65535 SYN URGP=0 MARK=1a0000
+
+12:28:37.742840 enX0  In  IP 10.255.255.2.35458 > 10.248.162.56.514: SYSLOG user.notice, length: 290
+E..>.z@.?.s.
+...
+..8.....*./<13>Aug 20 12:28:37 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.248.190.192 DST=172.217.115.4 LEN=60 TOS=00 PREC=0x00 TTL=63 ID=10933 DF PROTO=TCP SPT=56238 DPT=443 SEQ=3743264135 ACK=0 WINDOW=65535 SYN URGP=0 MARK=1a0000
+
+12:28:37.742841 enX0  In  IP 10.255.255.2.35458 > 10.248.162.56.514: SYSLOG user.notice, length: 254
+E....{@.?.s&
+...
+..8........<13>Aug 20 12:28:37 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.255.255.2 DST=1.1.1.1 LEN=52 TOS=00 PREC=0x00 TTL=64 ID=2421 DF PROTO=UDP SPT=46206 DPT=53 LEN=32 UID=0 GID=0 MARK=1a0000
+
+12:28:37.742841 enX0  In  IP 10.255.255.2.35458 > 10.248.162.56.514: SYSLOG user.notice, length: 255
+E....|@.?.s$
+...
+..8........<13>Aug 20 12:28:37 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.255.255.2 DST=8.8.8.8 LEN=52 TOS=00 PREC=0x00 TTL=64 ID=58987 DF PROTO=UDP SPT=48660 DPT=53 LEN=32 UID=0 GID=0 MARK=1a0000
+
+12:28:38.025415 enX0  In  IP 10.255.255.2.53863 > 10.248.162.56.514:  (invalid)
+E.....@.?.rn
+...
+..8.g......Aug 20 12:28:38 UDM-Pro-Max-Prime CEF:0|Ubiquiti|UniFi Network|10.5.67|530|AP Channel Change|2|UNIFIcategory=UniFi Devices UNIFIhost=UDM-Pro-Max-Prime UNIFIdeviceMac=90:41:b2:14:b4:7d UNIFIdeviceName=AP U7 Pro O H3_4 UNIFIdeviceModel=U7-Pro-Outdoor-EU UNIFIdeviceIp=10.248.188.33 UNIFIdeviceVersion=8.6.11 UNIFIcurrentChannel=6 UNIFIpriorChannel=1 UNIFIutcTime=2026-08-20T10:28:38.020Z msg=AP U7 Pro O H3_4 moved to channel 6 from 1.
+
+12:28:40.222687 enX0  In  IP 10.255.255.2.35458 > 10.248.162.56.514: SYSLOG user.notice, length: 289
+E..=.<@.?.rB
+...
+..8.....)X.<13>Aug 20 12:28:40 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.248.190.192 DST=172.217.115.4 LEN=60 TOS=00 PREC=0x00 TTL=63 ID=7487 DF PROTO=TCP SPT=56250 DPT=443 SEQ=1463060642 ACK=0 WINDOW=65535 SYN URGP=0 MARK=1a0000
+
+12:28:40.222688 enX0  In  IP 10.255.255.2.35458 > 10.248.162.56.514: SYSLOG user.notice, length: 259
+E....=@.?.r_
+...
+..8........<13>Aug 20 12:28:40 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.255.255.2 DST=1.1.1.1 LEN=66 TOS=00 PREC=0x00 TTL=64 ID=2631 DF PROTO=UDP SPT=34725 DPT=53 LEN=46 UID=65534 GID=30 MARK=1a0000
+
+12:28:40.222688 enX0  In  IP 10.255.255.2.35458 > 10.248.162.56.514: SYSLOG user.notice, length: 288
+E..<.>@.?.rA
+...
+..8.....(a"<13>Aug 20 12:28:40 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.248.190.192 DST=34.246.42.65 LEN=60 TOS=00 PREC=0x00 TTL=63 ID=20181 DF PROTO=TCP SPT=47554 DPT=443 SEQ=471708806 ACK=0 WINDOW=65535 SYN URGP=0 MARK=1a0000
+
+12:28:40.222688 enX0  In  IP 10.255.255.2.35458 > 10.248.162.56.514: SYSLOG user.notice, length: 259
+E....?@.?.r]
+...
+..8........<13>Aug 20 12:28:40 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.255.255.2 DST=1.1.1.1 LEN=63 TOS=00 PREC=0x00 TTL=64 ID=2636 DF PROTO=UDP SPT=59076 DPT=53 LEN=43 UID=65534 GID=30 MARK=1a0000
+
+12:28:40.222688 enX0  In  IP 10.255.255.2.35458 > 10.248.162.56.514: SYSLOG user.notice, length: 259
+E....@@.?.r\
+...
+..8........<13>Aug 20 12:28:40 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.255.255.2 DST=1.1.1.1 LEN=78 TOS=00 PREC=0x00 TTL=64 ID=2655 DF PROTO=UDP SPT=37017 DPT=53 LEN=58 UID=65534 GID=30 MARK=1a0000
+
+12:28:40.222689 enX0  In  IP 10.255.255.2.35458 > 10.248.162.56.514: SYSLOG user.notice, length: 289
+E..=.A@.?.r=
+...
+..8.....)f.<13>Aug 20 12:28:40 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.248.190.192 DST=4.150.223.114 LEN=60 TOS=00 PREC=0x00 TTL=63 ID=6085 DF PROTO=TCP SPT=47550 DPT=443 SEQ=3910601242 ACK=0 WINDOW=65535 SYN URGP=0 MARK=1a0000
+
+^C
+12 packets captured
+13 packets received by filter
+0 packets dropped by kernel
+htadmin@plslvmwazuh:~$

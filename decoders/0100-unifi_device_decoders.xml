@@ -30,18 +30,21 @@
 
   1. A parent that has children never runs its own regex. All fields come from
      the children.
-  2. Children that share one name are chained: analysisd walks the whole chain
+  2. Decoders cannot have grandchildren: a child decoder cannot be a parent.
+     Every unifi-device decoder is therefore a direct child of symantec-av.
+  3. Children that share one name are chained: analysisd walks the whole chain
      and applies every regex that matches, skipping the ones that do not.
      Children with distinct names are not chained - the first whose prematch
      matches is picked, and if its regex fails the event is dropped undecoded.
-     Every child here is named "unifi-device" for that reason. Chained children
-     must not declare prematch.
-  3. Because the whole chain is applied, one child can carry the header for
+     Every child here is named "unifi-device" for that reason. Children after
+     the first must not declare prematch. The first child must contain both a
+     prematch and a regex so Wazuh can link the following same-name children.
+  4. Because the whole chain is applied, one child can carry the header for
      every line while the others add only their own event fields. That is what
      the first child below does, so no event pattern has to repeat the
      "mac,model-firmware: daemon[pid]:" prefix. Patterns must still be mutually
      exclusive per field, or the same field would be set twice.
-  4. PCRE2 groups are read up to the highest group that participated in the
+  5. PCRE2 groups are read up to the highest group that participated in the
      match, and a group that did not participate is read from an unset offset
      (w_expression_PCRE2_fill_regex_match). Optional capture groups are
      therefore only ever placed last.
@@ -56,8 +59,8 @@
   first. Its prematch is twelve word characters and a comma - identical to a
   UniFi MAC prefix - so a standalone unifi-device parent is unreachable
   (wazuh-ruleset#840). The decoder below is therefore a child of symantec-av.
-  Do not install 0330-symantec_decoders.xml alongside it: that replacement
-  narrows the parent prematch and the child never runs. See README.
+  Do not install a custom Symantec replacement that narrows the stock parent
+  prematch: UniFi would no longer reach this child chain. See README.
 
   Install: copy to /var/ossec/etc/decoders/ on the manager, then restart
   wazuh-manager.
@@ -69,20 +72,25 @@
   wazuh-ruleset#840. analysisd stops at the first parent, so a standalone
   unifi-device parent is unreachable no matter how specific its prematch is.
 
-  The only reliable fix is to become a child of that parent. use_own_name
-  keeps decoded_as as unifi-device so the rules still key on it. The child
-  prematch requires the firmware token after the comma (`U7-Pro-8.7.11+19419:`)
-  which Symantec CSV (`24090D00000A,4,3,7,...`) never has, so real Symantec
-  events are left on the parent.
+  The only reliable fix is for the complete same-name sibling chain to consist
+  of direct children of that parent. use_own_name keeps decoded_as as
+  unifi-device so the rules still key on it. The first child prematch requires
+  the firmware token after the comma (`U7-Pro-8.7.11+19419:`), which Symantec
+  CSV (`24090D00000A,4,3,7,...`) never has, so real Symantec events are left on
+  the parent. This first child also carries the first regex; Wazuh requires it
+  in order to link the following same-name children as a multi-regex chain.
 -->
 <decoder name="unifi-device">
   <parent>symantec-av</parent>
   <use_own_name>true</use_own_name>
   <prematch type="pcre2">^[0-9a-f]{12},[\w.+-]+: </prematch>
+  <regex type="pcre2">^([0-9a-f]{12}),([\w-]+)-(\d+\.\d+\.\d+)\+(\d+): (?:switch: |: )?([\w.-]+)(?:\[\d+\])?: (.*)$</regex>
+  <order>unifi.mac,unifi.model,unifi.firmware,unifi.build,unifi.daemon,unifi.message</order>
 </decoder>
 
 <!--
-  Header, applied to every line of this family and nothing else. Guarantees
+  The first decoder above extracts the normal header and is applied to every
+  line of this family and nothing else. It guarantees
   unifi.daemon and unifi.message, so an event whose message text drifts between
   firmware releases is still attributed to a device and a daemon instead of
   vanishing. The optional groups here are non-capturing, so they do not shift
@@ -95,11 +103,6 @@
   version-like token; [\w-]+ cannot cross a colon or a space, so the prefix
   boundary is the only place this can match.
 -->
-<decoder name="unifi-device">
-  <parent>unifi-device</parent>
-  <regex type="pcre2">^([0-9a-f]{12}),([\w-]+)-(\d+\.\d+\.\d+)\+(\d+): (?:switch: |: )?([\w.-]+)(?:\[\d+\])?: (.*)$</regex>
-  <order>unifi.mac,unifi.model,unifi.firmware,unifi.build,unifi.daemon,unifi.message</order>
-</decoder>
 
 <!--
   Header fallback, for a firmware whose version token is not
@@ -109,7 +112,7 @@
   set twice on one line.
 -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">^([0-9a-f]{12}),(?![\w-]+-\d+\.\d+\.\d+\+\d+: )([\w.+-]+): (?:switch: |: )?([\w.-]+)(?:\[\d+\])?: (.*)$</regex>
   <order>unifi.mac,unifi.firmware,unifi.daemon,unifi.message</order>
 </decoder>
@@ -120,42 +123,42 @@
 
 <!-- hostapd: STA <mac> IEEE 802.11: associated (aid <n>) -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">hostapd\[\d+\]: (\S+): STA ((?:[0-9a-f]{2}:){5}[0-9a-f]{2}) IEEE 802\.11: (associated) \(aid (\d+)\)</regex>
   <order>unifi.vap,unifi.sta_mac,id,unifi.aid</order>
 </decoder>
 
 <!-- hostapd: STA <mac> IEEE 802.11: disassociated -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">hostapd\[\d+\]: (\S+): STA ((?:[0-9a-f]{2}:){5}[0-9a-f]{2}) IEEE 802\.11: (disassociated)$</regex>
   <order>unifi.vap,unifi.sta_mac,id</order>
 </decoder>
 
 <!-- hostapd: STA <mac> IEEE 802.11: deauthenticated due to local deauth request -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">hostapd\[\d+\]: (\S+): STA ((?:[0-9a-f]{2}:){5}[0-9a-f]{2}) IEEE 802\.11: (deauthenticated) due to (.+)$</regex>
   <order>unifi.vap,unifi.sta_mac,id,unifi.reason</order>
 </decoder>
 
 <!-- hostapd control interface: AP-STA-CONNECTED <mac> -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">hostapd\[\d+\]: (\S+): (AP-STA-CONNECTED) ((?:[0-9a-f]{2}:){5}[0-9a-f]{2})</regex>
   <order>unifi.vap,id,unifi.sta_mac</order>
 </decoder>
 
 <!-- hostapd control interface: AP-STA-DISCONNECTED <mac> -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">hostapd\[\d+\]: (\S+): (AP-STA-DISCONNECTED) ((?:[0-9a-f]{2}:){5}[0-9a-f]{2})</regex>
   <order>unifi.vap,id,unifi.sta_mac</order>
 </decoder>
 
 <!-- hostapd: STA <mac> WPA: authorized - the 4-way handshake completed -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">hostapd\[\d+\]: (\S+): STA ((?:[0-9a-f]{2}:){5}[0-9a-f]{2}) WPA: (authorized)$</regex>
   <order>unifi.vap,unifi.sta_mac,id</order>
 </decoder>
@@ -170,42 +173,42 @@
   answered message 1, which is what a wrong pre-shared key looks like.
 -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">hostapd\[\d+\]: (\S+): (AP-STA-POSSIBLE-PSK-MISMATCH) ((?:[0-9a-f]{2}:){5}[0-9a-f]{2})</regex>
   <order>unifi.vap,id,unifi.sta_mac</order>
 </decoder>
 
 <!-- hostapd: STA <mac> WPA: EAPOL-Key timeout / 4-way handshake failure -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">hostapd\[\d+\]: (\S+): STA ((?:[0-9a-f]{2}:){5}[0-9a-f]{2}) WPA: (group key handshake failed|4-Way Handshake failed|EAPOL-Key timeout)</regex>
   <order>unifi.vap,unifi.sta_mac,id</order>
 </decoder>
 
 <!-- hostapd: STA <mac> WPA: received EAPOL-Key with invalid MIC -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">hostapd\[\d+\]: (\S+): STA ((?:[0-9a-f]{2}:){5}[0-9a-f]{2}) WPA: received EAPOL-Key with (invalid MIC)</regex>
   <order>unifi.vap,unifi.sta_mac,id</order>
 </decoder>
 
 <!-- hostapd: STA <mac> IEEE 802.11: Michael MIC failure detected -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">hostapd\[\d+\]: (\S+): STA ((?:[0-9a-f]{2}:){5}[0-9a-f]{2}) IEEE 802\.11: (Michael MIC failure) detected</regex>
   <order>unifi.vap,unifi.sta_mac,id</order>
 </decoder>
 
 <!-- hostapd: STA <mac> IEEE 802.11: Station not allowed by MAC ACL -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">hostapd\[\d+\]: (\S+): STA ((?:[0-9a-f]{2}:){5}[0-9a-f]{2}) IEEE 802\.11: (deny|Station) (?:not allowed|MAC address not in the accept list)</regex>
   <order>unifi.vap,unifi.sta_mac,id</order>
 </decoder>
 
 <!-- hostapd: STA <mac> IEEE 802.1X: authentication failed / EAP failure -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">hostapd\[\d+\]: (\S+): STA ((?:[0-9a-f]{2}:){5}[0-9a-f]{2}) IEEE 802\.1X: (authentication failed)</regex>
   <order>unifi.vap,unifi.sta_mac,id</order>
 </decoder>
@@ -216,7 +219,7 @@
 
 <!-- hostapd: STA <mac> RADIUS: starting accounting session <session> -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">hostapd\[\d+\]: (\S+): STA ((?:[0-9a-f]{2}:){5}[0-9a-f]{2}) RADIUS: (starting accounting session) (\S+)</regex>
   <order>unifi.vap,unifi.sta_mac,id,unifi.session</order>
 </decoder>
@@ -231,7 +234,7 @@
   missing. The RADIUS server address is what the event is about anyway.
 -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">RADIUS: (No response from Authentication server) ((?:\d{1,3}\.){3}\d{1,3}):(\d+)</regex>
   <order>id,dstip,dstport</order>
 </decoder>
@@ -247,28 +250,28 @@
 
 <!-- hostapd: STA <mac> WPA: Receive UBNT_ROAM from <peer ap mac> -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">hostapd\[\d+\]: (\S+): STA ((?:[0-9a-f]{2}:){5}[0-9a-f]{2}) WPA: (Receive UBNT_ROAM) from ((?:[0-9a-f]{2}:){5}[0-9a-f]{2})</regex>
   <order>unifi.vap,unifi.sta_mac,id,unifi.peer_ap</order>
 </decoder>
 
 <!-- hostapd: STA <mac> WPA: UBNT_ROAM received: STA roamed to peer AP <mac> -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">hostapd\[\d+\]: (\S+): STA ((?:[0-9a-f]{2}:){5}[0-9a-f]{2}) WPA: (UBNT_ROAM received): STA roamed to peer AP ((?:[0-9a-f]{2}:){5}[0-9a-f]{2})</regex>
   <order>unifi.vap,unifi.sta_mac,id,unifi.peer_ap</order>
 </decoder>
 
 <!-- hostapd: STA <mac> WPA: <vap>: UBNT ROAM: STA=<mac> CurrentAP=<mac> -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">hostapd\[\d+\]: (\S+): STA (?:[0-9a-f]{2}:){5}[0-9a-f]{2} WPA: \S+: (UBNT ROAM): STA=((?:[0-9a-f]{2}:){5}[0-9a-f]{2}) CurrentAP=((?:[0-9a-f]{2}:){5}[0-9a-f]{2})</regex>
   <order>unifi.vap,id,unifi.sta_mac,unifi.peer_ap</order>
 </decoder>
 
 <!-- hostapd: STA <mac> WPA: <vap>: immed  disassoc for <mac> -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">hostapd\[\d+\]: (\S+): STA (?:[0-9a-f]{2}:){5}[0-9a-f]{2} WPA: \S+: (immed) +disassoc for ((?:[0-9a-f]{2}:){5}[0-9a-f]{2})</regex>
   <order>unifi.vap,id,unifi.sta_mac</order>
 </decoder>
@@ -284,14 +287,14 @@
 
 <!-- stahtd: {"op":"event","message_type":"STA_ASSOC_TRACKER","event_type":"...","mac":"...","vap":"...","assoc_status":"..."} -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">stahtd\[\d+\]: .*"message_type":\s*"([^"]+)","event_type":\s*"([^"]+)","mac":\s*"([^"]+)","vap":\s*"([^"]+)","assoc_status":\s*"([^"]+)"</regex>
   <order>unifi.message_type,id,unifi.sta_mac,unifi.vap,unifi.assoc_status</order>
 </decoder>
 
 <!-- stahtd: the auth_algo / auth_rssi tail present on association events -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">stahtd\[\d+\]: .*"auth_algo":\s*"([^"]+)","auth_rssi":\s*"(-?\d+)"</regex>
   <order>unifi.auth_algo,unifi.rssi</order>
 </decoder>
@@ -302,21 +305,21 @@
 
 <!-- wevent: EVENT_STA_JOIN <vap>: <mac> / <n> -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">wevent\[\d+\]: wevent\.ubnt_custom_event\(\): (EVENT_STA_JOIN) (\S+): ((?:[0-9a-f]{2}:){5}[0-9a-f]{2})</regex>
   <order>id,unifi.vap,unifi.sta_mac</order>
 </decoder>
 
 <!-- wevent: EVENT_STA_LEAVE <vap>: <mac> / <n> -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">wevent\[\d+\]: wevent\.ubnt_custom_event\(\): (EVENT_STA_LEAVE) (\S+): ((?:[0-9a-f]{2}:){5}[0-9a-f]{2})</regex>
   <order>id,unifi.vap,unifi.sta_mac</order>
 </decoder>
 
 <!-- wevent: EVENT_STA_IP <vap>: <mac> / <ip> - binds a client MAC to an address -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">wevent\[\d+\]: wevent\.ubnt_custom_event\(\): (EVENT_STA_IP) (\S+): ((?:[0-9a-f]{2}:){5}[0-9a-f]{2}) / ((?:\d{1,3}\.){3}\d{1,3})</regex>
   <order>id,unifi.vap,unifi.sta_mac,srcip</order>
 </decoder>
@@ -327,21 +330,21 @@
 
 <!-- kernel: [STA_TRACKER] DNS request timed out; [STA: <mac>] [DNS_TIMEOUTS: <n>] -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">kernel: \[STA_TRACKER\] (DNS request timed out); \[STA: ((?:[0-9a-f]{2}:){5}[0-9a-f]{2})\] \[DNS_TIMEOUTS: (\d+)\]</regex>
   <order>id,unifi.sta_mac,unifi.count</order>
 </decoder>
 
 <!-- kernel: wlan: ... vap-<n>(<vap>): [<mac>]recv auth frame with algorithm <n> seq <n> rssi:<n> -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">kernel: wlan: .*vap-\d+\((\S+)\): \[((?:[0-9a-f]{2}:){5}[0-9a-f]{2})\](recv auth frame) with algorithm (\d+) seq (\d+) rssi:(\d+)</regex>
   <order>unifi.vap,unifi.sta_mac,id,unifi.auth_algo,unifi.auth_seq,unifi.rssi</order>
 </decoder>
 
 <!-- kernel: wlan: ... vap-<n>(<vap>): [<mac>]station associated at aid <n>: <caps> -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">kernel: wlan: .*vap-\d+\((\S+)\): \[((?:[0-9a-f]{2}:){5}[0-9a-f]{2})\](station associated) at aid (\d+)</regex>
   <order>unifi.vap,unifi.sta_mac,id,unifi.aid</order>
 </decoder>
@@ -358,42 +361,42 @@
 
 <!-- switch: TRAPMGR: Link Up: <unit>/<port> -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">switch: TRAPMGR: (Link Up): (\d+/\d+)</regex>
   <order>id,unifi.port</order>
 </decoder>
 
 <!-- switch: TRAPMGR: Link Down: <unit>/<port> -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">switch: TRAPMGR: (Link Down): (\d+/\d+)</regex>
   <order>id,unifi.port</order>
 </decoder>
 
 <!-- switch: TRAPMGR: SFP inserted in <unit>/<port> -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">switch: TRAPMGR: (SFP inserted) in (\d+/\d+)</regex>
   <order>id,unifi.port</order>
 </decoder>
 
 <!-- switch: TRAPMGR: SFP removed from <unit>/<port> -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">switch: TRAPMGR: (SFP removed) from (\d+/\d+)</regex>
   <order>id,unifi.port</order>
 </decoder>
 
 <!-- switch: TRAPMGR: Session <n> of type <n> started/ended for user <user> connected from <ip> -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">switch: TRAPMGR: Session \d+ of type \d+ (started|ended) for user (\S+?) connected from ((?:\d{1,3}\.){3}\d{1,3})</regex>
   <order>id,srcuser,srcip</order>
 </decoder>
 
 <!-- switch: DOT1S: Port (<n>) inst(<n>) role changing from <role> to <role> -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">switch: DOT1S: Port \((\d+)\) inst\((\d+)\) (role changing) from (ROLE_\w+) to (ROLE_\w+)</regex>
   <order>unifi.port,unifi.stp_instance,id,unifi.role_from,unifi.role_to</order>
 </decoder>
@@ -404,7 +407,7 @@
 
 <!-- ubnt-fanctrl: Fan speed <n>% | pwm: ... | fan rpm: <n> | sensor PSU temp: <n>C -->
 <decoder name="unifi-device">
-  <parent>unifi-device</parent>
+  <parent>symantec-av</parent>
   <regex type="pcre2">ubnt-fanctrl\[\d+\]: fanctrl\.fanctrl_log\(\): (Fan speed) (\d+)%.*fan rpm: (\d+)</regex>
   <order>id,unifi.fan_percent,unifi.fan_rpm</order>
 </decoder>
