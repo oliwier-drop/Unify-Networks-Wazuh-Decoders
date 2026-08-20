@@ -20,8 +20,9 @@
   on program_name. None of them can fire on this hardware, so without these
   rules a console login is not merely unclassified - it is invisible.
 
-  As in the device file, the catch-all sits below every specific rule in level,
-  because siblings are evaluated by level and not by file position.
+  As in the device file, the catch-all uses level 1: level 0 is promoted to
+  internal priority 99 while Wazuh builds the rule tree, and all alerting
+  siblings use level 2 or higher.
 
   Install: copy to /var/ossec/etc/rules/ on the manager, then restart
   wazuh-manager. Remove any previous copy that still used 100200-100399.
@@ -154,12 +155,11 @@
   <!-- ================================================================ -->
   <!-- Catch-all                                                        -->
   <!--                                                                  -->
-  <!-- Level 0 and last in the file, for the same reason as 100190: an   -->
-  <!-- unconditional rule at any level above 0 would shadow every        -->
-  <!-- silencing rule above it.                                         -->
+  <!-- Level 1, for the same reason as 100190: level 0 is internally     -->
+  <!-- promoted to priority 99, while alerting rules are level 2+.       -->
   <!-- ================================================================ -->
 
-  <rule id="109390" level="0">
+  <rule id="109390" level="1">
     <if_sid>109300</if_sid>
     <description>UniFi OS: $(unifi.daemon) on $(unifi.system_name) - $(unifi.message)</description>
   </rule>

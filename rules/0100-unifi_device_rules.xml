@@ -5,14 +5,13 @@
   and the events with a specific decoder also carry id, which is the literal
   event marker taken from the message text. Rules key on id.
 
-  Sibling rules are not evaluated in file order. _OS_AddRule inserts each rule
-  before the first sibling with a lower level, so the children of 100100 are
-  evaluated in descending level order and file position only breaks ties. A
-  generic rule with a high level therefore shadows every specific rule below it
-  in level, wherever it sits in the file.
+  Sibling rules are not evaluated in file order. During insertion Wazuh changes
+  level 0 to an internal priority of 99, then orders the siblings by descending
+  priority; file position only breaks ties. This makes silencing rules run
+  first, but also means an unconditional level-0 rule shadows every alert rule.
 
-  That is why the catch-all 100190 sits at level 2, below every specific rule,
-  and the severity for an unrecognised failure lives in 100191 - a child of
+  The catch-all 100190 therefore sits at level 1: below every alert rule but
+  after the level-0 silencing rules. Severity lives in 100191 - a child of
   100190, evaluated only after its parent matched, so it cannot outrank a
   specific sibling. scripts/simulate-decode.mjs enforces this.
 
@@ -293,14 +292,13 @@
   <!-- ================================================================ -->
   <!-- Catch-all                                                        -->
   <!--                                                                  -->
-  <!-- Level 0, and last in the file. It carries no condition at all, so -->
-  <!-- it matches every event of this family; any level above 0 would    -->
-  <!-- make it outrank the silencing rules above and they would never be -->
-  <!-- reached. At level 0 it ties with them and the tie goes to file    -->
-  <!-- position, which is why it has to stay last.                      -->
+  <!-- Level 1. Wazuh promotes level 0 to internal priority 99 while     -->
+  <!-- building the tree, so the level-0 silencing rules run first. All  -->
+  <!-- specific alert rules are level 2 or higher and also run before    -->
+  <!-- this unconditional fallback.                                     -->
   <!-- ================================================================ -->
 
-  <rule id="100190" level="0">
+  <rule id="100190" level="1">
     <if_sid>100100</if_sid>
     <description>UniFi device: $(unifi.daemon) on $(unifi.model) - $(unifi.message)</description>
   </rule>

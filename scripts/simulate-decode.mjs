@@ -2,9 +2,9 @@
  * Offline check of the UniFi decoders against the captured samples.
  *
  * Replicates the parts of analysisd that decide whether a decoder fires:
- * pre-decoding, the program_name list split, the parent prematch and the
- * chained child decoders - analysisd walks the whole chain and applies every
- * regex that matches, so this does the same.
+ * pre-decoding, the program_name list split, the parent/child topology and the
+ * chained sibling decoders - analysisd walks the whole same-name chain and
+ * applies every regex that matches, so this does the same.
  *
  * Every UniFi event reaches the decoders with program_name = NULL, which is the
  * opposite of the ExtremeXOS case and the reason pre-decoding is modelled here
@@ -39,6 +39,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const FAMILIES = [
   {
     parent: "unifi-device",
+    externalParent: "symantec-av",
     decoders: "decoders/0100-unifi_device_decoders.xml",
     rules: "rules/0100-unifi_device_rules.xml",
     ruleRange: [100100, 100199],
@@ -271,12 +272,31 @@ for (const family of FAMILIES) {
   xmlProblems.push(...checkAngleBrackets(xml, family.decoders));
 
   const nodes = parseDecoders(xml);
-  // The family entry is the decoder rules key on. It may itself be a child of
-  // a stock parent (unifi-device sits under symantec-av so those logs are
-  // reachable at all); what matters is that it has the prematch.
-  const entry =
-    nodes.find((d) => d.name === family.parent && d.prematch) ??
-    nodes.find((d) => d.name === family.parent && !d.parent);
+  // Reject grandchildren exactly as OS_AddOSDecoder does: it searches parent
+  // names only in the two root lists, never inside another node's child list.
+  // A name shared by a root and its children is valid (the standard sibling
+  // pattern); a name found only on children cannot itself be referenced.
+  for (const node of nodes.filter((d) => d.parent)) {
+    const localParents = nodes.filter((candidate) => candidate.name === node.parent);
+    if (localParents.length && localParents.every((candidate) => candidate.parent)) {
+      problems.push(
+        `${family.decoders}: ${node.name} references child decoder ${node.parent}; ` +
+          "Wazuh decoders cannot have grandchildren",
+      );
+    }
+  }
+
+  // unifi-device is a same-name chain of direct children of the stock
+  // symantec-av root. unifi-os owns its root and has a conventional child
+  // chain. In both cases the entry is the only node allowed a prematch.
+  const entry = family.externalParent
+    ? nodes.find(
+        (d) =>
+          d.name === family.parent &&
+          d.parent === family.externalParent &&
+          d.prematch,
+      )
+    : nodes.find((d) => d.name === family.parent && !d.parent);
   if (!entry) {
     problems.push(`${family.decoders}: no entry decoder named ${family.parent}`);
     continue;
@@ -292,7 +312,34 @@ for (const family of FAMILIES) {
     );
   }
 
-  family.children = nodes.filter((d) => d.parent === family.parent);
+  family.children = family.externalParent
+    ? nodes.filter(
+        (d) => d.name === family.parent && d.parent === family.externalParent,
+      )
+    : nodes.filter((d) => d.parent === family.parent);
+  if (family.externalParent) {
+    const misplaced = nodes.filter(
+      (d) => d.name === family.parent && d.parent !== family.externalParent,
+    );
+    if (misplaced.length) {
+      problems.push(
+        `${family.decoders}: every ${family.parent} decoder must be a direct ` +
+          `child of ${family.externalParent}`,
+      );
+    }
+    if (family.children[0] !== entry) {
+      problems.push(
+        `${family.decoders}: the prematch+regex entry must be the first ` +
+          `${family.parent} child`,
+      );
+    }
+  }
+  if (family.externalParent && entry.use_own_name !== "true") {
+    problems.push(
+      `${family.decoders}: ${family.parent} must set use_own_name=true because ` +
+        `its root parent is ${family.externalParent}`,
+    );
+  }
   if (new Set(family.children.map((c) => c.name)).size !== 1) {
     problems.push(
       `${family.decoders}: children must all share one name so analysisd chains them via get_next`,
@@ -302,8 +349,15 @@ for (const family of FAMILIES) {
   family.compiled = [];
   family.children.forEach((child, i) => {
     child.label = labelOf(child.comment, i);
-    if (child.prematch) {
-      problems.push(`${child.label}: chained children must not declare prematch`);
+    if (child.prematch && child !== entry) {
+      problems.push(`${child.label}: only the first chained child may declare prematch`);
+    }
+    if (!child.regex) {
+      problems.push(
+        `${child.label}: every chained child must declare regex; a prematch-only ` +
+          "first child makes Wazuh reject the next same-name decoder as a duplicate",
+      );
+      return;
     }
     let rx;
     try {
@@ -497,12 +551,11 @@ if (duplicates.length) {
 }
 
 /*
- * Sibling rules are not evaluated in file order. _OS_AddRule inserts each rule
- * before the first sibling with a lower level, so the list ends up ordered by
- * level descending and file order only breaks ties. A generic rule with a high
- * level therefore shadows every specific rule below it in level, wherever it
- * sits in the file - and a catch-all with no conditions at all shadows every
- * sibling whose level is lower than its own.
+ * Sibling rules are not evaluated in file order. Before _OS_AddRule inserts a
+ * level-0 rule it temporarily changes its level to 99, then orders siblings by
+ * descending level; the displayed level is restored later. File position only
+ * breaks ties. This gives silencing rules highest matching priority, and makes
+ * an unconditional level-0 catch-all shadow every nonzero sibling.
  *
  * The check runs against the lines that were actually decoded rather than
  * against a list of event names, because a rule can also select on
@@ -561,8 +614,12 @@ for (const family of FAMILIES) {
   if (!siblings.length) continue;
 
   const evaluationOrder = siblings
-    .map((rule, position) => ({ ...rule, position }))
-    .sort((a, b) => b.level - a.level || a.position - b.position);
+    .map((rule, position) => ({
+      ...rule,
+      position,
+      loadPriority: rule.level === 0 ? 99 : rule.level,
+    }))
+    .sort((a, b) => b.loadPriority - a.loadPriority || a.position - b.position);
 
   const familyLines = decodedLines.filter((l) => l.family === family.parent);
   const matches = (rule, fields, log) => rule.conditions.every((c) => c(fields, log));
@@ -662,7 +719,7 @@ const unused = FAMILIES.flatMap((f) => (f.compiled ?? []).map((c) => c.child.lab
 if (unused.length) console.log(`\nno sample exercises: ${unused.join(", ")}`);
 
 if (verbose) {
-  console.log("\nrule that wins per id (level descending, then file order):");
+  console.log("\nrule that wins per id (level 0 loads as priority 99):");
   for (const [tag, rule] of [...ruleChoice].sort((a, b) => a[0].localeCompare(b[0]))) {
     console.log(`  ${tag.padEnd(46)} ${rule}`);
   }
