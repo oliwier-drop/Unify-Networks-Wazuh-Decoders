@@ -1,0 +1,29 @@
+<!--
+  Replacement for Wazuh's stock 0330-symantec_decoders.xml.
+
+  The stock prematch is `^\w\w\w\w\w\w\w\w\w\w\w\w,` - twelve word characters
+  and a comma. A UniFi AP or switch prefixes every syslog line with its MAC in
+  exactly that shape (`9041b21628d1,U7-Pro-Outdoor-...`), and both families
+  live in the decoder list for events without a program_name. analysisd stops
+  at the first parent whose prematch matches, the stock file loads before
+  anything in etc/decoders, and the event is reported as symantec-av with no
+  fields. This is wazuh/wazuh-ruleset#840, open since 2021.
+
+  Real Symantec Antivirus CSV starts `24090D00000A,4,3,7,<hostname>,...`, so
+  requiring two numeric fields after the comma keeps those logs and drops the
+  UniFi ones. Symantec Web Security is unchanged.
+
+  The stock file must be excluded or this one never runs. See README.
+-->
+
+<decoder name="symantec-av">
+  <prematch type="pcre2">^[0-9A-Za-z]{12},\d+,\d+,</prematch>
+  <regex offset="after_prematch">^(\d+),\d+,\d+,(\S+),(\.+),</regex>
+  <order>id, system_name, extra_data</order>
+  <fts>name, location, id, system_name, extra_data</fts>
+</decoder>
+
+<decoder name="symantec-websecurity">
+  <prematch>^\d\d\d\d\d\d\d\d,\d\d\d+,</prematch>
+  <plugin_decoder>SymantecWS_Decoder</plugin_decoder>
+</decoder>

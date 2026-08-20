@@ -1,0 +1,671 @@
+09:11:10.148343 enX0  In  IP 10.248.188.40.57942 > 10.248.162.56.514: SYSLOG user.info, length: 155
+E.....@.>..4
+..(
+..8.V......<14>Aug 20 09:11:10 APU7ProH4P11 8cede174ee36,U7-Pro-8.7.11+19419: wevent[8163]: wevent.ubnt_custom_event(): EVENT_STA_JOIN wifi1ap9: c4:93:d9:f2:1d:5b / 1
+09:11:10.148983 enX0  In  IP 10.248.188.40.57942 > 10.248.162.56.514: SYSLOG user.info, length: 165
+E.....@.>..)
+..(
+..8.V......<14>Aug 20 09:11:10 APU7ProH4P11 8cede174ee36,U7-Pro-8.7.11+19419: wevent[8163]: wevent.ubnt_custom_event(): EVENT_STA_IP wifi1ap9: c4:93:d9:f2:1d:5b / 10.248.190.65
+09:11:12.003852 enX0  In  IP 10.248.188.100.37784 > 10.248.162.56.514: SYSLOG daemon.notice, length: 116
+E....1@.>.4.
+..d
+..8.....|F.<29>Aug 20 09:11:12 USW-AG1-CORE 58d61f76e94c,USW-Pro-Aggregation-7.4.1+16850: switch: TRAPMGR: SFP inserted in 0/2
+
+09:11:14.098705 enX0  In  IP 10.248.188.100.37784 > 10.248.162.56.514: SYSLOG daemon.notice, length: 117
+E.....@.>.48
+..d
+..8.....}..<29>Aug 20 09:11:14 USW-AG1-CORE 58d61f76e94c,USW-Pro-Aggregation-7.4.1+16850: switch: TRAPMGR: SFP removed from 0/2
+
+09:11:14.888418 enX0  In  IP 10.248.188.145.43392 > 10.248.162.56.514: SYSLOG user.info, length: 208
+E...|.@.>.KG
+...
+..8......jW<14>Aug 20 09:11:14 USW-WIFI-H3 74fa294b1192,USW-Pro-Max-24-PoE-7.5.10+17129: : ubnt-fanctrl[943]: fanctrl.fanctrl_log(): Fan speed 25% | pwm: 64 (set) / 64 (actual) | fan rpm: 2356 | sensor PSU temp: 51..C
+
+09:11:15.478108 enX0  In  IP 10.248.188.152.58768 > 10.248.162.56.514: SYSLOG user.info, length: 208
+E....y@.>...
+...
+..8......5.<14>Aug 20 09:11:15 USW-WIFI-H4 1c6a1b6af104,USW-Pro-Max-24-PoE-7.5.10+17129: : ubnt-fanctrl[943]: fanctrl.fanctrl_log(): Fan speed 25% | pwm: 64 (set) / 64 (actual) | fan rpm: 2373 | sensor PSU temp: 53..C
+
+09:11:16.593731 enX0  In  IP 10.248.188.41.36475 > 10.248.162.56.514: SYSLOG kernel.warning, length: 153
+E.....@.>.<e
+..)
+..8.{.....0<4>Aug 20 09:11:16 APU7ProH4P12 8cede174e9fa,U7-Pro-8.7.11+19419: kernel: [STA_TRACKER] DNS request timed out; [STA: 94:e2:3c:db:c3:ab] [DNS_TIMEOUTS: 2]
+09:11:16.593732 enX0  In  IP 10.248.188.41.36475 > 10.248.162.56.514: SYSLOG user.info, length: 274
+E.....@.>.;.
+..)
+..8.{......<14>Aug 20 09:11:16 APU7ProH4P12 8cede174e9fa,U7-Pro-8.7.11+19419: stahtd[8163]: [STA-TRACKER].stahtd_dump_event(): {"op":"event","message_type":"STA_ASSOC_TRACKER","event_type":"dns timeout","mac":"94:e2:3c:db:c3:ab","vap":"wifi1ap9","assoc_status":"0","dns_timeouts": "2"}
+09:11:17.238106 enX0  In  IP 10.248.188.251.60283 > 10.248.162.56.514: SYSLOG kernel.info, length: 206
+E.....@.>..*
+...
+..8.{....zs<6>Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: kernel: wlan: [0:I:ANY] [UNSPECIFIED] vap-1(wifi1ap4): [22:94:04:5f:25:58]recv auth frame with algorithm 2 seq 1 rssi:34 minrssi:0
+09:11:17.321611 enX0  In  IP 10.248.188.234.54513 > 10.248.162.56.514: SYSLOG user.info, length: 170
+E.....@.>...
+...
+..8........<14>Aug 20 09:11:17 U7-Pro-Outdoor 9041b214dd00,U7-Pro-Outdoor-8.6.11+18870: hostapd[13327]: wifi0ap1: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+09:11:17.321611 enX0  In  IP 10.248.188.234.54513 > 10.248.162.56.514: SYSLOG user.info, length: 170
+E..../@.>...
+...
+..8........<14>Aug 20 09:11:17 U7-Pro-Outdoor 9041b214dd00,U7-Pro-Outdoor-8.6.11+18870: hostapd[13327]: wifi1ap4: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+09:11:17.321611 enX0  In  IP 10.248.188.248.49500 > 10.248.162.56.514: SYSLOG user.info, length: 170
+E....6@.>.=.
+...
+..8.\......<14>Aug 20 09:11:17 U7-Pro-Outdoor 9041b214dae4,U7-Pro-Outdoor-8.6.11+18870: hostapd[28246]: wifi0ap1: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+09:11:17.321616 enX0  In  IP 10.248.188.232.40636 > 10.248.162.56.514: SYSLOG user.info, length: 170
+E...(u@.>...
+...
+..8.......%<14>Aug 20 09:11:17 U7-Pro-Outdoor 9041b2162211,U7-Pro-Outdoor-8.6.11+18870: hostapd[14565]: wifi0ap1: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+09:11:17.321612 enX0  In  IP 10.248.188.248.49500 > 10.248.162.56.514: SYSLOG user.info, length: 170
+E....7@.>.=.
+...
+..8.\......<14>Aug 20 09:11:17 U7-Pro-Outdoor 9041b214dae4,U7-Pro-Outdoor-8.6.11+18870: hostapd[28246]: wifi1ap4: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+09:11:17.321612 enX0  In  IP 10.248.188.245.37380 > 10.248.162.56.514: SYSLOG user.info, length: 173
+E.....@.>...
+...
+..8......d.<14>Aug 20 09:11:17 U7-Pro 8cede17849e0,U7-Pro-8.7.11+19419: hostapd[13691]: wifi0ap1: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+09:11:17.321617 enX0  In  IP 10.248.188.232.40636 > 10.248.162.56.514: SYSLOG user.info, length: 170
+E...(v@.>...
+...
+..8.......$<14>Aug 20 09:11:17 U7-Pro-Outdoor 9041b2162211,U7-Pro-Outdoor-8.6.11+18870: hostapd[14565]: wifi1ap4: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+09:11:17.321612 enX0  In  IP 10.248.188.245.37380 > 10.248.162.56.514: SYSLOG user.info, length: 173
+E.....@.>...
+...
+..8......a.<14>Aug 20 09:11:17 U7-Pro 8cede17849e0,U7-Pro-8.7.11+19419: hostapd[13691]: wifi1ap4: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+09:11:17.321612 enX0  In  IP 10.248.188.245.37380 > 10.248.162.56.514: SYSLOG user.info, length: 173
+E.....@.>...
+...
+..8......].<14>Aug 20 09:11:17 U7-Pro 8cede17849e0,U7-Pro-8.7.11+19419: hostapd[13691]: wifi2ap8: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+09:11:17.321680 enX0  In  IP 10.248.188.239.52465 > 10.248.162.56.514: SYSLOG user.info, length: 170
+E...J.@.>.}
+...
+..8........<14>Aug 20 09:11:17 U7-Pro-Outdoor 9041b214dd93,U7-Pro-Outdoor-8.6.11+18870: hostapd[13360]: wifi0ap1: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+09:11:17.321681 enX0  In  IP 10.248.188.251.60283 > 10.248.162.56.514: SYSLOG kernel.info, length: 154
+E.....@.>..]
+...
+..8.{....T.<6>Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: kernel: node_vid: program hw vlan peer=22:94:04:5f:25:58 vid=190 ecm_flags=0x1
+09:11:17.321681 enX0  In  IP 10.248.188.251.60283 > 10.248.162.56.514: SYSLOG kernel.info, length: 180
+E.....@.>..B
+...
+..8.{.....N<6>Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: kernel: wlan: [13361:I:ANY] [UNSPECIFIED] vap-1(wifi1ap4):node[22:94:04:5f:25:58] set hw append vlan 190
+09:11:17.321681 enX0  In  IP 10.248.188.251.60283 > 10.248.162.56.514: SYSLOG kernel.info, length: 229
+E.....@.>...
+...
+..8.{.....
+<6>Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: kernel: wlan: [0:I:ANY] [UNSPECIFIED] vap-1(wifi1ap4): [22:94:04:5f:25:58]station associated at aid 1: short preamble, long slot time, QoSHE40 cap 0x1111
+09:11:17.321681 enX0  In  IP 10.248.188.251.60283 > 10.248.162.56.514: SYSLOG user.info, length: 127
+E.....@.>..u
+...
+..8.{.....2<14>Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: wevent[13349]: wevent.sta_join(): unset vport_down
+09:11:17.321681 enX0  In  IP 10.248.188.239.52465 > 10.248.162.56.514: SYSLOG user.info, length: 170
+E...J.@.>.}.
+...
+..8........<14>Aug 20 09:11:17 U7-Pro-Outdoor 9041b214dd93,U7-Pro-Outdoor-8.6.11+18870: hostapd[13360]: wifi1ap4: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+09:11:17.321681 enX0  In  IP 10.248.188.251.60283 > 10.248.162.56.514: SYSLOG user.info, length: 179
+E.....@.>..@
+...
+..8.{......<14>Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: wevent[13349]: libubnt.qos_sta_control(): /bin/qos_control.sh replace-sta wifi1ap4 5 1 1kbit 70000kbit
+09:11:17.321682 enX0  In  IP 10.248.188.251.60283 > 10.248.162.56.514: SYSLOG user.info, length: 156
+E.....@.>..V
+...
+..8.{.....=<14>Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: hostapd[13361]: wifi1ap4: STA 22:94:04:5f:25:58 IEEE 802.11: associated (aid 1)
+09:11:17.321718 enX0  In  IP 10.248.188.251.60283 > 10.248.162.56.514: SYSLOG user.notice, length: 137
+E.....@.>..h
+...
+..8.{....-.<13>Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: hostapd[13361]: wifi1ap4: AP-STA-CONNECTED 22:94:04:5f:25:58
+09:11:17.321718 enX0  In  IP 10.248.188.251.60283 > 10.248.162.56.514: SYSLOG user.info, length: 200
+E.....@.>..(
+...
+..8.{....n.<14>Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: hostapd[13361]: wifi1ap4: STA 22:94:04:5f:25:58 WPA: wifi1ap4: UBNT ROAM: STA=22:94:04:5f:25:58 CurrentAP=96:41:b2:16:28:d3
+09:11:17.321718 enX0  In  IP 10.248.188.251.60283 > 10.248.162.56.514: SYSLOG user.info, length: 140
+E.....@.>..c
+...
+..8.{......<14>Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: hostapd[13361]: wifi1ap4: STA 22:94:04:5f:25:58 WPA: authorized
+09:11:17.321718 enX0  In  IP 10.248.188.251.60283 > 10.248.162.56.514: SYSLOG user.notice, length: 229
+E.....@.>..
+...
+..8.{......<13>Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: hostapd[13361]: wpa_driver_nl80211_set_key: ifindex=25 (wifi1ap4) alg=3 addr=0x7696b5b8 key_idx=0 set_tx=1 seq_len=0 key_len=16 key_flag=0x2c link_id=-1
+09:11:17.321719 enX0  In  IP 10.248.188.251.60283 > 10.248.162.56.514: SYSLOG user.info, length: 350
+E..z..@.>...
+...
+..8.{...f0X<14>Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: stahtd[13350]: [STA-TRACKER].stahtd_dump_event(): {"op":"event","message_type":"STA_ASSOC_TRACKER","event_type":"association","mac":"22:94:04:5f:25:58","vap":"wifi1ap4","assoc_status":"0","event_id": "1","auth_utc": "1787209877.234214","auth_algo": "ft","auth_rssi": "-62"}
+09:11:17.321719 enX0  In  IP 10.248.188.251.60283 > 10.248.162.56.514: SYSLOG kernel.info, length: 154
+E.....@.>..R
+...
+..8.{....T.<6>Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: kernel: node_vid: program hw vlan peer=22:94:04:5f:25:58 vid=190 ecm_flags=0x1
+09:11:17.321719 enX0  In  IP 10.248.188.251.60283 > 10.248.162.56.514: SYSLOG kernel.info, length: 180
+E.....@.>..7
+...
+..8.{.....N<6>Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: kernel: wlan: [13361:I:ANY] [UNSPECIFIED] vap-1(wifi1ap4):node[22:94:04:5f:25:58] set hw append vlan 190
+09:11:17.321719 enX0  In  IP 10.248.188.251.60283 > 10.248.162.56.514: SYSLOG user.info, length: 175
+E.....@.>..;
+...
+..8.{......<14>Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: wevent[13349]: libubnt.qos_sta_control(): /bin/qos_control.sh replace-sta eth0 5 1 1kbit 70000kbit
+09:11:17.322362 enX0  In  IP 10.248.188.35.34097 > 10.248.162.56.514: SYSLOG user.info, length: 176
+E.....@.>.A.
+..#
+..8.1......<14>Aug 20 09:11:17 APU7ProH31 8cede1aab1c8,U7-Pro-8.7.11+19419: hostapd[8175]: wifi0ap1: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+09:11:17.322362 enX0  In  IP 10.248.188.35.34097 > 10.248.162.56.514: SYSLOG user.info, length: 176
+E.....@.>.A.
+..#
+..8.1......<14>Aug 20 09:11:17 APU7ProH31 8cede1aab1c8,U7-Pro-8.7.11+19419: hostapd[8175]: wifi1ap4: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+09:11:17.322362 enX0  In  IP 10.248.188.35.34097 > 10.248.162.56.514: SYSLOG user.info, length: 176
+E.....@.>.A.
+..#
+..8.1......<14>Aug 20 09:11:17 APU7ProH31 8cede1aab1c8,U7-Pro-8.7.11+19419: hostapd[8175]: wifi2ap8: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+09:11:17.322371 enX0  In  IP 10.248.188.34.33897 > 10.248.162.56.514: SYSLOG user.info, length: 166
+E.....@.>...
+.."
+..8.i...._.<14>Aug 20 09:11:17 APU7ProOH35 9041b214269f,U7-Pro-Outdoor-8.6.11+18870: hostapd[8572]: wifi0ap1: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+09:11:17.322372 enX0  In  IP 10.248.188.34.33897 > 10.248.162.56.514: SYSLOG user.info, length: 166
+E.....@.>...
+.."
+..8.i....\.<14>Aug 20 09:11:17 APU7ProOH35 9041b214269f,U7-Pro-Outdoor-8.6.11+18870: hostapd[8572]: wifi1ap4: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+09:11:17.322382 enX0  In  IP 10.248.188.32.58740 > 10.248.162.56.514: SYSLOG user.info, length: 166
+E.....@.>..b
+..
+..8.t......<14>Aug 20 09:11:17 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: hostapd[7925]: wifi0ap1: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+09:11:17.322994 enX0  In  IP 10.248.188.42.35276 > 10.248.162.56.514: SYSLOG user.info, length: 178
+E.....@.>...
+..*
+..8........<14>Aug 20 09:11:17 APU7ProH4P21 8cede174ea0e,U7-Pro-8.7.11+19419: hostapd[8173]: wifi0ap8: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+09:11:17.322994 enX0  In  IP 10.248.188.42.35276 > 10.248.162.56.514: SYSLOG user.info, length: 178
+E.....@.>...
+..*
+..8........<14>Aug 20 09:11:17 APU7ProH4P21 8cede174ea0e,U7-Pro-8.7.11+19419: hostapd[8173]: wifi1ap9: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+09:11:17.322994 enX0  In  IP 10.248.188.42.35276 > 10.248.162.56.514: SYSLOG user.info, length: 179
+E.....@.>...
+..*
+..8......M      <14>Aug 20 09:11:17 APU7ProH4P21 8cede174ea0e,U7-Pro-8.7.11+19419: hostapd[8173]: wifi2ap10: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+09:11:17.322995 enX0  In  IP 10.248.188.46.35927 > 10.248.162.56.514: SYSLOG user.info, length: 166
+E....j@.>..j
+...
+..8.W....h;<14>Aug 20 09:11:17 APU7ProOH43 1c0b8b0ea440,U7-Pro-Outdoor-8.6.11+18870: hostapd[7923]: wifi0ap5: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+09:11:17.322995 enX0  In  IP 10.248.188.46.35927 > 10.248.162.56.514: SYSLOG user.info, length: 166
+E....k@.>..i
+...
+..8.W....g:<14>Aug 20 09:11:17 APU7ProOH43 1c0b8b0ea440,U7-Pro-Outdoor-8.6.11+18870: hostapd[7923]: wifi1ap6: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+09:11:17.323046 enX0  In  IP 10.248.188.44.46154 > 10.248.162.56.514: SYSLOG user.info, length: 166
+E...c.@.>.dG
+..,
+..8.J....mF<14>Aug 20 09:11:17 APU7ProOH41 1c0b8b0e8724,U7-Pro-Outdoor-8.6.11+18870: hostapd[7920]: wifi0ap5: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+09:11:17.323047 enX0  In  IP 10.248.188.44.46154 > 10.248.162.56.514: SYSLOG user.info, length: 166
+E...c.@.>.dF
+..,
+..8.J....lE<14>Aug 20 09:11:17 APU7ProOH41 1c0b8b0e8724,U7-Pro-Outdoor-8.6.11+18870: hostapd[7920]: wifi1ap6: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+09:11:17.323061 enX0  In  IP 10.248.188.36.59485 > 10.248.162.56.514: SYSLOG user.info, length: 176
+E...L.@.>.{?
+..$
+..8.]....n^<14>Aug 20 09:11:17 APU7ProH32 8cede1aaa3cc,U7-Pro-8.7.11+19419: hostapd[8177]: wifi0ap1: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+09:11:17.323061 enX0  In  IP 10.248.188.45.54962 > 10.248.162.56.514: SYSLOG user.info, length: 166
+E....M@.>.2.
+..-
+..8........<14>Aug 20 09:11:17 APU7ProOH42 1c0b8b0ea5b1,U7-Pro-Outdoor-8.6.11+18870: hostapd[7920]: wifi0ap5: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+09:11:17.323061 enX0  In  IP 10.248.188.36.59485 > 10.248.162.56.514: SYSLOG user.info, length: 176
+E...L.@.>.{>
+..$
+..8.]....m[<14>Aug 20 09:11:17 APU7ProH32 8cede1aaa3cc,U7-Pro-8.7.11+19419: hostapd[8177]: wifi1ap4: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+09:11:17.323062 enX0  In  IP 10.248.188.36.59485 > 10.248.162.56.514: SYSLOG user.info, length: 176
+E...L.@.>.{=
+..$
+..8.]....lW<14>Aug 20 09:11:17 APU7ProH32 8cede1aaa3cc,U7-Pro-8.7.11+19419: hostapd[8177]: wifi2ap8: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+09:11:17.323062 enX0  In  IP 10.248.188.45.54962 > 10.248.162.56.514: SYSLOG user.info, length: 166
+E....N@.>.2.
+..-
+..8........<14>Aug 20 09:11:17 APU7ProOH42 1c0b8b0ea5b1,U7-Pro-Outdoor-8.6.11+18870: hostapd[7920]: wifi1ap6: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+09:11:17.323062 enX0  In  IP 10.248.188.32.58740 > 10.248.162.56.514: SYSLOG user.info, length: 166
+E.....@.>..a
+..
+..8.t......<14>Aug 20 09:11:17 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: hostapd[7925]: wifi1ap4: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+09:11:17.323062 enX0  In  IP 10.248.188.41.36475 > 10.248.162.56.514: SYSLOG user.info, length: 178
+E.....@.>.<J
+..)
+..8.{......<14>Aug 20 09:11:17 APU7ProH4P12 8cede174e9fa,U7-Pro-8.7.11+19419: hostapd[8174]: wifi0ap8: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+09:11:17.323062 enX0  In  IP 10.248.188.41.36475 > 10.248.162.56.514: SYSLOG user.info, length: 178
+E.....@.>.<I
+..)
+..8.{......<14>Aug 20 09:11:17 APU7ProH4P12 8cede174e9fa,U7-Pro-8.7.11+19419: hostapd[8174]: wifi1ap9: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+09:11:17.323094 enX0  In  IP 10.248.188.43.43173 > 10.248.162.56.514: SYSLOG user.info, length: 178
+E.....@.>...
+..+
+..8......}.<14>Aug 20 09:11:17 APU7ProH4P22 8cede174eaba,U7-Pro-8.7.11+19419: hostapd[8175]: wifi0ap8: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+09:11:17.323095 enX0  In  IP 10.248.188.43.43173 > 10.248.162.56.514: SYSLOG user.info, length: 178
+E.....@.>...
+..+
+..8......|.<14>Aug 20 09:11:17 APU7ProH4P22 8cede174eaba,U7-Pro-8.7.11+19419: hostapd[8175]: wifi1ap9: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+09:11:17.323095 enX0  In  IP 10.248.188.43.43173 > 10.248.162.56.514: SYSLOG user.info, length: 179
+E.....@.>...
+..+
+..8....../.<14>Aug 20 09:11:17 APU7ProH4P22 8cede174eaba,U7-Pro-8.7.11+19419: hostapd[8175]: wifi2ap10: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+09:11:17.323112 enX0  In  IP 10.248.188.41.36475 > 10.248.162.56.514: SYSLOG user.info, length: 179
+E.....@.>.<G
+..)
+..8.{....t$<14>Aug 20 09:11:17 APU7ProH4P12 8cede174e9fa,U7-Pro-8.7.11+19419: hostapd[8174]: wifi2ap10: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+09:11:17.323112 enX0  In  IP 10.248.188.33.44810 > 10.248.162.56.514: SYSLOG user.info, length: 166
+E.....@.>.>.
+..!
+..8.
+.....%<14>Aug 20 09:11:17 APU7ProOH34 9041b214b47d,U7-Pro-Outdoor-8.6.11+18870: hostapd[7925]: wifi0ap1: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+09:11:17.323112 enX0  In  IP 10.248.188.33.44810 > 10.248.162.56.514: SYSLOG user.info, length: 166
+E.....@.>.>.
+..!
+..8.
+.....$<14>Aug 20 09:11:17 APU7ProOH34 9041b214b47d,U7-Pro-Outdoor-8.6.11+18870: hostapd[7925]: wifi1ap4: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+09:11:17.323113 enX0  In  IP 10.248.188.47.51310 > 10.248.162.56.514: SYSLOG user.info, length: 166
+E...c|@.>.dW
+../
+..8.n....P.<14>Aug 20 09:11:17 APU7ProOH44 1c0b8b0e7e87,U7-Pro-Outdoor-8.6.11+18870: hostapd[7920]: wifi0ap5: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+09:11:17.323113 enX0  In  IP 10.248.188.47.51310 > 10.248.162.56.514: SYSLOG user.info, length: 166
+E...c}@.>.dV
+../
+..8.n....O.<14>Aug 20 09:11:17 APU7ProOH44 1c0b8b0e7e87,U7-Pro-Outdoor-8.6.11+18870: hostapd[7920]: wifi1ap6: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+09:11:17.323146 enX0  In  IP 10.248.188.48.47103 > 10.248.162.56.514: SYSLOG user.info, length: 166
+E...1.@.>...
+..0
+..8......h.<14>Aug 20 09:11:17 APU7ProOH45 1c0b8b0e8709,U7-Pro-Outdoor-8.6.11+18870: hostapd[7919]: wifi0ap5: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+09:11:17.323146 enX0  In  IP 10.248.188.48.47103 > 10.248.162.56.514: SYSLOG user.info, length: 166
+E...1.@.>...
+..0
+..8......g~<14>Aug 20 09:11:17 APU7ProOH45 1c0b8b0e8709,U7-Pro-Outdoor-8.6.11+18870: hostapd[7919]: wifi1ap6: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+09:11:17.323146 enX0  In  IP 10.248.188.40.57942 > 10.248.162.56.514: SYSLOG user.info, length: 178
+E.....@.>...
+..(
+..8.V....p]<14>Aug 20 09:11:17 APU7ProH4P11 8cede174ee36,U7-Pro-8.7.11+19419: hostapd[8171]: wifi0ap8: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+09:11:17.323146 enX0  In  IP 10.248.188.40.57942 > 10.248.162.56.514: SYSLOG user.info, length: 178
+E.....@.>...
+..(
+..8.V....o\<14>Aug 20 09:11:17 APU7ProH4P11 8cede174ee36,U7-Pro-8.7.11+19419: hostapd[8171]: wifi1ap9: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+09:11:17.323147 enX0  In  IP 10.248.188.40.57942 > 10.248.162.56.514: SYSLOG user.info, length: 179
+E.....@.>...
+..(
+..8.V...."~<14>Aug 20 09:11:17 APU7ProH4P11 8cede174ee36,U7-Pro-8.7.11+19419: hostapd[8171]: wifi2ap10: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+09:11:17.323698 enX0  In  IP 10.248.188.31.45044 > 10.248.162.56.514: SYSLOG user.info, length: 166
+E.....@.>.._
+...
+..8......>7<14>Aug 20 09:11:17 APU7ProOH32 9041b216288c,U7-Pro-Outdoor-8.6.11+18870: hostapd[7926]: wifi0ap1: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+09:11:17.323698 enX0  In  IP 10.248.188.31.45044 > 10.248.162.56.514: SYSLOG user.info, length: 166
+E.....@.>..^
+...
+..8......;6<14>Aug 20 09:11:17 APU7ProOH32 9041b216288c,U7-Pro-Outdoor-8.6.11+18870: hostapd[7926]: wifi1ap4: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+09:11:17.324496 enX0  In  IP 10.248.188.249.49889 > 10.248.162.56.514: SYSLOG user.info, length: 172
+E....#@.>.(.
+...
+..8......p.<14>Aug 20 09:11:17 U7ProOutdoorTEMP 1c0b8b0e7f80,U7-Pro-Outdoor-8.6.11+18870: hostapd[20168]: wifi0ap5: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+09:11:17.324496 enX0  In  IP 10.248.188.249.49889 > 10.248.162.56.514: SYSLOG user.info, length: 172
+E....$@.>.(.
+...
+..8......o.<14>Aug 20 09:11:17 U7ProOutdoorTEMP 1c0b8b0e7f80,U7-Pro-Outdoor-8.6.11+18870: hostapd[20168]: wifi1ap6: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+09:11:17.326066 enX0  In  IP 10.248.188.30.60687 > 10.248.162.56.514: SYSLOG user.info, length: 166
+E....1@.>...
+...
+..8.......&<14>Aug 20 09:11:17 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: hostapd[8545]: wifi0ap1: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+09:11:17.326066 enX0  In  IP 10.248.188.30.60687 > 10.248.162.56.514: SYSLOG user.info, length: 173
+E....2@.>...
+...
+..8........<14>Aug 20 09:11:17 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: hostapd[8545]: wifi1ap4: STA 22:94:04:5f:25:58 WPA: wifi1ap4: immed  disassoc for 22:94:04:5f:25:58
+09:11:17.326066 enX0  In  IP 10.248.188.30.60687 > 10.248.162.56.514: SYSLOG user.notice, length: 153
+E....3@.>...
+...
+..8......[^<13>Aug 20 09:11:17 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: hostapd[8545]: nl80211(QCA): wifi1ap4[21]: i802_sta_disassoc(22:94:04:5f:25:58)
+09:11:17.326066 enX0  In  IP 10.248.188.30.60687 > 10.248.162.56.514: SYSLOG user.info, length: 166
+E....4@.>...
+...
+..8.......%<14>Aug 20 09:11:17 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: hostapd[8545]: wifi1ap4: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+09:11:17.326066 enX0  In  IP 10.248.188.30.60687 > 10.248.162.56.514: SYSLOG user.info, length: 173
+E....5@.>...
+...
+..8........<14>Aug 20 09:11:17 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: hostapd[8545]: wifi1ap4: STA 22:94:04:5f:25:58 WPA: wifi1ap4: immed  disassoc for 22:94:04:5f:25:58
+09:11:17.326067 enX0  In  IP 10.248.188.30.60687 > 10.248.162.56.514: SYSLOG user.notice, length: 153
+E....6@.>...
+...
+..8......[^<13>Aug 20 09:11:17 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: hostapd[8545]: nl80211(QCA): wifi1ap4[21]: i802_sta_disassoc(22:94:04:5f:25:58)
+09:11:17.326067 enX0  In  IP 10.248.188.30.60687 > 10.248.162.56.514: SYSLOG user.info, length: 147
+E....7@.>...
+...
+..8........<14>Aug 20 09:11:17 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: hostapd[8545]: wifi1ap4: STA 22:94:04:5f:25:58 IEEE 802.11: disassociated
+09:11:17.326067 enX0  In  IP 10.248.188.30.60687 > 10.248.162.56.514: SYSLOG user.notice, length: 136
+E....8@.>...
+...
+..8........<13>Aug 20 09:11:17 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: hostapd[8545]: wifi1ap4: AP-STA-DISCONNECTED 22:94:04:5f:25:58
+09:11:17.326116 enX0  In  IP 10.248.188.30.60687 > 10.248.162.56.514: SYSLOG user.notice, length: 224
+E....9@.>..p
+...
+..8........<13>Aug 20 09:11:17 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: hostapd[8545]: wpa_driver_nl80211_set_key: ifindex=21 (wifi1ap4) alg=0 addr=0x7696eaa8 key_idx=0 set_tx=1 seq_len=0 key_len=0 key_flag=0x20 link_id=-1
+09:11:17.329754 enX0  In  IP 10.248.188.30.60687 > 10.248.162.56.514: SYSLOG user.info, length: 293
+E..A.:@.>..*
+...
+..8.....-..<14>Aug 20 09:11:17 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: stahtd[8523]: [STA-TRACKER].stahtd_dump_event(): {"op":"event","message_type":"STA_ASSOC_TRACKER","event_type":"sta_roam","mac":"22:94:04:5f:25:58","vap":"wifi1ap4","assoc_status":"0","event_id": "10","avg_rssi": "-73"}
+09:11:17.332899 enX0  In  IP 10.248.188.30.60687 > 10.248.162.56.514: SYSLOG kernel.info, length: 164
+E....;@.>...
+...
+..8........<6>Aug 20 09:11:17 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: kernel: wlan: [8545:I:ANY] ieee80211_ucfg_setmlme: No peer found with mac 22:94:04:5f:25:58
+09:11:17.333613 enX0  In  IP 10.248.188.30.60687 > 10.248.162.56.514: SYSLOG user.info, length: 167
+E....<@.>...
+...
+..8.......k<14>Aug 20 09:11:17 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: wevent[8520]: libubnt.qos_sta_control(): /bin/qos_control.sh del-sta wifi1ap4 5 1 0kbit 0kbit
+09:11:17.383801 enX0  In  IP 10.248.188.30.60687 > 10.248.162.56.514: SYSLOG user.info, length: 163
+E....=@.>...
+...
+..8.......%<14>Aug 20 09:11:17 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: wevent[8520]: libubnt.qos_sta_control(): /bin/qos_control.sh del-sta eth0 5 1 0kbit 0kbit
+09:11:17.385185 enX0  In  IP 10.248.188.251.60283 > 10.248.162.56.514: SYSLOG user.info, length: 179
+E.....@.>..6
+...
+..8.{......<14>Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: wevent[13349]: libubnt.qos_sta_control(): /bin/qos_control.sh replace-sta vwireap6 5 1 1kbit 70000kbit
+09:11:17.428294 enX0  In  IP 10.248.188.30.60687 > 10.248.162.56.514: SYSLOG user.info, length: 167
+E....>@.>...
+...
+..8.......5<14>Aug 20 09:11:17 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: wevent[8520]: libubnt.qos_sta_control(): /bin/qos_control.sh del-sta vwireap6 5 1 0kbit 0kbit
+09:11:17.453547 enX0  In  IP 10.248.188.251.60283 > 10.248.162.56.514: SYSLOG user.info, length: 166
+E.....@.>..B
+...
+..8.{......<14>Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: wevent[13349]: wevent.ubnt_custom_event(): EVENT_STA_JOIN wifi1ap4: 22:94:04:5f:25:58 / 1
+09:11:17.454446 enX0  In  IP 10.248.188.251.60283 > 10.248.162.56.514: SYSLOG user.error, length: 153
+E.....@.>..N
+...
+..8.{......<11>Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: wevent[13349]: garp.get_ipv4_by_mac(): Netlink error response: Resource busy
+09:11:17.454446 enX0  In  IP 10.248.188.251.60283 > 10.248.162.56.514: SYSLOG user.warning, length: 167
+E.....@.>..?
+...
+..8.{....Q.<12>Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: wevent[13349]: garp.ui_garp_send_frame(): ARP table does not have IP for 22:94:04:5f:25:58
+09:11:17.478753 enX0  In  IP 10.248.188.30.60687 > 10.248.162.56.514: SYSLOG user.info, length: 163
+E....?@.>...
+...
+..8......d.<14>Aug 20 09:11:17 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: wevent[8520]: wevent.ubnt_custom_event(): EVENT_STA_LEAVE wifi1ap4: 22:94:04:5f:25:58 / 1
+09:11:17.482491 enX0  In  IP 10.248.188.30.60687 > 10.248.162.56.514: SYSLOG kernel.warning, length: 148
+E....@@.>...
+...
+..8........<4>Aug 20 09:11:17 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: kernel: ieee80211_ioctl_tag_guest: failed to find specified node with aid 1
+09:11:19.606052 enX0  In  IP 10.248.188.110.47985 > 10.248.162.56.514: SYSLOG daemon.notice, length: 111
+E.....@.>...
+..n
+..8.q...wx.<29>Aug 20 09:11:19 USW-AG2-CORE 58d61f76e868,USW-Pro-Aggregation-7.4.1+16850: switch: TRAPMGR: Link Down: 0/5
+
+09:11:19.606869 enX0  In  IP 10.248.188.110.47985 > 10.248.162.56.514: SYSLOG daemon.info, length: 163
+E.....@.>...
+..n
+..8.q....\M<30>Aug 20 09:11:19 USW-AG2-CORE 58d61f76e868,USW-Pro-Aggregation-7.4.1+16850: switch: DOT1S: Port (5) inst(0) role changing from ROLE_DESIGNATED to ROLE_DISABLED
+
+09:11:19.841647 enX0  In  IP 10.248.188.40.57942 > 10.248.162.56.514: SYSLOG user.info, length: 166
+E.....@.>..$
+..(
+..8.V......<14>Aug 20 09:11:19 APU7ProH4P11 8cede174ee36,U7-Pro-8.7.11+19419: hostapd[8171]: wifi1ap9: STA c4:93:d9:f2:1d:5b RADIUS: starting accounting session 1E155A1BA6E561EC
+09:11:19.928424 enX0  In  IP 10.248.188.145.43392 > 10.248.162.56.514: SYSLOG user.info, length: 208
+E...}O@.>.I.
+...
+..8......`W<14>Aug 20 09:11:19 USW-WIFI-H3 74fa294b1192,USW-Pro-Max-24-PoE-7.5.10+17129: : ubnt-fanctrl[943]: fanctrl.fanctrl_log(): Fan speed 25% | pwm: 64 (set) / 64 (actual) | fan rpm: 2358 | sensor PSU temp: 54..C
+
+09:11:20.126673 enX0  In  IP 10.248.188.110.47985 > 10.248.162.56.514: SYSLOG daemon.notice, length: 109
+E.....@.>...
+..n
+..8.q...u.H<29>Aug 20 09:11:20 USW-AG2-CORE 58d61f76e868,USW-Pro-Aggregation-7.4.1+16850: switch: TRAPMGR: Link Up: 0/5
+
+09:11:20.129707 enX0  In  IP 10.248.188.110.47985 > 10.248.162.56.514: SYSLOG daemon.info, length: 163
+E.....@.>...
+..n
+..8.q....y8<30>Aug 20 09:11:20 USW-AG2-CORE 58d61f76e868,USW-Pro-Aggregation-7.4.1+16850: switch: DOT1S: Port (5) inst(0) role changing from ROLE_DISABLED to ROLE_DESIGNATED
+
+09:11:20.518123 enX0  In  IP 10.248.188.152.58768 > 10.248.162.56.514: SYSLOG user.info, length: 208
+E....j@.>...
+...
+..8......:.<14>Aug 20 09:11:20 USW-WIFI-H4 1c6a1b6af104,USW-Pro-Max-24-PoE-7.5.10+17129: : ubnt-fanctrl[943]: fanctrl.fanctrl_log(): Fan speed 25% | pwm: 64 (set) / 64 (actual) | fan rpm: 2375 | sensor PSU temp: 51..C
+
+09:12:02.292916 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 295
+E..C@.@.?.B.
+...
+..8...../9B<13>Aug 20 09:12:01 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [WAN_LAN-A-10001] DESCR="PA_LibreNMS_to_OT-MGMT" IN=eth9 OUT=br0 MAC=6c:63:f8:6e:30:46:00:1b:17:00:02:23:08:00 SRC=10.248.162.51 DST=10.248.188.103 LEN=92 TOS=00 PREC=0x00 TTL=61 ID=10834 DF PROTO=UDP SPT=33950 DPT=161 LEN=72 MARK=1a0000
+
+09:12:02.293590 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 294
+E..B@.@.?.B.
+...
+..8........<13>Aug 20 09:12:01 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [WAN_LAN-A-10001] DESCR="PA_LibreNMS_to_OT-MGMT" IN=eth9 OUT=br0 MAC=6c:63:f8:6e:30:46:00:1b:17:00:02:23:08:00 SRC=10.248.162.51 DST=10.248.188.114 LEN=92 TOS=00 PREC=0x00 TTL=61 ID=3657 DF PROTO=UDP SPT=33012 DPT=161 LEN=72 MARK=1a0000
+
+09:12:02.293591 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 295
+E..C@.@.?.B.
+...
+..8...../7><13>Aug 20 09:12:01 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [WAN_LAN-A-10001] DESCR="PA_LibreNMS_to_OT-MGMT" IN=eth9 OUT=br0 MAC=6c:63:f8:6e:30:46:00:1b:17:00:02:23:08:00 SRC=10.248.162.51 DST=10.248.188.103 LEN=92 TOS=00 PREC=0x00 TTL=61 ID=10861 DF PROTO=UDP SPT=38456 DPT=161 LEN=72 MARK=1a0000
+
+09:12:02.293591 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 294
+E..B@.@.?.B.
+...
+..8........<13>Aug 20 09:12:01 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [WAN_LAN-A-10001] DESCR="PA_LibreNMS_to_OT-MGMT" IN=eth9 OUT=br0 MAC=6c:63:f8:6e:30:46:00:1b:17:00:02:23:08:00 SRC=10.248.162.51 DST=10.248.188.114 LEN=92 TOS=00 PREC=0x00 TTL=61 ID=3760 DF PROTO=UDP SPT=54611 DPT=161 LEN=72 MARK=1a0000
+
+09:12:02.293591 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 295
+E..C@.@.?.B.
+...
+..8...../5@<13>Aug 20 09:12:01 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [WAN_LAN-A-10001] DESCR="PA_LibreNMS_to_OT-MGMT" IN=eth9 OUT=br0 MAC=6c:63:f8:6e:30:46:00:1b:17:00:02:23:08:00 SRC=10.248.162.51 DST=10.248.188.103 LEN=92 TOS=00 PREC=0x00 TTL=61 ID=10911 DF PROTO=UDP SPT=56982 DPT=161 LEN=72 MARK=1a0000
+
+09:12:02.293592 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 295
+E..C@.@.?.B.
+...
+..8...../:><13>Aug 20 09:12:01 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [WAN_LAN-A-10001] DESCR="PA_LibreNMS_to_OT-MGMT" IN=eth9 OUT=br0 MAC=6c:63:f8:6e:30:46:00:1b:17:00:02:23:08:00 SRC=10.248.162.51 DST=10.248.188.103 LEN=92 TOS=00 PREC=0x00 TTL=61 ID=10940 DF PROTO=UDP SPT=37834 DPT=161 LEN=72 MARK=1a0000
+
+09:12:02.293592 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 294
+E..B@.@.?.B.
+...
+..8........<13>Aug 20 09:12:01 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [WAN_LAN-A-10001] DESCR="PA_LibreNMS_to_OT-MGMT" IN=eth9 OUT=br0 MAC=6c:63:f8:6e:30:46:00:1b:17:00:02:23:08:00 SRC=10.248.162.51 DST=10.248.188.114 LEN=92 TOS=00 PREC=0x00 TTL=61 ID=3803 DF PROTO=UDP SPT=53193 DPT=161 LEN=72 MARK=1a0000
+
+09:12:02.293592 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 295
+E..C@.@.?.B.
+...
+..8...../7;<13>Aug 20 09:12:01 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [WAN_LAN-A-10001] DESCR="PA_LibreNMS_to_OT-MGMT" IN=eth9 OUT=br0 MAC=6c:63:f8:6e:30:46:00:1b:17:00:02:23:08:00 SRC=10.248.162.51 DST=10.248.188.103 LEN=92 TOS=00 PREC=0x00 TTL=61 ID=10991 DF PROTO=UDP SPT=47851 DPT=161 LEN=72 MARK=1a0000
+
+09:12:02.293592 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 295
+E..C@.@.?.B.
+...
+..8...../G9<13>Aug 20 09:12:01 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [WAN_LAN-A-10001] DESCR="PA_LibreNMS_to_OT-MGMT" IN=eth9 OUT=br0 MAC=6c:63:f8:6e:30:46:00:1b:17:00:02:23:08:00 SRC=10.248.162.51 DST=10.248.188.103 LEN=92 TOS=00 PREC=0x00 TTL=61 ID=11071 DF PROTO=UDP SPT=34419 DPT=161 LEN=72 MARK=1a0000
+
+09:12:02.916531 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG daemon.info, length: 125
+E...@.@.?.C.
+...
+..8........<30>Aug 20 09:12:02 UDM-Pro-Max-Prime UDM-Pro-Max-Prime mcad[3735297]: ui-probe-dhcpv6: sending Solicit on eth9 (xid=1526fb)
+
+09:12:03.423015 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 260
+E.. @.@.?.C.
+...
+..8........<13>Aug 20 09:12:03 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.255.255.2 DST=1.1.1.1 LEN=89 TOS=00 PREC=0x00 TTL=64 ID=55284 DF PROTO=UDP SPT=51230 DPT=53 LEN=69 UID=65534 GID=30 MARK=1a0000
+
+09:12:03.423015 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 260
+E.. @.@.?.C.
+...
+..8........<13>Aug 20 09:12:03 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.255.255.2 DST=1.1.1.1 LEN=89 TOS=00 PREC=0x00 TTL=64 ID=55285 DF PROTO=UDP SPT=41875 DPT=53 LEN=69 UID=65534 GID=30 MARK=1a0000
+
+09:12:03.423015 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 260
+E.. @.@.?.C.
+...
+..8........<13>Aug 20 09:12:03 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.255.255.2 DST=1.1.1.1 LEN=85 TOS=00 PREC=0x00 TTL=64 ID=55288 DF PROTO=UDP SPT=55047 DPT=53 LEN=65 UID=65534 GID=30 MARK=1a0000
+
+09:12:03.423016 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 285
+E..9@.@.?.B.
+...
+..8.....%..<13>Aug 20 09:12:03 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.248.190.44 DST=52.98.229.178 LEN=64 TOS=00 PREC=0x00 TTL=63 ID=0 DF PROTO=TCP SPT=55073 DPT=443 SEQ=4064150268 ACK=0 WINDOW=65535 SYN URGP=0 MARK=1a0000
+
+09:12:03.423662 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 285
+E..9@.@.?.B.
+...
+..8.....%..<13>Aug 20 09:12:03 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.248.190.30 DST=52.97.229.210 LEN=64 TOS=00 PREC=0x00 TTL=63 ID=0 DF PROTO=TCP SPT=57616 DPT=443 SEQ=2671829680 ACK=0 WINDOW=65535 SYN URGP=0 MARK=1a0000
+
+09:12:03.423662 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 260
+E.. @.@.?.B.
+...
+..8........<13>Aug 20 09:12:03 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.255.255.2 DST=1.1.1.1 LEN=66 TOS=00 PREC=0x00 TTL=64 ID=55311 DF PROTO=UDP SPT=54494 DPT=53 LEN=46 UID=65534 GID=30 MARK=1a0000
+
+09:12:03.423663 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 255
+E...@.@.?.C.
+...
+..8........<13>Aug 20 09:12:03 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.248.190.250 DST=51.81.57.55 LEN=1052 TOS=00 PREC=0x00 TTL=63 ID=32004 DF PROTO=UDP SPT=36600 DPT=2002 LEN=1032 MARK=1a0000
+
+09:12:03.423663 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 284
+E..8@.@.?.B.
+...
+..8.....$MJ<13>Aug 20 09:12:03 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.248.190.30 DST=52.97.229.210 LEN=64 TOS=00 PREC=0x00 TTL=63 ID=0 DF PROTO=TCP SPT=57617 DPT=443 SEQ=331436068 ACK=0 WINDOW=65535 SYN URGP=0 MARK=1a0000
+
+09:12:03.423663 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 255
+E...@.@.?.B.
+...
+..8......N.<13>Aug 20 09:12:03 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.255.255.2 DST=1.1.1.1 LEN=52 TOS=00 PREC=0x00 TTL=64 ID=55319 DF PROTO=UDP SPT=46723 DPT=53 LEN=32 UID=0 GID=0 MARK=1a0000
+
+09:12:03.423663 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 255
+E...@.@.?.B.
+...
+..8......Zd<13>Aug 20 09:12:03 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.255.255.2 DST=8.8.8.8 LEN=52 TOS=00 PREC=0x00 TTL=64 ID=50827 DF PROTO=UDP SPT=38300 DPT=53 LEN=32 UID=0 GID=0 MARK=1a0000
+
+09:12:03.423664 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 260
+E.. @.@.?.B.
+...
+..8......%.<13>Aug 20 09:12:03 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.255.255.2 DST=1.1.1.1 LEN=72 TOS=00 PREC=0x00 TTL=64 ID=55320 DF PROTO=UDP SPT=33971 DPT=53 LEN=52 UID=65534 GID=30 MARK=1a0000
+
+09:12:03.423664 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 260
+E.. @.@.?.B.
+...
+..8......'.<13>Aug 20 09:12:03 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.255.255.2 DST=1.1.1.1 LEN=72 TOS=00 PREC=0x00 TTL=64 ID=55321 DF PROTO=UDP SPT=34375 DPT=53 LEN=52 UID=65534 GID=30 MARK=1a0000
+
+09:12:03.423768 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 283
+E..7@.@.?.B.
+...
+..8.....#
+.<13>Aug 20 09:12:03 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.248.190.44 DST=52.98.240.2 LEN=64 TOS=00 PREC=0x00 TTL=63 ID=0 DF PROTO=TCP SPT=55074 DPT=443 SEQ=3082047480 ACK=0 WINDOW=65535 SYN URGP=0 MARK=1a0000
+
+09:12:03.423769 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 290
+E..>@.@.?.B.
+...
+..8.....*..<13>Aug 20 09:12:03 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.248.190.250 DST=157.240.27.40 LEN=60 TOS=00 PREC=0x00 TTL=63 ID=15111 DF PROTO=TCP SPT=40616 DPT=443 SEQ=2553470006 ACK=0 WINDOW=65535 SYN URGP=0 MARK=1a0000
+
+09:12:04.623463 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 283
+E..7A.@.?.Bp
+...
+..8.....#..<13>Aug 20 09:12:04 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.248.190.44 DST=52.98.240.2 LEN=64 TOS=00 PREC=0x00 TTL=63 ID=0 DF PROTO=TCP SPT=55075 DPT=443 SEQ=2797909410 ACK=0 WINDOW=65535 SYN URGP=0 MARK=1a0000
+
+09:12:05.893145 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 285
+E..9AY@.?.B)
+...
+..8.....%..<13>Aug 20 09:12:05 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.248.190.30 DST=52.97.229.210 LEN=64 TOS=00 PREC=0x00 TTL=63 ID=0 DF PROTO=TCP SPT=57618 DPT=443 SEQ=3098982478 ACK=0 WINDOW=65535 SYN URGP=0 MARK=1a0000
+
+09:12:05.893146 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 257
+E...AZ@.?.BD
+...
+..8.....        _g<13>Aug 20 09:12:05 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.248.190.41 DST=142.251.154.119 LEN=1278 TOS=00 PREC=0x00 TTL=63 ID=43164 DF PROTO=UDP SPT=39711 DPT=443 LEN=1258 MARK=1a0000
+
+09:12:05.893146 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 290
+E..>A[@.?.B"
+...
+..8.....*..<13>Aug 20 09:12:05 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.248.190.41 DST=142.251.154.119 LEN=60 TOS=00 PREC=0x00 TTL=63 ID=62569 DF PROTO=TCP SPT=56582 DPT=443 SEQ=195733090 ACK=0 WINDOW=65535 SYN URGP=0 MARK=1a0000
+
+09:12:05.893146 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 253
+E...A\@.?.BF
+...
+..8........<13>Aug 20 09:12:05 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.248.190.154 DST=85.215.189.120 LEN=76 TOS=00 PREC=0x00 TTL=61 ID=65010 DF PROTO=UDP SPT=62426 DPT=123 LEN=56 MARK=1a0000
+
+09:12:05.893146 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 258
+E...A]@.?.B@
+...
+..8.....
+..<13>Aug 20 09:12:05 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.248.190.154 DST=142.251.127.81 LEN=1052 TOS=00 PREC=0x00 TTL=61 ID=65529 DF PROTO=UDP SPT=62427 DPT=2002 LEN=1032 MARK=1a0000
+
+09:12:05.916837 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG daemon.info, length: 125
+E...A^@.?.B.
+...
+..8........<30>Aug 20 09:12:05 UDM-Pro-Max-Prime UDM-Pro-Max-Prime mcad[3735297]: ui-probe-dhcpv6: sending Solicit on eth9 (xid=1526fb)
+
+09:12:06.929053 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG daemon.info, length: 118
+E...A.@.?.B.
+...
+..8.....~.U<30>Aug 20 09:12:06 UDM-Pro-Max-Prime UDM-Pro-Max-Prime mcad[3735297]: ui-probe-dhcpv6: no Advertise received on eth9
+
+09:12:06.929053 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.warning, length: 206
+E...A.@.?.B&
+...
+..8........<12>Aug 20 09:12:06 UDM-Pro-Max-Prime UDM-Pro-Max-Prime mcad[3256]: probe-runner.probe_instance_handle_script_output(): [dhcpv6] probe finished for eth9 (req=0effafab-889e-435f-b9f1-f7d8b03605a3, 30 bytes)
+
+09:12:06.929053 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.warning, length: 204
+E...A.@.?.B'
+...
+..8........<12>Aug 20 09:12:06 UDM-Pro-Max-Prime UDM-Pro-Max-Prime mcad[3256]: probe-runner.probe_instance_send_event(): [dhcpv6] reporting event for eth9 (req=0effafab-889e-435f-b9f1-f7d8b03605a3, status=finished)
+
+09:12:06.929053 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.warning, length: 184
+E...A.@.?.B:
+...
+..8......d.<12>Aug 20 09:12:06 UDM-Pro-Max-Prime UDM-Pro-Max-Prime mcad[3256]: probe-runner.probe_runner_dispatch(): [slaac] start ifname=eth9 timeout=10 req=49f0acd0-f8ab-4135-8c3f-558bd8e0c006
+
+09:12:06.929054 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.warning, length: 181
+E...A.@.?.B<
+...
+..8........<12>Aug 20 09:12:06 UDM-Pro-Max-Prime UDM-Pro-Max-Prime mcad[3256]: probe-runner.probe_instance_launch(): [slaac] launched probe for eth9 (req=49f0acd0-f8ab-4135-8c3f-558bd8e0c006)
+
+09:12:07.026068 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 255
+E...A.@.?.A.
+...
+..8........<13>Aug 20 09:12:07 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.248.190.41 DST=216.58.207.46 LEN=1278 TOS=00 PREC=0x00 TTL=63 ID=27667 DF PROTO=UDP SPT=40018 DPT=443 LEN=1258 MARK=1a0000
+
+09:12:07.026068 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 289
+E..=A.@.?.A.
+...
+..8.....)..<13>Aug 20 09:12:07 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.248.190.41 DST=142.251.156.119 LEN=60 TOS=00 PREC=0x00 TTL=63 ID=2913 DF PROTO=TCP SPT=35822 DPT=443 SEQ=374152651 ACK=0 WINDOW=65535 SYN URGP=0 MARK=1a0000
+
+09:12:07.026069 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 254
+E...A.@.?.A.
+...
+..8......Y.<13>Aug 20 09:12:07 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.248.190.41 DST=216.239.34.36 LEN=1278 TOS=00 PREC=0x00 TTL=63 ID=4343 DF PROTO=UDP SPT=37592 DPT=443 LEN=1258 MARK=1a0000
+
+09:12:07.026069 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 260
+E.. A.@.?.A.
+...
+..8........<13>Aug 20 09:12:07 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.255.255.2 DST=1.1.1.1 LEN=75 TOS=00 PREC=0x00 TTL=64 ID=55639 DF PROTO=UDP SPT=33598 DPT=53 LEN=55 UID=65534 GID=30 MARK=1a0000
+
+09:12:07.026069 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 260
+E.. A.@.?.A.
+...
+..8......".<13>Aug 20 09:12:07 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.255.255.2 DST=1.1.1.1 LEN=63 TOS=00 PREC=0x00 TTL=64 ID=55645 DF PROTO=UDP SPT=47143 DPT=53 LEN=43 UID=65534 GID=30 MARK=1a0000
+
+09:12:07.834145 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 257
+E...B.@.?.A.
+...
+..8.....        `c<13>Aug 20 09:12:07 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.248.190.41 DST=142.251.156.119 LEN=1278 TOS=00 PREC=0x00 TTL=63 ID=27186 DF PROTO=UDP SPT=35204 DPT=443 LEN=1258 MARK=1a0000
+
+09:12:07.834146 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 260
+E.. B   @.?.A.
+...
+..8........<13>Aug 20 09:12:07 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.255.255.2 DST=1.1.1.1 LEN=64 TOS=00 PREC=0x00 TTL=64 ID=55648 DF PROTO=UDP SPT=56490 DPT=53 LEN=44 UID=65534 GID=30 MARK=1a0000
+
+09:12:07.834146 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 290
+E..>B
+@.?.As
+...
+..8.....*w.<13>Aug 20 09:12:07 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.248.190.154 DST=157.240.27.18 LEN=60 TOS=00 PREC=0x00 TTL=61 ID=64333 DF PROTO=TCP SPT=62428 DPT=443 SEQ=3403721275 ACK=0 WINDOW=65535 SYN URGP=0 MARK=1a0000
+
+09:12:07.834146 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 289
+E..=B.@.?.As
+...
+..8.....)a.<13>Aug 20 09:12:07 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.248.190.41 DST=142.251.37.99 LEN=60 TOS=00 PREC=0x00 TTL=63 ID=63876 DF PROTO=TCP SPT=50328 DPT=443 SEQ=2461960478 ACK=0 WINDOW=65535 SYN URGP=0 MARK=1a0000
+
+09:12:07.834146 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 283
+E..7B.@.?.Ax
+...
+..8.....#..<13>Aug 20 09:12:07 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.248.190.44 DST=52.98.240.2 LEN=64 TOS=00 PREC=0x00 TTL=63 ID=0 DF PROTO=TCP SPT=55076 DPT=443 SEQ=2295822804 ACK=0 WINDOW=65535 SYN URGP=0 MARK=1a0000
+
+09:12:07.834146 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 254
+E...B.@.?.A.
+...
+..8......U.<13>Aug 20 09:12:07 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.248.188.110 DST=10.248.162.56 LEN=139 TOS=00 PREC=0x00 TTL=63 ID=57372 DF PROTO=UDP SPT=47985 DPT=514 LEN=119 MARK=1a0000
+
+09:12:07.834146 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 260
+E.. B.@.?.A.
+...
+..8........<13>Aug 20 09:12:07 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.255.255.2 DST=1.1.1.1 LEN=69 TOS=00 PREC=0x00 TTL=64 ID=55679 DF PROTO=UDP SPT=40438 DPT=53 LEN=49 UID=65534 GID=30 MARK=1a0000
+
+09:12:07.834147 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 260
+E.. B.@.?.A.
+...
+..8........<13>Aug 20 09:12:07 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.255.255.2 DST=1.1.1.1 LEN=69 TOS=00 PREC=0x00 TTL=64 ID=55680 DF PROTO=UDP SPT=39257 DPT=53 LEN=49 UID=65534 GID=30 MARK=1a0000
+
+09:12:07.834229 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 290
+E..>B.@.?.Am
+...
+..8.....*n.<13>Aug 20 09:12:07 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.248.190.250 DST=47.246.110.35 LEN=60 TOS=00 PREC=0x00 TTL=63 ID=49548 DF PROTO=TCP SPT=42298 DPT=443 SEQ=1658129217 ACK=0 WINDOW=65535 SYN URGP=0 MARK=1a0000
+
+09:12:07.834229 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 260
+E.. B.@.?.A.
+...
+..8........<13>Aug 20 09:12:07 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.255.255.2 DST=1.1.1.1 LEN=72 TOS=00 PREC=0x00 TTL=64 ID=55691 DF PROTO=UDP SPT=37851 DPT=53 LEN=52 UID=65534 GID=30 MARK=1a0000
+
+09:12:08.853340 enX0  In  IP 10.255.255.2.60905 > 10.248.162.56.514: SYSLOG user.notice, length: 255
+E...BB@.?.A^
+...
+..8........<13>Aug 20 09:12:08 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.248.190.41 DST=216.58.207.46 LEN=1278 TOS=00 PREC=0x00 TTL=63 ID=40386 DF PROTO=UDP SPT=58219 DPT=443 LEN=1258 MARK=1a0000

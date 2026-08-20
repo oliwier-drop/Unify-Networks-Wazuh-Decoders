@@ -1,0 +1,213 @@
+<!--
+  Ubiquiti UniFi OS consoles - UDM / UDM Pro / UDM Pro Max / UXG / UCG / CK
+
+  On the wire:
+
+    <13>Aug 20 09:12:01 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [WAN_LAN-A-10001] DESCR="..." IN=eth9 OUT=br0 MAC=... SRC=10.248.162.51 DST=10.248.188.103 ...
+    <30>Aug 20 09:12:02 UDM-Pro-Max-Prime UDM-Pro-Max-Prime mcad[3735297]: ui-probe-dhcpv6: sending Solicit on eth9
+
+  The console repeats its own hostname: once in the RFC 3164 header, once at
+  the start of the message. That repetition is the whole story of this file.
+
+  Pre-decoding takes the first token as the hostname, then walks the
+  program-name candidate - which is the second copy of the hostname. The walk
+  stops at the space that follows it, and a space is neither ":" nor "[" nor
+  "|", so cleanevent.c falls through to its last else branch and sets
+  program_name = NULL.
+
+  Two consequences:
+
+  1. These events land in the decoder list for events without a program name,
+     the same list as the UniFi AP and switch family, so the parent here must
+     not declare program_name either.
+  2. Every one of Wazuh's built-in Linux decoders is keyed on program_name -
+     sshd, sudo, su, systemd, dropbear. None of them can ever fire on a UniFi
+     OS console, however ordinary the message looks. A console SSH login is
+     therefore invisible unless this file decodes it, which is why the sshd
+     patterns below are here rather than left to the default ruleset.
+
+  The same analysisd constraints as the device file apply: the parent's own
+  regex never runs, all children share the name "unifi-os" so that analysisd
+  chains them and applies every regex that matches, chained children declare no
+  prematch, and an optional capture group is only ever placed last in a pattern.
+
+  Install: copy to /var/ossec/etc/decoders/ on the manager, then restart
+  wazuh-manager.
+-->
+
+<!--
+  The first token is matched with [\w.-]+ rather than \S+ so that this parent
+  cannot claim the device family. A UniFi AP line begins
+  "8cede174ee36,U7-Pro-8.7.11+19419: hostapd[13361]: ..." which satisfies
+  "\S+ <daemon>[<pid>]: " exactly, and both parents live in the same decoder
+  list, where analysisd stops at the first prematch that matches. Excluding ","
+  and ":" from the token keeps the two mutually exclusive regardless of the
+  order the files happen to load in.
+-->
+<decoder name="unifi-os">
+  <prematch type="pcre2">^[\w.-]+ (?:\[\w+-[A-Z]+-\d+\] DESCR=|[\w.-]+\[\d+\]: )</prematch>
+</decoder>
+
+<!-- ==================================================================== -->
+<!-- netfilter LOG - firewall                                             -->
+<!--                                                                      -->
+<!-- The bracketed tag is the UniFi firewall rule identity:               -->
+<!-- <chain>-<action>-<index>, where the action is A (accept), D (drop),   -->
+<!-- R (reject) or RET (return). It is captured into id, so rules key on   -->
+<!-- the action the same way the device rules key on an event name.        -->
+<!-- ==================================================================== -->
+
+<!-- [<chain>-<action>-<index>] DESCR="<rule name>" IN=<if> OUT=<if> -->
+<decoder name="unifi-os">
+  <parent>unifi-os</parent>
+  <regex type="pcre2">^(\S+) \[(\w+)-([A-Z]+)-(\d+)\] DESCR="([^"]*)" IN=(\S*) OUT=(\S*)</regex>
+  <order>unifi.system_name,unifi.fw_chain,id,unifi.fw_index,unifi.fw_rule,unifi.in_iface,unifi.out_iface</order>
+</decoder>
+
+<!--
+  The addresses and protocol of a logged packet. Separate from the tag above so
+  that a shape without SRC/DST, such as an ARP or a truncated log, still gets
+  its rule identity. SPT/DPT are absent for ICMP, so that group is optional and
+  therefore last in the pattern.
+-->
+<decoder name="unifi-os">
+  <parent>unifi-os</parent>
+  <regex type="pcre2">SRC=((?:\d{1,3}\.){3}\d{1,3}) DST=((?:\d{1,3}\.){3}\d{1,3}) .*?PROTO=(\w+)(?: SPT=(\d+) DPT=(\d+))?</regex>
+  <order>srcip,dstip,protocol,srcport,dstport</order>
+</decoder>
+
+<!--
+  The netfilter MAC field is destination MAC, source MAC and ethertype
+  concatenated, 14 bytes in all. It is absent on locally generated traffic
+  (MAC= with nothing after it), which is why this is its own pattern.
+-->
+<decoder name="unifi-os">
+  <parent>unifi-os</parent>
+  <regex type="pcre2">MAC=((?:[0-9a-f]{2}:){5}[0-9a-f]{2}):((?:[0-9a-f]{2}:){5}[0-9a-f]{2}):([0-9a-f]{2}:[0-9a-f]{2}) </regex>
+  <order>unifi.dst_mac,unifi.src_mac,unifi.ethertype</order>
+</decoder>
+
+<!-- TTL and IP id, useful for spotting crafted packets -->
+<decoder name="unifi-os">
+  <parent>unifi-os</parent>
+  <regex type="pcre2">\bTTL=(\d+) ID=(\d+)</regex>
+  <order>unifi.ttl,unifi.ip_id</order>
+</decoder>
+
+<!-- The UID/GID netfilter adds for locally generated traffic -->
+<decoder name="unifi-os">
+  <parent>unifi-os</parent>
+  <regex type="pcre2">\bUID=(\d+) GID=(\d+)</regex>
+  <order>unifi.uid,unifi.gid</order>
+</decoder>
+
+<!-- ==================================================================== -->
+<!-- daemon header                                                        -->
+<!--                                                                      -->
+<!-- Applied to every non-firewall line, so unifi.daemon and unifi.message -->
+<!-- are guaranteed and a message text this file does not recognise is     -->
+<!-- still attributed instead of being dropped as undecoded.               -->
+<!-- ==================================================================== -->
+
+<!-- <host> <daemon>[<pid>]: <message> -->
+<decoder name="unifi-os">
+  <parent>unifi-os</parent>
+  <regex type="pcre2">^(\S+) ([\w.-]+)\[(\d+)\]: (.*)$</regex>
+  <order>unifi.system_name,unifi.daemon,unifi.pid,unifi.message</order>
+</decoder>
+
+<!-- ==================================================================== -->
+<!-- sshd - console administrative access                                 -->
+<!--                                                                      -->
+<!-- Wazuh's own sshd decoders cannot reach these lines, see the header    -->
+<!-- comment. The message texts are OpenSSH's, from auth.c and auth2*.c.   -->
+<!-- ==================================================================== -->
+
+<!-- sshd: Accepted password|publickey for <user> from <ip> port <port> ssh2 -->
+<decoder name="unifi-os">
+  <parent>unifi-os</parent>
+  <regex type="pcre2">sshd\[\d+\]: (Accepted) (\w+) for (\S+) from ((?:\d{1,3}\.){3}\d{1,3}) port (\d+)</regex>
+  <order>id,unifi.auth_method,srcuser,srcip,srcport</order>
+</decoder>
+
+<!-- sshd: Failed password for [invalid user] <user> from <ip> port <port> ssh2 -->
+<decoder name="unifi-os">
+  <parent>unifi-os</parent>
+  <regex type="pcre2">sshd\[\d+\]: (Failed) (\w+) for (?:invalid user )?(\S+) from ((?:\d{1,3}\.){3}\d{1,3}) port (\d+)</regex>
+  <order>id,unifi.auth_method,srcuser,srcip,srcport</order>
+</decoder>
+
+<!-- sshd: Invalid user <user> from <ip> port <port> -->
+<decoder name="unifi-os">
+  <parent>unifi-os</parent>
+  <regex type="pcre2">sshd\[\d+\]: (Invalid user) (\S*) from ((?:\d{1,3}\.){3}\d{1,3})</regex>
+  <order>id,srcuser,srcip</order>
+</decoder>
+
+<!-- sshd: Connection closed by authenticating user <user> <ip> port <port> [preauth] -->
+<decoder name="unifi-os">
+  <parent>unifi-os</parent>
+  <regex type="pcre2">sshd\[\d+\]: (Connection closed) by (?:authenticating|invalid) user (\S+) ((?:\d{1,3}\.){3}\d{1,3})</regex>
+  <order>id,srcuser,srcip</order>
+</decoder>
+
+<!-- sshd: Disconnected from user <user> <ip> port <port> -->
+<decoder name="unifi-os">
+  <parent>unifi-os</parent>
+  <regex type="pcre2">sshd\[\d+\]: (Disconnected) from (?:authenticating )?user (\S+) ((?:\d{1,3}\.){3}\d{1,3})</regex>
+  <order>id,srcuser,srcip</order>
+</decoder>
+
+<!-- sshd: error: maximum authentication attempts exceeded for <user> from <ip> -->
+<decoder name="unifi-os">
+  <parent>unifi-os</parent>
+  <regex type="pcre2">sshd\[\d+\]: error: (maximum authentication attempts exceeded) for (?:invalid user )?(\S+) from ((?:\d{1,3}\.){3}\d{1,3})</regex>
+  <order>id,srcuser,srcip</order>
+</decoder>
+
+<!-- ==================================================================== -->
+<!-- sudo and su - privilege escalation on the console                    -->
+<!-- ==================================================================== -->
+
+<!--
+  sudo: <user> : TTY=<tty> ; PWD=<dir> ; USER=<target> ; COMMAND=<cmd>
+
+  Anchored on ": TTY=" rather than on USER= so that it cannot also match the
+  failure line below, which carries the same USER= and COMMAND= fields after
+  its own reason text. Both patterns are in one chain and every match is
+  applied, so an overlap here would set id twice.
+-->
+<decoder name="unifi-os">
+  <parent>unifi-os</parent>
+  <regex type="pcre2">sudo\[\d+\]: +(\S+) : TTY=\S+ ; PWD=\S+ ; USER=(\S+) ; (COMMAND)=(.+)$</regex>
+  <order>srcuser,dstuser,id,unifi.command</order>
+</decoder>
+
+<!-- sudo: <user> : <n> incorrect password attempts ; ... -->
+<decoder name="unifi-os">
+  <parent>unifi-os</parent>
+  <regex type="pcre2">sudo\[\d+\]: +(\S+) : \d+ (incorrect password attempts)</regex>
+  <order>srcuser,id</order>
+</decoder>
+
+<!-- ==================================================================== -->
+<!-- UniFi OS services                                                    -->
+<!-- ==================================================================== -->
+
+<!--
+  mcad probe runner. Carries no security signal on its own, but it is the
+  highest-volume daemon on a console, so it gets an explicit id to keep it out
+  of the catch-all rule.
+-->
+<decoder name="unifi-os">
+  <parent>unifi-os</parent>
+  <regex type="pcre2">mcad\[\d+\]: (probe-runner)\.\w+\(\): \[(\w+)\] (.*)$</regex>
+  <order>id,unifi.probe,unifi.message_detail</order>
+</decoder>
+
+<!-- mcad: ui-probe-<name>: <message> -->
+<decoder name="unifi-os">
+  <parent>unifi-os</parent>
+  <regex type="pcre2">mcad\[\d+\]: (ui-probe)-(\S+): (.*)$</regex>
+  <order>id,unifi.probe,unifi.message_detail</order>
+</decoder>

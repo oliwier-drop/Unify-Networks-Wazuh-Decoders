@@ -1,0 +1,324 @@
+<!--
+  Ubiquiti UniFi access points and switches - rules 100100-100199
+
+  Every event carries unifi.daemon and unifi.message from the header decoder,
+  and the events with a specific decoder also carry id, which is the literal
+  event marker taken from the message text. Rules key on id.
+
+  Sibling rules are not evaluated in file order. _OS_AddRule inserts each rule
+  before the first sibling with a lower level, so the children of 100100 are
+  evaluated in descending level order and file position only breaks ties. A
+  generic rule with a high level therefore shadows every specific rule below it
+  in level, wherever it sits in the file.
+
+  That is why the catch-all 100190 sits at level 2, below every specific rule,
+  and the severity for an unrecognised failure lives in 100191 - a child of
+  100190, evaluated only after its parent matched, so it cannot outrank a
+  specific sibling. scripts/simulate-decode.mjs enforces this.
+
+  Install: copy to /var/ossec/etc/rules/ on the manager, then restart
+  wazuh-manager.
+-->
+
+<group name="unifi,unifi_device,">
+
+  <rule id="100100" level="0">
+    <decoded_as>unifi-device</decoded_as>
+    <description>UniFi device event</description>
+  </rule>
+
+  <!-- ================================================================ -->
+  <!-- Wireless association lifecycle                                   -->
+  <!-- ================================================================ -->
+
+  <rule id="100101" level="3">
+    <if_sid>100100</if_sid>
+    <id type="pcre2">^AP-STA-CONNECTED$</id>
+    <description>UniFi: station $(unifi.sta_mac) connected to $(unifi.vap)</description>
+    <group>authentication_success,wireless,</group>
+  </rule>
+
+  <rule id="100102" level="3">
+    <if_sid>100100</if_sid>
+    <id type="pcre2">^AP-STA-DISCONNECTED$</id>
+    <description>UniFi: station $(unifi.sta_mac) disconnected from $(unifi.vap)</description>
+    <group>wireless,</group>
+  </rule>
+
+  <rule id="100103" level="2">
+    <if_sid>100100</if_sid>
+    <id type="pcre2">^(?:associated|station associated)$</id>
+    <description>UniFi: station $(unifi.sta_mac) associated on $(unifi.vap)</description>
+    <group>wireless,</group>
+  </rule>
+
+  <rule id="100104" level="2">
+    <if_sid>100100</if_sid>
+    <id type="pcre2">^disassociated$</id>
+    <description>UniFi: station $(unifi.sta_mac) disassociated on $(unifi.vap)</description>
+    <group>wireless,</group>
+  </rule>
+
+  <rule id="100105" level="3">
+    <if_sid>100100</if_sid>
+    <id type="pcre2">^authorized$</id>
+    <description>UniFi: station $(unifi.sta_mac) completed the WPA handshake on $(unifi.vap)</description>
+    <group>authentication_success,wireless,</group>
+  </rule>
+
+  <rule id="100106" level="4">
+    <if_sid>100100</if_sid>
+    <id type="pcre2">^deauthenticated$</id>
+    <description>UniFi: station $(unifi.sta_mac) deauthenticated on $(unifi.vap): $(unifi.reason)</description>
+    <group>wireless,</group>
+  </rule>
+
+  <rule id="100107" level="3">
+    <if_sid>100100</if_sid>
+    <id type="pcre2">^EVENT_STA_JOIN$</id>
+    <description>UniFi: client $(unifi.sta_mac) joined $(unifi.vap)</description>
+    <group>wireless,</group>
+  </rule>
+
+  <rule id="100108" level="3">
+    <if_sid>100100</if_sid>
+    <id type="pcre2">^EVENT_STA_LEAVE$</id>
+    <description>UniFi: client $(unifi.sta_mac) left $(unifi.vap)</description>
+    <group>wireless,</group>
+  </rule>
+
+  <!-- Binds a client MAC to an address, which is what makes later alerts on
+       that address attributable to a device. -->
+  <rule id="100109" level="3">
+    <if_sid>100100</if_sid>
+    <id type="pcre2">^EVENT_STA_IP$</id>
+    <description>UniFi: client $(unifi.sta_mac) on $(unifi.vap) took address $(srcip)</description>
+    <group>wireless,</group>
+  </rule>
+
+  <!-- ================================================================ -->
+  <!-- Wireless authentication failures                                 -->
+  <!-- ================================================================ -->
+
+  <!-- The 4-way handshake stopped after the station answered message 1, which
+       is what an incorrect pre-shared key looks like from the AP side. -->
+  <rule id="100110" level="7">
+    <if_sid>100100</if_sid>
+    <id type="pcre2">^AP-STA-POSSIBLE-PSK-MISMATCH$</id>
+    <description>UniFi: possible wrong pre-shared key from $(unifi.sta_mac) on $(unifi.vap)</description>
+    <group>authentication_failed,wireless,</group>
+  </rule>
+
+  <rule id="100111" level="6">
+    <if_sid>100100</if_sid>
+    <id type="pcre2">^(?:4-Way Handshake failed|group key handshake failed|EAPOL-Key timeout)$</id>
+    <description>UniFi: WPA handshake failed for $(unifi.sta_mac) on $(unifi.vap)</description>
+    <group>authentication_failed,wireless,</group>
+  </rule>
+
+  <rule id="100112" level="8">
+    <if_sid>100100</if_sid>
+    <id type="pcre2">^invalid MIC$</id>
+    <description>UniFi: EAPOL-Key with an invalid MIC from $(unifi.sta_mac) on $(unifi.vap)</description>
+    <group>authentication_failed,wireless,</group>
+  </rule>
+
+  <!-- Two Michael MIC failures inside a minute force TKIP countermeasures, so
+       this is an active attack signal rather than a misconfiguration. -->
+  <rule id="100113" level="10">
+    <if_sid>100100</if_sid>
+    <id type="pcre2">^Michael MIC failure$</id>
+    <description>UniFi: Michael MIC failure from $(unifi.sta_mac) on $(unifi.vap)</description>
+    <group>attack,wireless,</group>
+  </rule>
+
+  <rule id="100114" level="7">
+    <if_sid>100100</if_sid>
+    <id type="pcre2">^(?:deny|Station)$</id>
+    <description>UniFi: station $(unifi.sta_mac) refused by the MAC access list on $(unifi.vap)</description>
+    <group>authentication_failed,wireless,</group>
+  </rule>
+
+  <rule id="100115" level="7">
+    <if_sid>100100</if_sid>
+    <id type="pcre2">^authentication failed$</id>
+    <description>UniFi: 802.1X authentication failed for $(unifi.sta_mac) on $(unifi.vap)</description>
+    <group>authentication_failed,wireless,</group>
+  </rule>
+
+  <rule id="100116" level="8">
+    <if_sid>100100</if_sid>
+    <id type="pcre2">^No response from Authentication server$</id>
+    <description>UniFi: no response from RADIUS server $(dstip):$(dstport)</description>
+    <group>authentication_failed,radius,</group>
+  </rule>
+
+  <!-- ================================================================ -->
+  <!-- Correlation                                                      -->
+  <!-- ================================================================ -->
+
+  <rule id="100120" level="10" frequency="5" timeframe="120">
+    <if_matched_sid>100110</if_matched_sid>
+    <same_field>unifi.sta_mac</same_field>
+    <description>UniFi: repeated wrong pre-shared key from $(unifi.sta_mac) - possible brute force</description>
+    <group>authentication_failures,wireless,</group>
+  </rule>
+
+  <rule id="100121" level="12" frequency="2" timeframe="60">
+    <if_matched_sid>100113</if_matched_sid>
+    <description>UniFi: repeated Michael MIC failures - TKIP countermeasures territory</description>
+    <group>attack,wireless,</group>
+  </rule>
+
+  <rule id="100122" level="10" frequency="5" timeframe="60">
+    <if_matched_sid>100116</if_matched_sid>
+    <description>UniFi: RADIUS server unreachable repeatedly</description>
+    <group>radius,</group>
+  </rule>
+
+  <!-- A single client cycling through associations is either broken or probing;
+       either way it is worth one alert instead of a hundred. -->
+  <rule id="100123" level="6" frequency="20" timeframe="60">
+    <if_matched_sid>100103</if_matched_sid>
+    <same_field>unifi.sta_mac</same_field>
+    <description>UniFi: station $(unifi.sta_mac) is associating repeatedly</description>
+    <group>wireless,</group>
+  </rule>
+
+  <!-- ================================================================ -->
+  <!-- Switch ports and topology                                        -->
+  <!-- ================================================================ -->
+
+  <rule id="100130" level="3">
+    <if_sid>100100</if_sid>
+    <id type="pcre2">^Link Up$</id>
+    <description>UniFi switch: port $(unifi.port) up</description>
+    <group>network_port,</group>
+  </rule>
+
+  <rule id="100131" level="4">
+    <if_sid>100100</if_sid>
+    <id type="pcre2">^Link Down$</id>
+    <description>UniFi switch: port $(unifi.port) down</description>
+    <group>network_port,</group>
+  </rule>
+
+  <rule id="100132" level="3">
+    <if_sid>100100</if_sid>
+    <id type="pcre2">^SFP inserted$</id>
+    <description>UniFi switch: SFP inserted in port $(unifi.port)</description>
+    <group>network_port,</group>
+  </rule>
+
+  <!-- Physical removal of an uplink transceiver, worth noticing on its own. -->
+  <rule id="100133" level="5">
+    <if_sid>100100</if_sid>
+    <id type="pcre2">^SFP removed$</id>
+    <description>UniFi switch: SFP removed from port $(unifi.port)</description>
+    <group>network_port,</group>
+  </rule>
+
+  <rule id="100134" level="3">
+    <if_sid>100100</if_sid>
+    <id type="pcre2">^role changing$</id>
+    <description>UniFi switch: STP port $(unifi.port) went from $(unifi.role_from) to $(unifi.role_to)</description>
+    <group>spanning_tree,</group>
+  </rule>
+
+  <rule id="100135" level="4">
+    <if_sid>100100</if_sid>
+    <id type="pcre2">^started$</id>
+    <description>UniFi switch: management session opened for $(srcuser) from $(srcip)</description>
+    <group>authentication_success,</group>
+  </rule>
+
+  <rule id="100136" level="3">
+    <if_sid>100100</if_sid>
+    <id type="pcre2">^ended$</id>
+    <description>UniFi switch: management session closed for $(srcuser) from $(srcip)</description>
+    <group>authentication_success,</group>
+  </rule>
+
+  <rule id="100137" level="8" frequency="8" timeframe="120">
+    <if_matched_sid>100131</if_matched_sid>
+    <same_field>unifi.port</same_field>
+    <description>UniFi switch: port $(unifi.port) is flapping</description>
+    <group>network_port,</group>
+  </rule>
+
+  <!-- ================================================================ -->
+  <!-- Client tracking                                                  -->
+  <!-- ================================================================ -->
+
+  <rule id="100150" level="2">
+    <if_sid>100100</if_sid>
+    <id type="pcre2">^(?:association|sta_roam)$</id>
+    <description>UniFi: station tracker reported $(id) for $(unifi.sta_mac)</description>
+    <group>wireless,</group>
+  </rule>
+
+  <!-- A client whose DNS never answers is the usual shape of a device talking
+       to a resolver it is not allowed to reach. -->
+  <rule id="100151" level="4">
+    <if_sid>100100</if_sid>
+    <id type="pcre2">^(?:dns timeout|DNS request timed out)$</id>
+    <description>UniFi: DNS requests from $(unifi.sta_mac) are timing out</description>
+    <group>wireless,</group>
+  </rule>
+
+  <rule id="100152" level="3">
+    <if_sid>100100</if_sid>
+    <id type="pcre2">^starting accounting session$</id>
+    <description>UniFi: RADIUS accounting started for $(unifi.sta_mac) on $(unifi.vap)</description>
+    <group>radius,</group>
+  </rule>
+
+  <!-- ================================================================ -->
+  <!-- Known-noisy events, kept at level 0 so they are decoded but silent -->
+  <!-- ================================================================ -->
+
+  <rule id="100160" level="0">
+    <if_sid>100100</if_sid>
+    <id type="pcre2">^(?:Receive UBNT_ROAM|UBNT_ROAM received|UBNT ROAM|immed)$</id>
+    <description>UniFi: Ubiquiti roaming exchange for $(unifi.sta_mac)</description>
+    <group>wireless,</group>
+  </rule>
+
+  <rule id="100161" level="0">
+    <if_sid>100100</if_sid>
+    <id type="pcre2">^(?:recv auth frame|Fan speed)$</id>
+    <description>UniFi: routine driver or platform event</description>
+  </rule>
+
+  <!-- ================================================================ -->
+  <!-- Catch-all                                                        -->
+  <!--                                                                  -->
+  <!-- Level 0, and last in the file. It carries no condition at all, so -->
+  <!-- it matches every event of this family; any level above 0 would    -->
+  <!-- make it outrank the silencing rules above and they would never be -->
+  <!-- reached. At level 0 it ties with them and the tie goes to file    -->
+  <!-- position, which is why it has to stay last.                      -->
+  <!-- ================================================================ -->
+
+  <rule id="100190" level="0">
+    <if_sid>100100</if_sid>
+    <description>UniFi device: $(unifi.daemon) on $(unifi.model) - $(unifi.message)</description>
+  </rule>
+
+  <!-- Children of 100190, evaluated only once 100190 matched, so neither can
+       outrank a specific sibling however high its level. -->
+  <rule id="100191" level="7">
+    <if_sid>100190</if_sid>
+    <match>fail|error|denied|refused|unauthorized|invalid</match>
+    <description>UniFi device: unhandled failure event from $(unifi.daemon)</description>
+    <group>gpg13_4.12,</group>
+  </rule>
+
+  <!-- Keeps an event this ruleset does not recognise visible so it can be
+       given a decoder. Drop to level 0 once the ruleset has settled. -->
+  <rule id="100192" level="3">
+    <if_sid>100190</if_sid>
+    <description>UniFi device: unhandled $(unifi.daemon) event - $(unifi.message)</description>
+  </rule>
+
+</group>

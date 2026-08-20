@@ -1,0 +1,15 @@
+Aug 20 09:20:05 APU7ProH31 8cede1aab1c8,U7-Pro-8.7.11+19419: hostapd[8175]: wifi0ap1: STA 3a:1f:99:04:22:7c IEEE 802.11: deauthenticated due to local deauth request
+Aug 20 09:20:08 USW-AG1-CORE 58d61f76e94c,USW-Pro-Aggregation-7.4.1+16850: switch: TRAPMGR: Session 0 of type 3 started for user admin connected from 10.248.162.51
+Aug 20 09:20:09 USW-AG1-CORE 58d61f76e94c,USW-Pro-Aggregation-7.4.1+16850: switch: TRAPMGR: Session 0 of type 3 ended for user admin connected from 10.248.162.51
+Aug 20 09:21:01 UDM-Pro-Max-Prime UDM-Pro-Max-Prime sshd[45211]: Accepted publickey for root from 10.248.162.51 port 51884 ssh2: RSA SHA256:0O8Sc1DfPqZmXhLm2eYw
+Aug 20 09:21:02 UDM-Pro-Max-Prime UDM-Pro-Max-Prime sshd[45212]: Failed password for root from 203.0.113.9 port 51885 ssh2
+Aug 20 09:21:03 UDM-Pro-Max-Prime UDM-Pro-Max-Prime sshd[45213]: Invalid user admin from 203.0.113.9 port 51886
+Aug 20 09:21:04 UDM-Pro-Max-Prime UDM-Pro-Max-Prime sshd[45214]: Failed password for invalid user admin from 203.0.113.9 port 51886 ssh2
+Aug 20 09:21:05 UDM-Pro-Max-Prime UDM-Pro-Max-Prime sshd[45215]: error: maximum authentication attempts exceeded for root from 203.0.113.9 port 51887 ssh2 [preauth]
+Aug 20 09:21:06 UDM-Pro-Max-Prime UDM-Pro-Max-Prime sshd[45216]: Connection closed by authenticating user root 203.0.113.9 port 51888 [preauth]
+Aug 20 09:21:07 UDM-Pro-Max-Prime UDM-Pro-Max-Prime sshd[45217]: Disconnected from authenticating user root 203.0.113.9 port 51889 [preauth]
+Aug 20 09:21:08 UDM-Pro-Max-Prime UDM-Pro-Max-Prime sudo[45300]:     root : TTY=pts/0 ; PWD=/root ; USER=root ; COMMAND=/usr/bin/systemctl restart unifi
+Aug 20 09:21:09 UDM-Pro-Max-Prime UDM-Pro-Max-Prime sudo[45301]:     ubnt : 3 incorrect password attempts ; TTY=pts/0 ; PWD=/home/ubnt ; USER=root ; COMMAND=/bin/sh
+Aug 20 09:21:10 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [WAN_IN-D-2001] DESCR="Block inbound RDP" IN=eth9 OUT=br0 MAC=6c:63:f8:6e:30:46:00:1b:17:00:02:23:08:00 SRC=203.0.113.9 DST=10.248.190.44 LEN=60 TOS=00 PREC=0x00 TTL=115 ID=54321 DF PROTO=TCP SPT=61000 DPT=3389 SEQ=1 ACK=0 WINDOW=1024 SYN URGP=0 MARK=0
+Aug 20 09:21:11 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [LAN_OUT-D-3001] DESCR="Block IoT to WAN" IN=br18 OUT=eth9 MAC=6c:63:f8:6e:30:46:00:1b:17:00:02:23:08:00 SRC=10.248.190.99 DST=45.33.32.156 LEN=60 TOS=00 PREC=0x00 TTL=63 ID=1 DF PROTO=TCP SPT=44000 DPT=443 SEQ=1 ACK=0 WINDOW=64240 SYN URGP=0 MARK=0
+Aug 20 09:21:12 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [WAN_IN-D-2002] DESCR="Block inbound ICMP" IN=eth9 OUT= MAC=6c:63:f8:6e:30:46:00:1b:17:00:02:23:08:00 SRC=198.51.100.7 DST=10.255.255.2 LEN=84 TOS=00 PREC=0x00 TTL=52 ID=12345 PROTO=ICMP TYPE=8 CODE=0 ID=999 SEQ=1 MARK=0

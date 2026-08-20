@@ -1,0 +1,410 @@
+<!--
+  Ubiquiti UniFi access points and switches (UniFi Network remote syslog)
+
+  On the wire the device sends RFC 3164 syslog:
+
+    <14>Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: hostapd[13361]: wifi1ap4: AP-STA-CONNECTED 22:94:04:5f:25:58
+
+  wazuh-remoted strips the priority, then pre-decoding takes the hostname and
+  tries to read a program name. It fails, and that failure is what shapes this
+  whole file:
+
+    cleanevent.c walks the program-name candidate with isValidChar(), whose
+    hostname_map marks "," as invalid (os_regex_maps.c). The candidate is
+    "9041b21628d1", the character that stops the walk is "," - not ":", not "["
+    and not "|" - so the last else branch sets program_name = NULL and leaves
+    lf->log pointing at the whole remainder.
+
+  The decoders therefore see:
+
+    program_name = (none)
+    log          = 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: hostapd[13361]: wifi1ap4: AP-STA-CONNECTED 22:94:04:5f:25:58
+
+  This is the opposite of the ExtremeXOS case. Wazuh keeps decoders with and
+  without program_name in separate lists and searches only the one matching the
+  pre-decoded event, so here the parent must NOT declare program_name - and the
+  device MAC, model, firmware and daemon name stay inside the body where the
+  decoders can extract them.
+
+  Constraints from analysisd (decoder.c, decoders_list.c, shared/expression.c):
+
+  1. A parent that has children never runs its own regex. All fields come from
+     the children.
+  2. Children that share one name are chained: analysisd walks the whole chain
+     and applies every regex that matches, skipping the ones that do not.
+     Children with distinct names are not chained - the first whose prematch
+     matches is picked, and if its regex fails the event is dropped undecoded.
+     Every child here is named "unifi-device" for that reason. Chained children
+     must not declare prematch.
+  3. Because the whole chain is applied, one child can carry the header for
+     every line while the others add only their own event fields. That is what
+     the first child below does, so no event pattern has to repeat the
+     "mac,model-firmware: daemon[pid]:" prefix. Patterns must still be mutually
+     exclusive per field, or the same field would be set twice.
+  4. PCRE2 groups are read up to the highest group that participated in the
+     match, and a group that did not participate is read from an unset offset
+     (w_expression_PCRE2_fill_regex_match). Optional capture groups are
+     therefore only ever placed last.
+
+  Wazuh replaces a child's name with the parent's unless <use_own_name> is set,
+  so wazuh-logtest always reports "unifi-device" in Phase 2 and
+  "decoded_as unifi-device" matches every child.
+
+  The parent prematch here is more specific than the stock symantec-av decoder,
+  but that does not help on its own. Both live in the no-program_name list and
+  analysisd stops at the first prematch that matches; the stock file loads
+  first. Its prematch is twelve word characters and a comma - identical to a
+  UniFi MAC prefix - so a standalone unifi-device parent is unreachable
+  (wazuh-ruleset#840). The decoder below is therefore a child of symantec-av.
+  Do not install 0330-symantec_decoders.xml alongside it: that replacement
+  narrows the parent prematch and the child never runs. See README.
+
+  Install: copy to /var/ossec/etc/decoders/ on the manager, then restart
+  wazuh-manager.
+-->
+
+<!--
+  UniFi AP/switch logs match the stock symantec-av prematch
+  (`^\w\w\w\w\w\w\w\w\w\w\w\w,`) before this file is even searched —
+  wazuh-ruleset#840. analysisd stops at the first parent, so a standalone
+  unifi-device parent is unreachable no matter how specific its prematch is.
+
+  The only reliable fix is to become a child of that parent. use_own_name
+  keeps decoded_as as unifi-device so the rules still key on it. The child
+  prematch requires the firmware token after the comma (`U7-Pro-8.7.11+19419:`)
+  which Symantec CSV (`24090D00000A,4,3,7,...`) never has, so real Symantec
+  events are left on the parent.
+-->
+<decoder name="unifi-device">
+  <parent>symantec-av</parent>
+  <use_own_name>true</use_own_name>
+  <prematch type="pcre2">^[0-9a-f]{12},[\w.+-]+: </prematch>
+</decoder>
+
+<!--
+  Header, applied to every line of this family and nothing else. Guarantees
+  unifi.daemon and unifi.message, so an event whose message text drifts between
+  firmware releases is still attributed to a device and a daemon instead of
+  vanishing. The optional groups here are non-capturing, so they do not shift
+  PCRE2 numbering: "switch: " is the extra slot the switch platform inserts
+  before the daemon, and ": " is that same slot left empty.
+
+  The model is matched with [\w-]+ rather than .+ on purpose. A greedy .+ can
+  cross the ": " that ends the prefix and re-satisfy the rest of the pattern
+  further along the line, because a message body may itself contain a
+  version-like token; [\w-]+ cannot cross a colon or a space, so the prefix
+  boundary is the only place this can match.
+-->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">^([0-9a-f]{12}),([\w-]+)-(\d+\.\d+\.\d+)\+(\d+): (?:switch: |: )?([\w.-]+)(?:\[\d+\])?: (.*)$</regex>
+  <order>unifi.mac,unifi.model,unifi.firmware,unifi.build,unifi.daemon,unifi.message</order>
+</decoder>
+
+<!--
+  Header fallback, for a firmware whose version token is not
+  "<model>-<x.y.z>+<build>". Without it such a line would reach no child at all
+  and be reported as undecoded. The negative lookahead makes it mutually
+  exclusive with the pattern above, so unifi.mac and unifi.message are never
+  set twice on one line.
+-->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">^([0-9a-f]{12}),(?![\w-]+-\d+\.\d+\.\d+\+\d+: )([\w.+-]+): (?:switch: |: )?([\w.-]+)(?:\[\d+\])?: (.*)$</regex>
+  <order>unifi.mac,unifi.firmware,unifi.daemon,unifi.message</order>
+</decoder>
+
+<!-- ==================================================================== -->
+<!-- hostapd - association lifecycle                                      -->
+<!-- ==================================================================== -->
+
+<!-- hostapd: STA <mac> IEEE 802.11: associated (aid <n>) -->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">hostapd\[\d+\]: (\S+): STA ((?:[0-9a-f]{2}:){5}[0-9a-f]{2}) IEEE 802\.11: (associated) \(aid (\d+)\)</regex>
+  <order>unifi.vap,unifi.sta_mac,id,unifi.aid</order>
+</decoder>
+
+<!-- hostapd: STA <mac> IEEE 802.11: disassociated -->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">hostapd\[\d+\]: (\S+): STA ((?:[0-9a-f]{2}:){5}[0-9a-f]{2}) IEEE 802\.11: (disassociated)$</regex>
+  <order>unifi.vap,unifi.sta_mac,id</order>
+</decoder>
+
+<!-- hostapd: STA <mac> IEEE 802.11: deauthenticated due to local deauth request -->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">hostapd\[\d+\]: (\S+): STA ((?:[0-9a-f]{2}:){5}[0-9a-f]{2}) IEEE 802\.11: (deauthenticated) due to (.+)$</regex>
+  <order>unifi.vap,unifi.sta_mac,id,unifi.reason</order>
+</decoder>
+
+<!-- hostapd control interface: AP-STA-CONNECTED <mac> -->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">hostapd\[\d+\]: (\S+): (AP-STA-CONNECTED) ((?:[0-9a-f]{2}:){5}[0-9a-f]{2})</regex>
+  <order>unifi.vap,id,unifi.sta_mac</order>
+</decoder>
+
+<!-- hostapd control interface: AP-STA-DISCONNECTED <mac> -->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">hostapd\[\d+\]: (\S+): (AP-STA-DISCONNECTED) ((?:[0-9a-f]{2}:){5}[0-9a-f]{2})</regex>
+  <order>unifi.vap,id,unifi.sta_mac</order>
+</decoder>
+
+<!-- hostapd: STA <mac> WPA: authorized - the 4-way handshake completed -->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">hostapd\[\d+\]: (\S+): STA ((?:[0-9a-f]{2}:){5}[0-9a-f]{2}) WPA: (authorized)$</regex>
+  <order>unifi.vap,unifi.sta_mac,id</order>
+</decoder>
+
+<!-- ==================================================================== -->
+<!-- hostapd - authentication failures                                    -->
+<!-- ==================================================================== -->
+
+<!--
+  hostapd control interface: AP-STA-POSSIBLE-PSK-MISMATCH <mac>
+  Emitted from wpa_auth.c when the 4-way handshake times out after the station
+  answered message 1, which is what a wrong pre-shared key looks like.
+-->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">hostapd\[\d+\]: (\S+): (AP-STA-POSSIBLE-PSK-MISMATCH) ((?:[0-9a-f]{2}:){5}[0-9a-f]{2})</regex>
+  <order>unifi.vap,id,unifi.sta_mac</order>
+</decoder>
+
+<!-- hostapd: STA <mac> WPA: EAPOL-Key timeout / 4-way handshake failure -->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">hostapd\[\d+\]: (\S+): STA ((?:[0-9a-f]{2}:){5}[0-9a-f]{2}) WPA: (group key handshake failed|4-Way Handshake failed|EAPOL-Key timeout)</regex>
+  <order>unifi.vap,unifi.sta_mac,id</order>
+</decoder>
+
+<!-- hostapd: STA <mac> WPA: received EAPOL-Key with invalid MIC -->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">hostapd\[\d+\]: (\S+): STA ((?:[0-9a-f]{2}:){5}[0-9a-f]{2}) WPA: received EAPOL-Key with (invalid MIC)</regex>
+  <order>unifi.vap,unifi.sta_mac,id</order>
+</decoder>
+
+<!-- hostapd: STA <mac> IEEE 802.11: Michael MIC failure detected -->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">hostapd\[\d+\]: (\S+): STA ((?:[0-9a-f]{2}:){5}[0-9a-f]{2}) IEEE 802\.11: (Michael MIC failure) detected</regex>
+  <order>unifi.vap,unifi.sta_mac,id</order>
+</decoder>
+
+<!-- hostapd: STA <mac> IEEE 802.11: Station not allowed by MAC ACL -->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">hostapd\[\d+\]: (\S+): STA ((?:[0-9a-f]{2}:){5}[0-9a-f]{2}) IEEE 802\.11: (deny|Station) (?:not allowed|MAC address not in the accept list)</regex>
+  <order>unifi.vap,unifi.sta_mac,id</order>
+</decoder>
+
+<!-- hostapd: STA <mac> IEEE 802.1X: authentication failed / EAP failure -->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">hostapd\[\d+\]: (\S+): STA ((?:[0-9a-f]{2}:){5}[0-9a-f]{2}) IEEE 802\.1X: (authentication failed)</regex>
+  <order>unifi.vap,unifi.sta_mac,id</order>
+</decoder>
+
+<!-- ==================================================================== -->
+<!-- hostapd - RADIUS                                                     -->
+<!-- ==================================================================== -->
+
+<!-- hostapd: STA <mac> RADIUS: starting accounting session <session> -->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">hostapd\[\d+\]: (\S+): STA ((?:[0-9a-f]{2}:){5}[0-9a-f]{2}) RADIUS: (starting accounting session) (\S+)</regex>
+  <order>unifi.vap,unifi.sta_mac,id,unifi.session</order>
+</decoder>
+
+<!--
+  hostapd: RADIUS: No response from Authentication server <ip>:<port>
+
+  The interface prefix hostapd puts in front of this message is deliberately
+  not captured. It is present on some builds and absent on others, and a
+  leading optional capture group is the one PCRE2 shape Wazuh cannot read: it
+  would take every later group from an unset offset whenever the prefix was
+  missing. The RADIUS server address is what the event is about anyway.
+-->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">RADIUS: (No response from Authentication server) ((?:\d{1,3}\.){3}\d{1,3}):(\d+)</regex>
+  <order>id,dstip,dstport</order>
+</decoder>
+
+<!-- ==================================================================== -->
+<!-- hostapd - Ubiquiti roaming extension                                 -->
+<!--                                                                      -->
+<!-- UBNT_ROAM is a Ubiquiti patch, not upstream hostapd, so these three   -->
+<!-- patterns come from the capture rather than from hostapd source. They  -->
+<!-- are the bulk of the traffic in a roaming-heavy network and are        -->
+<!-- decoded mainly so they can be given a low-noise rule.                -->
+<!-- ==================================================================== -->
+
+<!-- hostapd: STA <mac> WPA: Receive UBNT_ROAM from <peer ap mac> -->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">hostapd\[\d+\]: (\S+): STA ((?:[0-9a-f]{2}:){5}[0-9a-f]{2}) WPA: (Receive UBNT_ROAM) from ((?:[0-9a-f]{2}:){5}[0-9a-f]{2})</regex>
+  <order>unifi.vap,unifi.sta_mac,id,unifi.peer_ap</order>
+</decoder>
+
+<!-- hostapd: STA <mac> WPA: UBNT_ROAM received: STA roamed to peer AP <mac> -->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">hostapd\[\d+\]: (\S+): STA ((?:[0-9a-f]{2}:){5}[0-9a-f]{2}) WPA: (UBNT_ROAM received): STA roamed to peer AP ((?:[0-9a-f]{2}:){5}[0-9a-f]{2})</regex>
+  <order>unifi.vap,unifi.sta_mac,id,unifi.peer_ap</order>
+</decoder>
+
+<!-- hostapd: STA <mac> WPA: <vap>: UBNT ROAM: STA=<mac> CurrentAP=<mac> -->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">hostapd\[\d+\]: (\S+): STA (?:[0-9a-f]{2}:){5}[0-9a-f]{2} WPA: \S+: (UBNT ROAM): STA=((?:[0-9a-f]{2}:){5}[0-9a-f]{2}) CurrentAP=((?:[0-9a-f]{2}:){5}[0-9a-f]{2})</regex>
+  <order>unifi.vap,id,unifi.sta_mac,unifi.peer_ap</order>
+</decoder>
+
+<!-- hostapd: STA <mac> WPA: <vap>: immed  disassoc for <mac> -->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">hostapd\[\d+\]: (\S+): STA (?:[0-9a-f]{2}:){5}[0-9a-f]{2} WPA: \S+: (immed) +disassoc for ((?:[0-9a-f]{2}:){5}[0-9a-f]{2})</regex>
+  <order>unifi.vap,id,unifi.sta_mac</order>
+</decoder>
+
+<!-- ==================================================================== -->
+<!-- stahtd - Ubiquiti station tracking, JSON payload                     -->
+<!--                                                                      -->
+<!-- The richest source of client-side security signal on a UniFi AP: it   -->
+<!-- reports association outcome, roaming and per-station anomalies. Key   -->
+<!-- order inside the object is stable per event_type but the spacing      -->
+<!-- after a colon is not, so every pattern allows optional whitespace.    -->
+<!-- ==================================================================== -->
+
+<!-- stahtd: {"op":"event","message_type":"STA_ASSOC_TRACKER","event_type":"...","mac":"...","vap":"...","assoc_status":"..."} -->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">stahtd\[\d+\]: .*"message_type":\s*"([^"]+)","event_type":\s*"([^"]+)","mac":\s*"([^"]+)","vap":\s*"([^"]+)","assoc_status":\s*"([^"]+)"</regex>
+  <order>unifi.message_type,id,unifi.sta_mac,unifi.vap,unifi.assoc_status</order>
+</decoder>
+
+<!-- stahtd: the auth_algo / auth_rssi tail present on association events -->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">stahtd\[\d+\]: .*"auth_algo":\s*"([^"]+)","auth_rssi":\s*"(-?\d+)"</regex>
+  <order>unifi.auth_algo,unifi.rssi</order>
+</decoder>
+
+<!-- ==================================================================== -->
+<!-- wevent - Ubiquiti client join/leave/IP events                        -->
+<!-- ==================================================================== -->
+
+<!-- wevent: EVENT_STA_JOIN <vap>: <mac> / <n> -->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">wevent\[\d+\]: wevent\.ubnt_custom_event\(\): (EVENT_STA_JOIN) (\S+): ((?:[0-9a-f]{2}:){5}[0-9a-f]{2})</regex>
+  <order>id,unifi.vap,unifi.sta_mac</order>
+</decoder>
+
+<!-- wevent: EVENT_STA_LEAVE <vap>: <mac> / <n> -->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">wevent\[\d+\]: wevent\.ubnt_custom_event\(\): (EVENT_STA_LEAVE) (\S+): ((?:[0-9a-f]{2}:){5}[0-9a-f]{2})</regex>
+  <order>id,unifi.vap,unifi.sta_mac</order>
+</decoder>
+
+<!-- wevent: EVENT_STA_IP <vap>: <mac> / <ip> - binds a client MAC to an address -->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">wevent\[\d+\]: wevent\.ubnt_custom_event\(\): (EVENT_STA_IP) (\S+): ((?:[0-9a-f]{2}:){5}[0-9a-f]{2}) / ((?:\d{1,3}\.){3}\d{1,3})</regex>
+  <order>id,unifi.vap,unifi.sta_mac,srcip</order>
+</decoder>
+
+<!-- ==================================================================== -->
+<!-- kernel - driver and station tracker                                  -->
+<!-- ==================================================================== -->
+
+<!-- kernel: [STA_TRACKER] DNS request timed out; [STA: <mac>] [DNS_TIMEOUTS: <n>] -->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">kernel: \[STA_TRACKER\] (DNS request timed out); \[STA: ((?:[0-9a-f]{2}:){5}[0-9a-f]{2})\] \[DNS_TIMEOUTS: (\d+)\]</regex>
+  <order>id,unifi.sta_mac,unifi.count</order>
+</decoder>
+
+<!-- kernel: wlan: ... vap-<n>(<vap>): [<mac>]recv auth frame with algorithm <n> seq <n> rssi:<n> -->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">kernel: wlan: .*vap-\d+\((\S+)\): \[((?:[0-9a-f]{2}:){5}[0-9a-f]{2})\](recv auth frame) with algorithm (\d+) seq (\d+) rssi:(\d+)</regex>
+  <order>unifi.vap,unifi.sta_mac,id,unifi.auth_algo,unifi.auth_seq,unifi.rssi</order>
+</decoder>
+
+<!-- kernel: wlan: ... vap-<n>(<vap>): [<mac>]station associated at aid <n>: <caps> -->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">kernel: wlan: .*vap-\d+\((\S+)\): \[((?:[0-9a-f]{2}:){5}[0-9a-f]{2})\](station associated) at aid (\d+)</regex>
+  <order>unifi.vap,unifi.sta_mac,id,unifi.aid</order>
+</decoder>
+
+<!-- ==================================================================== -->
+<!-- switch platform - TRAPMGR / DOT1S                                    -->
+<!--                                                                      -->
+<!-- UniFi switches wrap their firmware log as "switch: <COMPONENT>: msg". -->
+<!-- Note this is NOT the EdgeSwitch/FASTPATH shape, which carries a       -->
+<!-- "traputil.c(735) 248 %%" prefix instead; EdgeSwitch needs its own     -->
+<!-- file, because there the bracket holds a task name rather than a pid   -->
+<!-- and pre-decoding lands it in a different decoder list.                -->
+<!-- ==================================================================== -->
+
+<!-- switch: TRAPMGR: Link Up: <unit>/<port> -->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">switch: TRAPMGR: (Link Up): (\d+/\d+)</regex>
+  <order>id,unifi.port</order>
+</decoder>
+
+<!-- switch: TRAPMGR: Link Down: <unit>/<port> -->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">switch: TRAPMGR: (Link Down): (\d+/\d+)</regex>
+  <order>id,unifi.port</order>
+</decoder>
+
+<!-- switch: TRAPMGR: SFP inserted in <unit>/<port> -->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">switch: TRAPMGR: (SFP inserted) in (\d+/\d+)</regex>
+  <order>id,unifi.port</order>
+</decoder>
+
+<!-- switch: TRAPMGR: SFP removed from <unit>/<port> -->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">switch: TRAPMGR: (SFP removed) from (\d+/\d+)</regex>
+  <order>id,unifi.port</order>
+</decoder>
+
+<!-- switch: TRAPMGR: Session <n> of type <n> started/ended for user <user> connected from <ip> -->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">switch: TRAPMGR: Session \d+ of type \d+ (started|ended) for user (\S+?) connected from ((?:\d{1,3}\.){3}\d{1,3})</regex>
+  <order>id,srcuser,srcip</order>
+</decoder>
+
+<!-- switch: DOT1S: Port (<n>) inst(<n>) role changing from <role> to <role> -->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">switch: DOT1S: Port \((\d+)\) inst\((\d+)\) (role changing) from (ROLE_\w+) to (ROLE_\w+)</regex>
+  <order>unifi.port,unifi.stp_instance,id,unifi.role_from,unifi.role_to</order>
+</decoder>
+
+<!-- ==================================================================== -->
+<!-- platform hardware                                                    -->
+<!-- ==================================================================== -->
+
+<!-- ubnt-fanctrl: Fan speed <n>% | pwm: ... | fan rpm: <n> | sensor PSU temp: <n>C -->
+<decoder name="unifi-device">
+  <parent>unifi-device</parent>
+  <regex type="pcre2">ubnt-fanctrl\[\d+\]: fanctrl\.fanctrl_log\(\): (Fan speed) (\d+)%.*fan rpm: (\d+)</regex>
+  <order>id,unifi.fan_percent,unifi.fan_rpm</order>
+</decoder>

@@ -1,0 +1,97 @@
+Aug 20 09:11:10 APU7ProH4P11 8cede174ee36,U7-Pro-8.7.11+19419: wevent[8163]: wevent.ubnt_custom_event(): EVENT_STA_IP wifi1ap9: c4:93:d9:f2:1d:5b / 10.248.190.65
+Aug 20 09:11:10 APU7ProH4P11 8cede174ee36,U7-Pro-8.7.11+19419: wevent[8163]: wevent.ubnt_custom_event(): EVENT_STA_JOIN wifi1ap9: c4:93:d9:f2:1d:5b / 1
+Aug 20 09:11:12 USW-AG1-CORE 58d61f76e94c,USW-Pro-Aggregation-7.4.1+16850: switch: TRAPMGR: SFP inserted in 0/2
+Aug 20 09:11:14 USW-AG1-CORE 58d61f76e94c,USW-Pro-Aggregation-7.4.1+16850: switch: TRAPMGR: SFP removed from 0/2
+Aug 20 09:11:14 USW-WIFI-H3 74fa294b1192,USW-Pro-Max-24-PoE-7.5.10+17129: : ubnt-fanctrl[943]: fanctrl.fanctrl_log(): Fan speed 25% | pwm: 64 (set) / 64 (actual) | fan rpm: 2356 | sensor PSU temp: 51..C
+Aug 20 09:11:15 USW-WIFI-H4 1c6a1b6af104,USW-Pro-Max-24-PoE-7.5.10+17129: : ubnt-fanctrl[943]: fanctrl.fanctrl_log(): Fan speed 25% | pwm: 64 (set) / 64 (actual) | fan rpm: 2373 | sensor PSU temp: 53..C
+Aug 20 09:11:16 APU7ProH4P12 8cede174e9fa,U7-Pro-8.7.11+19419: kernel: [STA_TRACKER] DNS request timed out; [STA: 94:e2:3c:db:c3:ab] [DNS_TIMEOUTS: 2]
+Aug 20 09:11:16 APU7ProH4P12 8cede174e9fa,U7-Pro-8.7.11+19419: stahtd[8163]: [STA-TRACKER].stahtd_dump_event(): {"op":"event","message_type":"STA_ASSOC_TRACKER","event_type":"dns timeout","mac":"94:e2:3c:db:c3:ab","vap":"wifi1ap9","assoc_status":"0","dns_timeouts": "2"}
+Aug 20 09:11:17 APU7ProH31 8cede1aab1c8,U7-Pro-8.7.11+19419: hostapd[8175]: wifi0ap1: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProH31 8cede1aab1c8,U7-Pro-8.7.11+19419: hostapd[8175]: wifi1ap4: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProH31 8cede1aab1c8,U7-Pro-8.7.11+19419: hostapd[8175]: wifi2ap8: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProH32 8cede1aaa3cc,U7-Pro-8.7.11+19419: hostapd[8177]: wifi0ap1: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProH32 8cede1aaa3cc,U7-Pro-8.7.11+19419: hostapd[8177]: wifi1ap4: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProH32 8cede1aaa3cc,U7-Pro-8.7.11+19419: hostapd[8177]: wifi2ap8: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProH4P11 8cede174ee36,U7-Pro-8.7.11+19419: hostapd[8171]: wifi0ap8: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProH4P11 8cede174ee36,U7-Pro-8.7.11+19419: hostapd[8171]: wifi1ap9: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProH4P11 8cede174ee36,U7-Pro-8.7.11+19419: hostapd[8171]: wifi2ap10: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProH4P12 8cede174e9fa,U7-Pro-8.7.11+19419: hostapd[8174]: wifi0ap8: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProH4P12 8cede174e9fa,U7-Pro-8.7.11+19419: hostapd[8174]: wifi1ap9: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProH4P12 8cede174e9fa,U7-Pro-8.7.11+19419: hostapd[8174]: wifi2ap10: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProH4P21 8cede174ea0e,U7-Pro-8.7.11+19419: hostapd[8173]: wifi0ap8: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProH4P21 8cede174ea0e,U7-Pro-8.7.11+19419: hostapd[8173]: wifi1ap9: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProH4P21 8cede174ea0e,U7-Pro-8.7.11+19419: hostapd[8173]: wifi2ap10: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProH4P22 8cede174eaba,U7-Pro-8.7.11+19419: hostapd[8175]: wifi0ap8: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProH4P22 8cede174eaba,U7-Pro-8.7.11+19419: hostapd[8175]: wifi1ap9: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProH4P22 8cede174eaba,U7-Pro-8.7.11+19419: hostapd[8175]: wifi2ap10: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: hostapd[8545]: nl80211(QCA): wifi1ap4[21]: i802_sta_disassoc(22:94:04:5f:25:58)
+Aug 20 09:11:17 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: hostapd[8545]: wifi0ap1: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: hostapd[8545]: wifi1ap4: AP-STA-DISCONNECTED 22:94:04:5f:25:58
+Aug 20 09:11:17 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: hostapd[8545]: wifi1ap4: STA 22:94:04:5f:25:58 IEEE 802.11: disassociated
+Aug 20 09:11:17 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: hostapd[8545]: wifi1ap4: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: hostapd[8545]: wifi1ap4: STA 22:94:04:5f:25:58 WPA: wifi1ap4: immed  disassoc for 22:94:04:5f:25:58
+Aug 20 09:11:17 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: hostapd[8545]: wpa_driver_nl80211_set_key: ifindex=21 (wifi1ap4) alg=0 addr=0x7696eaa8 key_idx=0 set_tx=1 seq_len=0 key_len=0 key_flag=0x20 link_id=-1
+Aug 20 09:11:17 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: kernel: ieee80211_ioctl_tag_guest: failed to find specified node with aid 1
+Aug 20 09:11:17 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: kernel: wlan: [8545:I:ANY] ieee80211_ucfg_setmlme: No peer found with mac 22:94:04:5f:25:58
+Aug 20 09:11:17 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: stahtd[8523]: [STA-TRACKER].stahtd_dump_event(): {"op":"event","message_type":"STA_ASSOC_TRACKER","event_type":"sta_roam","mac":"22:94:04:5f:25:58","vap":"wifi1ap4","assoc_status":"0","event_id": "10","avg_rssi": "-73"}
+Aug 20 09:11:17 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: wevent[8520]: libubnt.qos_sta_control(): /bin/qos_control.sh del-sta eth0 5 1 0kbit 0kbit
+Aug 20 09:11:17 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: wevent[8520]: libubnt.qos_sta_control(): /bin/qos_control.sh del-sta vwireap6 5 1 0kbit 0kbit
+Aug 20 09:11:17 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: wevent[8520]: libubnt.qos_sta_control(): /bin/qos_control.sh del-sta wifi1ap4 5 1 0kbit 0kbit
+Aug 20 09:11:17 APU7ProOH31 9041b214d6bb,U7-Pro-Outdoor-8.6.11+18870: wevent[8520]: wevent.ubnt_custom_event(): EVENT_STA_LEAVE wifi1ap4: 22:94:04:5f:25:58 / 1
+Aug 20 09:11:17 APU7ProOH32 9041b216288c,U7-Pro-Outdoor-8.6.11+18870: hostapd[7926]: wifi0ap1: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProOH32 9041b216288c,U7-Pro-Outdoor-8.6.11+18870: hostapd[7926]: wifi1ap4: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: hostapd[7925]: wifi0ap1: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProOH33 9041b21427d1,U7-Pro-Outdoor-8.6.11+18870: hostapd[7925]: wifi1ap4: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProOH34 9041b214b47d,U7-Pro-Outdoor-8.6.11+18870: hostapd[7925]: wifi0ap1: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProOH34 9041b214b47d,U7-Pro-Outdoor-8.6.11+18870: hostapd[7925]: wifi1ap4: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProOH35 9041b214269f,U7-Pro-Outdoor-8.6.11+18870: hostapd[8572]: wifi0ap1: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProOH35 9041b214269f,U7-Pro-Outdoor-8.6.11+18870: hostapd[8572]: wifi1ap4: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProOH41 1c0b8b0e8724,U7-Pro-Outdoor-8.6.11+18870: hostapd[7920]: wifi0ap5: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProOH41 1c0b8b0e8724,U7-Pro-Outdoor-8.6.11+18870: hostapd[7920]: wifi1ap6: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProOH42 1c0b8b0ea5b1,U7-Pro-Outdoor-8.6.11+18870: hostapd[7920]: wifi0ap5: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProOH42 1c0b8b0ea5b1,U7-Pro-Outdoor-8.6.11+18870: hostapd[7920]: wifi1ap6: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProOH43 1c0b8b0ea440,U7-Pro-Outdoor-8.6.11+18870: hostapd[7923]: wifi0ap5: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProOH43 1c0b8b0ea440,U7-Pro-Outdoor-8.6.11+18870: hostapd[7923]: wifi1ap6: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProOH44 1c0b8b0e7e87,U7-Pro-Outdoor-8.6.11+18870: hostapd[7920]: wifi0ap5: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProOH44 1c0b8b0e7e87,U7-Pro-Outdoor-8.6.11+18870: hostapd[7920]: wifi1ap6: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProOH45 1c0b8b0e8709,U7-Pro-Outdoor-8.6.11+18870: hostapd[7919]: wifi0ap5: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+Aug 20 09:11:17 APU7ProOH45 1c0b8b0e8709,U7-Pro-Outdoor-8.6.11+18870: hostapd[7919]: wifi1ap6: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+Aug 20 09:11:17 U7-Pro 8cede17849e0,U7-Pro-8.7.11+19419: hostapd[13691]: wifi0ap1: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+Aug 20 09:11:17 U7-Pro 8cede17849e0,U7-Pro-8.7.11+19419: hostapd[13691]: wifi1ap4: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+Aug 20 09:11:17 U7-Pro 8cede17849e0,U7-Pro-8.7.11+19419: hostapd[13691]: wifi2ap8: STA 22:94:04:5f:25:58 WPA: UBNT_ROAM received: STA roamed to peer AP 96:41:b2:16:28:d3
+Aug 20 09:11:17 U7-Pro-Outdoor 9041b214dd00,U7-Pro-Outdoor-8.6.11+18870: hostapd[13327]: wifi0ap1: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+Aug 20 09:11:17 U7-Pro-Outdoor 9041b214dd00,U7-Pro-Outdoor-8.6.11+18870: hostapd[13327]: wifi1ap4: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: hostapd[13361]: wifi1ap4: AP-STA-CONNECTED 22:94:04:5f:25:58
+Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: hostapd[13361]: wifi1ap4: STA 22:94:04:5f:25:58 IEEE 802.11: associated (aid 1)
+Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: hostapd[13361]: wifi1ap4: STA 22:94:04:5f:25:58 WPA: authorized
+Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: hostapd[13361]: wifi1ap4: STA 22:94:04:5f:25:58 WPA: wifi1ap4: UBNT ROAM: STA=22:94:04:5f:25:58 CurrentAP=96:41:b2:16:28:d3
+Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: hostapd[13361]: wpa_driver_nl80211_set_key: ifindex=25 (wifi1ap4) alg=3 addr=0x7696b5b8 key_idx=0 set_tx=1 seq_len=0 key_len=16 key_flag=0x2c link_id=-1
+Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: kernel: node_vid: program hw vlan peer=22:94:04:5f:25:58 vid=190 ecm_flags=0x1
+Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: kernel: wlan: [0:I:ANY] [UNSPECIFIED] vap-1(wifi1ap4): [22:94:04:5f:25:58]recv auth frame with algorithm 2 seq 1 rssi:34 minrssi:0
+Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: kernel: wlan: [0:I:ANY] [UNSPECIFIED] vap-1(wifi1ap4): [22:94:04:5f:25:58]station associated at aid 1: short preamble, long slot time, QoSHE40 cap 0x1111
+Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: kernel: wlan: [13361:I:ANY] [UNSPECIFIED] vap-1(wifi1ap4):node[22:94:04:5f:25:58] set hw append vlan 190
+Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: stahtd[13350]: [STA-TRACKER].stahtd_dump_event(): {"op":"event","message_type":"STA_ASSOC_TRACKER","event_type":"association","mac":"22:94:04:5f:25:58","vap":"wifi1ap4","assoc_status":"0","event_id": "1","auth_utc": "1787209877.234214","auth_algo": "ft","auth_rssi": "-62"}
+Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: wevent[13349]: garp.get_ipv4_by_mac(): Netlink error response: Resource busy
+Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: wevent[13349]: garp.ui_garp_send_frame(): ARP table does not have IP for 22:94:04:5f:25:58
+Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: wevent[13349]: libubnt.qos_sta_control(): /bin/qos_control.sh replace-sta eth0 5 1 1kbit 70000kbit
+Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: wevent[13349]: libubnt.qos_sta_control(): /bin/qos_control.sh replace-sta vwireap6 5 1 1kbit 70000kbit
+Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: wevent[13349]: libubnt.qos_sta_control(): /bin/qos_control.sh replace-sta wifi1ap4 5 1 1kbit 70000kbit
+Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: wevent[13349]: wevent.sta_join(): unset vport_down
+Aug 20 09:11:17 U7-Pro-Outdoor 9041b21628d1,U7-Pro-Outdoor-8.6.11+18870: wevent[13349]: wevent.ubnt_custom_event(): EVENT_STA_JOIN wifi1ap4: 22:94:04:5f:25:58 / 1
+Aug 20 09:11:17 U7ProOutdoorTEMP 1c0b8b0e7f80,U7-Pro-Outdoor-8.6.11+18870: hostapd[20168]: wifi0ap5: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+Aug 20 09:11:17 U7ProOutdoorTEMP 1c0b8b0e7f80,U7-Pro-Outdoor-8.6.11+18870: hostapd[20168]: wifi1ap6: STA 22:94:04:5f:25:58 WPA: Receive UBNT_ROAM from 96:41:b2:16:28:d3
+Aug 20 09:11:19 APU7ProH4P11 8cede174ee36,U7-Pro-8.7.11+19419: hostapd[8171]: wifi1ap9: STA c4:93:d9:f2:1d:5b RADIUS: starting accounting session 1E155A1BA6E561EC
+Aug 20 09:11:19 USW-AG2-CORE 58d61f76e868,USW-Pro-Aggregation-7.4.1+16850: switch: DOT1S: Port (5) inst(0) role changing from ROLE_DESIGNATED to ROLE_DISABLED
+Aug 20 09:11:19 USW-AG2-CORE 58d61f76e868,USW-Pro-Aggregation-7.4.1+16850: switch: TRAPMGR: Link Down: 0/5
+Aug 20 09:11:20 USW-AG2-CORE 58d61f76e868,USW-Pro-Aggregation-7.4.1+16850: switch: DOT1S: Port (5) inst(0) role changing from ROLE_DISABLED to ROLE_DESIGNATED
+Aug 20 09:11:20 USW-AG2-CORE 58d61f76e868,USW-Pro-Aggregation-7.4.1+16850: switch: TRAPMGR: Link Up: 0/5
+Aug 20 09:12:01 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [WAN_LAN-A-10001] DESCR="PA_LibreNMS_to_OT-MGMT" IN=eth9 OUT=br0 MAC=6c:63:f8:6e:30:46:00:1b:17:00:02:23:08:00 SRC=10.248.162.51 DST=10.248.188.103 LEN=92 TOS=00 PREC=0x00 TTL=61 ID=10834 DF PROTO=UDP SPT=33950 DPT=161 LEN=72 MARK=1a0000
+Aug 20 09:12:02 UDM-Pro-Max-Prime UDM-Pro-Max-Prime mcad[3735297]: ui-probe-dhcpv6: sending Solicit on eth9 (xid=1526fb)
+Aug 20 09:12:03 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.248.190.250 DST=51.81.57.55 LEN=1052 TOS=00 PREC=0x00 TTL=63 ID=32004 DF PROTO=UDP SPT=36600 DPT=2002 LEN=1032 MARK=1a0000
+Aug 20 09:12:03 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.248.190.44 DST=52.98.229.178 LEN=64 TOS=00 PREC=0x00 TTL=63 ID=0 DF PROTO=TCP SPT=55073 DPT=443 SEQ=4064150268 ACK=0 WINDOW=65535 SYN URGP=0 MARK=1a0000
+Aug 20 09:12:03 UDM-Pro-Max-Prime UDM-Pro-Max-Prime [POSTROUTING-RET-1] DESCR="NO  NAT for Palo Alto" IN= OUT=eth9 MAC= SRC=10.255.255.2 DST=1.1.1.1 LEN=89 TOS=00 PREC=0x00 TTL=64 ID=55284 DF PROTO=UDP SPT=51230 DPT=53 LEN=69 UID=65534 GID=30 MARK=1a0000
+Aug 20 09:12:06 UDM-Pro-Max-Prime UDM-Pro-Max-Prime mcad[3256]: probe-runner.probe_instance_handle_script_output(): [dhcpv6] probe finished for eth9 (req=0effafab-889e-435f-b9f1-f7d8b03605a3, 30 bytes)
+Aug 20 09:12:06 UDM-Pro-Max-Prime UDM-Pro-Max-Prime mcad[3256]: probe-runner.probe_instance_launch(): [slaac] launched probe for eth9 (req=49f0acd0-f8ab-4135-8c3f-558bd8e0c006)
+Aug 20 09:12:06 UDM-Pro-Max-Prime UDM-Pro-Max-Prime mcad[3256]: probe-runner.probe_instance_send_event(): [dhcpv6] reporting event for eth9 (req=0effafab-889e-435f-b9f1-f7d8b03605a3, status=finished)
+Aug 20 09:12:06 UDM-Pro-Max-Prime UDM-Pro-Max-Prime mcad[3256]: probe-runner.probe_runner_dispatch(): [slaac] start ifname=eth9 timeout=10 req=49f0acd0-f8ab-4135-8c3f-558bd8e0c006
+Aug 20 09:12:06 UDM-Pro-Max-Prime UDM-Pro-Max-Prime mcad[3735297]: ui-probe-dhcpv6: no Advertise received on eth9
